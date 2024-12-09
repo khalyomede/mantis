@@ -149,7 +149,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ## Roadmap
 
-██░░░░░░░░░░░░░░░░░░ (20/92 - 21%)
+██░░░░░░░░░░░░░░░░░░ (21/93 - 22%)
 
 - Routing
   - ✅ Get routes
@@ -189,6 +189,8 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
   - ⏳ Streamed response
   - ⏳ Keep-alive response
   - ⏳ Chunked transfer encoding
+- Environment
+  - Dot env embeded values ✅
 - Database
   - ⏳ Max connections settings (with wait mecanism)
   - ✅ Typed MySQL query result (struct)
