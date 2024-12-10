@@ -7,7 +7,9 @@ fn test_can_load_env_file() {
         file: $embed_file("misc/.env")
     }
 
-    expect(environment.get('APP_NAME')!).to_be_equal_to('Mantis')
+    name := environment.get('APP_NAME') or { "" }
+
+    expect(name).to_be_equal_to('Mantis')
 }
 
 fn test_can_use_cached_values() {
@@ -16,9 +18,9 @@ fn test_can_use_cached_values() {
     }
 
     // First access parses
-    first := environment.get('APP_NAME')!
+    first := environment.get('APP_NAME') ?
     // Second should use cache
-    second := environment.get('APP_NAME')!
+    second := environment.get('APP_NAME') ?
 
     expect(first).to_be_equal_to(second)
 }
@@ -40,5 +42,7 @@ fn test_ignores_comments() {
         file: $embed_file("misc/.env")
     }
 
-    expect(environment.get('AFTER_COMMENT')!).to_be_equal_to('value')
+    after_comment := environment.get('AFTER_COMMENT') or { "" }
+
+    expect(after_comment).to_be_equal_to('value')
 }
