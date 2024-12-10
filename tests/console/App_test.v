@@ -51,10 +51,15 @@ fn test_it_can_return_correct_response_code_for_basic_command() {
         ]
     }
 
-    response := app.render()
+    res := app.render() or {
+        Response{
+            output: ""
+            code: 1
+        }
+    }
 
-    expect(response.code).to_be_equal_to(0)
-    expect(response.output).to_be_equal_to("Hello john!")
+    expect(res.code).to_be_equal_to(0)
+    expect(res.output).to_be_equal_to("Hello john!")
 }
 
 fn test_it_display_help_text() {
@@ -108,10 +113,15 @@ fn test_it_display_help_text() {
         ]
     }
 
-    response := app.render()
+    res := app.render() or {
+        Response{
+            output: ""
+            code: 1
+        }
+    }
 
-    expect(response.code).to_be_equal_to(0)
-    expect(response.output).to_be_equal_to([
+    expect(res.code).to_be_equal_to(0)
+    expect(res.output).to_be_equal_to([
         "Displays a greeting message."
         ""
         "Usage:"

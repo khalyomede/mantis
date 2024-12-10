@@ -15,7 +15,7 @@ pub struct App {
 }
 
 pub fn (app App) render() ?Response {
-    command := app.find_command() ?
+    command := app.find_command() ? // List all commands instead
 
     // 1. Here check at compile time that no arguments has reserved names "_program" or "_command".
     // 2. Instead of app.arguments[2..], remove them by name using a .filter()
