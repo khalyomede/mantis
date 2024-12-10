@@ -51,12 +51,7 @@ fn test_it_can_return_correct_response_code_for_basic_command() {
         ]
     }
 
-    response := app.render() or {
-        Response{
-            output: ""
-            code: 1
-        }
-    }
+    response := app.render()
 
     expect(response.code).to_be_equal_to(0)
     expect(response.output).to_be_equal_to("Hello john!")
@@ -113,12 +108,7 @@ fn test_it_display_help_text() {
         ]
     }
 
-    response := app.render() or {
-        Response{
-            output: ""
-            code: 1
-        }
-    }
+    response := app.render()
 
     expect(response.code).to_be_equal_to(0)
     expect(response.output).to_be_equal_to([

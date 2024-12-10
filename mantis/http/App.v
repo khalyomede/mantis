@@ -21,6 +21,7 @@ pub struct App {
         env Env
         session Session
         database Database
+        error_handler ErrorHandler = default_error_handler()
 }
 
 pub fn (app App) route_parameter(key string) ?string {
@@ -201,13 +202,6 @@ fn (app App) validate_options()! {
     validation.validate(data, validation_rules)!
 }
 
-fn (app App) render_not_found() Response {
-    return Response{
-        content: ""
-        status: .not_found
-    }
-}
-
 pub fn (app App) find_route() ?Route {
     for route in app.routes {
         if route.matches(app.request) {
@@ -218,8 +212,13 @@ pub fn (app App) find_route() ?Route {
     return none
 }
 
-pub fn (app App) render() ?Response {
-    route := app.find_route() ?
+pub fn (app App) render() Response {
+    route := app.find_route() or {
+        return app.error_handler.render(app, HttpError{
+            code: .not_found
+            message: 'Route not found'
+        })
+    }
 
     return route.callback(app)
 }
@@ -328,9 +327,7 @@ fn handle_connection(mut connection net.TcpConn, app App) {
 
     mut response_watch := time.new_stopwatch()
 
-    response := app_with_request.render() or {
-        app_with_request.render_not_found()
-    }
+    response := app_with_request.render()
 
     response_watch.stop()
 

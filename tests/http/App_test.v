@@ -1,6 +1,6 @@
 import json
 import mantis { Env }
-import mantis.http { App, Route, Status, Request, Response, Session, SessionData }
+import mantis.http { App, Route, Status, Request, Response, Session, SessionData, ErrorHandler }
 import mantis.http.response
 import mantis.http.route
 import mantis.test { expect }
@@ -23,9 +23,7 @@ fn test_serves_200_response_for_simple_get_route() {
         }
     )
 
-    res := app.render() or {
-        response.html(status: .server_error)
-    }
+    res := app.render()
 
     expect(res.status).to_be_equal_to(Status.ok)
     expect(res.content).to_be_equal_to("hello world")
@@ -52,9 +50,7 @@ fn test_serves_200_response_for_route_with_parameters() {
         }
     )
 
-    res := app.render() or {
-        response.html(status: .server_error)
-    }
+    res := app.render()
 
     expect(res.content).to_be_equal_to("post details")
     expect(res.status).to_be_equal_to(Status.ok)
@@ -82,9 +78,7 @@ fn test_can_get_route_parameter() {
         }
     )
 
-    res := app.render() or {
-        response.html(status: .server_error)
-    }
+    res := app.render()
 
     expect(res.content).to_be_equal_to("showing comment a90ede34f14645bc90aed2db39907b97")
 }
@@ -106,9 +100,7 @@ fn test_can_get_query() {
         }
     )
 
-    res := app.render() or {
-        response.html(content: "")
-    }
+    res := app.render()
 
     expect(res.content).to_be_equal_to("fr")
 }
@@ -131,9 +123,7 @@ fn test_can_set_response_headers() {
         }
     )
 
-    res := app.render() or {
-        response.html(status: .server_error)
-    }
+    res := app.render()
 
     expect(res.headers["X-Powered-By"]).to_contain("Mantis")
 }
@@ -154,9 +144,7 @@ fn test_can_redirect_to_url_with_query_parameters() {
         }
     )
 
-    res := app.render() or {
-        response.html(status: .server_error)
-    }
+    res := app.render()
 
     expect(res.headers["Location"]).to_contain("/login?error=invalid_credentials&email=user%40example.com")
 }
@@ -180,9 +168,7 @@ fn test_can_parse_form_body_in_post_request() {
         }
     )
 
-    res := app.render() or {
-        response.html(status: .server_error)
-    }
+    res := app.render()
 
     expect(res.content).to_be_equal_to("John Doe - john@example.com")
 }
@@ -225,12 +211,72 @@ fn test_can_retreive_session_data() {
         }
     )
 
-    res := app.render() or {
-        response.html(status: .server_error)
-    }
+    res := app.render()
 
     expect(res.content).to_be_equal_to("User uuid is 8fa97b8a-e840-4316-87ba-ad0c528eafba.")
 
     // Clean up test files
     os.rmdir_all("misc/sessions") or {}
+}
+
+fn test_returns_404_for_missing_route() {
+    app := App{
+        request: Request{
+            path: '/not-found'
+            method: .get
+            headers: {
+                'Accept': ['text/html']
+            }
+        }
+    }
+
+    res := app.render()
+
+    expect(res.status).to_be_equal_to(Status.not_found)
+    expect(res.headers).to_have_key_equal_to('Content-Type', ['text/html'])
+    expect(res.content).to_be_equal_to('')
+}
+
+fn test_returns_json_error_when_requested() {
+    app := App{
+        request: Request{
+            path: '/not-found'
+            method: .get
+            headers: {
+                'Accept': ['application/json']
+            }
+        }
+    }
+
+    res := app.render()
+
+    expect(res.status).to_be_equal_to(Status.not_found)
+    expect(res.headers).to_have_key_equal_to('Content-Type', ['application/json'])
+    expect(res.content).to_be_equal_to('')
+}
+
+fn test_can_use_custom_error_handler() {
+    custom_handler := ErrorHandler{
+        report: fn (app App, err IError) {
+            // Custom reporting logic
+        }
+        render: fn (app App, err IError) Response {
+            return Response{
+                content: 'Custom error: ${err.msg()}'
+                status: .server_error
+            }
+        }
+    }
+
+    app := App{
+        error_handler: custom_handler
+        request: Request{
+            path: '/not-found'
+            method: .get
+        }
+    }
+
+    res := app.render()
+
+    expect(res.content).to_be_equal_to('Custom error: Route not found')
 }
