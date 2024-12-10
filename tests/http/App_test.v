@@ -1,5 +1,4 @@
 import json
-import mantis { Env }
 import mantis.http { App, Route, Status, Request, Response, Session, SessionData, ErrorHandler }
 import mantis.http.response
 import mantis.http.route
@@ -14,9 +13,6 @@ fn test_serves_200_response_for_simple_get_route() {
                 return response.html(content: "hello world")
             })
         ],
-        env: Env{
-            path: ".env"
-        },
         request: Request{
             path: "/"
             method: .get
@@ -41,9 +37,6 @@ fn test_serves_200_response_for_route_with_parameters() {
                 }
             )
         ]
-        env: Env{
-            path: ".env"
-        }
         request: Request{
             path: "/post/25c1c7bfc6514c84b5a7148389e22c84"
             method: .get
@@ -69,9 +62,6 @@ fn test_can_get_route_parameter() {
                 }
             )
         ]
-        env: Env{
-            path: ".env"
-        }
         request: Request{
             path: "/post/25c1c7bfc6514c84b5a7148389e22c84/comment/a90ede34f14645bc90aed2db39907b97"
             method: .get

@@ -1,7 +1,7 @@
 module http
 
 import mantis.console
-import mantis { Env }
+import mantis.env { Env }
 import mantis.validation { Rule, Min, Max, Value }
 import mantis.database { Database }
 import net
