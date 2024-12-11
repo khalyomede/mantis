@@ -27,7 +27,7 @@ export default defineConfig({
         langMenuLabel: "version",
 
     },
-    base: "/docs/",
+    base: "/mantis/",
     outDir: "../docs",
     locales: {
         root: {
