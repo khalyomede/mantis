@@ -25,8 +25,10 @@ export default defineConfig({
             { icon: 'github', link: 'https://github.com/khalyomede/mantis' }
         ],
         langMenuLabel: "version",
+
     },
     base: "/docs/",
+    outDir: "../docs",
     locales: {
         root: {
             label: 'master'
