@@ -9,6 +9,16 @@ services:
     ports:
       - 80:80
 
+  npm:
+    image: node:23-alpine
+    entrypoint: npm
+    user: node
+    working_dir: /home/node/app
+    volumes:
+      - .:/home/node/app
+    ports:
+      - 5173:5173
+
   siege:
     image: jstarcher/siege:latest
     entrypoint: siege

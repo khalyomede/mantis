@@ -9,9 +9,9 @@ import time
 fn test_serves_200_response_for_simple_get_route() {
     app := http.create_app(
         routes: [
-            route.get(name: "index", path: "/", callback: fn (app App) Response {
+            Route{name: "index", path: "/", callback: fn (app App) Response {
                 return response.html(content: "hello world")
-            })
+            }}
         ],
         request: Request{
             path: "/"

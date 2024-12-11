@@ -22,3 +22,6 @@ bin/
 # vweb and database
 *.db
 *.js
+
+# Node
+node_modules
