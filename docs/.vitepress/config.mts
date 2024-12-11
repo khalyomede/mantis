@@ -26,6 +26,7 @@ export default defineConfig({
         ],
         langMenuLabel: "version",
     },
+    base: "/docs/",
     locales: {
         root: {
             label: 'master'
