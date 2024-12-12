@@ -13,6 +13,7 @@ export default defineConfig({
         sidebar: [
             {
                 items: [
+                    { text: 'Introduction', link: '/introduction' },
                     { text: 'Quick start', link: '/quick-start' },
                     { text: 'Productivity', link: '/productivity' },
                     { text: 'Folder structure', link: '/folder-structure' },
