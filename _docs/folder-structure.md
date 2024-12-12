@@ -68,3 +68,7 @@ your-app
 ├── v.mod
 └── vite.config.js
 ```
+
+- **app**: Contains all your source files.
+- **build**: Built version of your source files (to be deployed to your server).
+  - **main**: The executable of your server.
