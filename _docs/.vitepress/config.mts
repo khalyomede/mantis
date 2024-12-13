@@ -35,7 +35,6 @@ export default defineConfig({
     },
     base: "/mantis/",
     outDir: "../docs",
-    assetsDir: "mantis",
     locales: {
         root: {
             label: 'master'
