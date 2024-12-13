@@ -20,6 +20,7 @@ export default defineConfig({
                     { text: 'Documentation', link: '/documentation' },
                     {
                         text: 'Http', items: [
+                            { text: "Routing", link: '/http/routing' },
                             { text: "Erorr handling", link: '/http/error-handling' },
                         ],
                     },

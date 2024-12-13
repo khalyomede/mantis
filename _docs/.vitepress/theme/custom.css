@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --vp-font-family-mono: 'Fira Code', monospace;
+}
+
+/* Enable font ligatures in code blocks */
+pre,
+code {
+    font-feature-settings: "calt" 1;
+    font-variant-ligatures: contextual;
+
+    /* Enable ligatures */
+    font-variant-ligatures: contextual;
+}
+
+.vp-doc [class*='language-'] code {
+    line-height: 2rem;
+    font-size: 1rem;
+}
