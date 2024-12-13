@@ -1,5 +1,5 @@
 import json
-import mantis.http { App, Route, Status, Request, Response, Session, SessionData, ErrorHandler }
+import mantis.http { App, Route, Status, Request, Response, Session, SessionData, ErrorHandler, HttpError }
 import mantis.http.response
 import mantis.http.route
 import mantis.test { expect }
@@ -269,4 +269,36 @@ fn test_can_use_custom_error_handler() {
     res := app.render()
 
     expect(res.content).to_be_equal_to('Custom error: Route not found')
+}
+
+fn test_handle_error_reports_and_renders_error() {
+    custom_handler := ErrorHandler{
+        report: fn (app App, err IError) {
+            //
+        }
+        render: fn (app App, err IError) Response {
+            return Response{
+                content: err.msg()
+                status: .server_error
+            }
+        }
+    }
+
+    app := http.create_app(
+        error_handler: custom_handler
+        request: Request{
+            path: "/"
+            method: .get
+        }
+    )
+
+    test_error := HttpError{
+        code: .not_found
+        message: 'Test error'
+    }
+
+    res := app.handle_error(test_error)
+
+    expect(res.content).to_be_equal_to('Test error')
+    expect(res.status).to_be_equal_to(Status.server_error)
 }

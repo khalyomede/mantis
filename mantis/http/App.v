@@ -60,6 +60,15 @@ pub fn (app App) route(name string, parameters map[string]string) ?string {
     return none
 }
 
+pub fn (app App) handle_error(err IError) Response {
+    app.error_handler.report(app, err)
+    return app.error_handler.render(app, err)
+}
+
+pub fn (app App) report_error(err IError) {
+    app.error_handler.report(app, err)
+}
+
 struct CreateRequestParameters {
     method string @[required]
     path string @[required]
@@ -214,7 +223,7 @@ pub fn (app App) find_route() ?Route {
 
 pub fn (app App) render() Response {
     route := app.find_route() or {
-        return app.error_handler.render(app, HttpError{
+        return app.handle_error(HttpError{
             code: .not_found
             message: 'Route not found'
         })
