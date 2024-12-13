@@ -4,7 +4,7 @@ import mantis.env { Env }
 
 fn test_can_load_env_file() {
     mut environment := Env{
-        file: $embed_file("misc/.env")
+        file: $embed_file("../misc/.env")
     }
 
     name := environment.get('APP_NAME') or { "" }
@@ -14,7 +14,7 @@ fn test_can_load_env_file() {
 
 fn test_can_use_cached_values() {
     mut environment := Env{
-        file: $embed_file("misc/.env")
+        file: $embed_file("../misc/.env")
     }
 
     // First access parses
@@ -27,7 +27,7 @@ fn test_can_use_cached_values() {
 
 fn test_handles_missing_values() {
     mut environment := Env{
-        file: $embed_file("misc/.env")
+        file: $embed_file("../misc/.env")
     }
 
     value := environment.get('DOES_NOT_EXIST') or {
@@ -39,7 +39,7 @@ fn test_handles_missing_values() {
 
 fn test_ignores_comments() {
     mut environment := Env{
-        file: $embed_file("misc/.env")
+        file: $embed_file("../misc/.env")
     }
 
     after_comment := environment.get('AFTER_COMMENT') or { "" }
