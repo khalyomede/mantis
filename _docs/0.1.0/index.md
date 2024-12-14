@@ -11,8 +11,8 @@ hero:
       text: Quick start
       link: /quick-start
     - theme: alt
-      text: Documentation
-      link: /documentation
+      text: Reference
+      link: /reference
 
 features:
   - title: Battery included
@@ -20,6 +20,5 @@ features:
   - title: Single executable
     details: "Mantis compiles to a single binary including everything: dot env, views, ..."
   - title: Written in V
-    details: V is what Go should have been; strongly typed and simple.
+    details: "Mantis uses V, a type-safe and blazing fast™ version of Go."
 ---
-

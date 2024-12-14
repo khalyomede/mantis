@@ -11,8 +11,8 @@ hero:
       text: Quick start
       link: /quick-start
     - theme: alt
-      text: Documentation
-      link: /documentation
+      text: Reference
+      link: /reference
 
 features:
   - title: Battery included

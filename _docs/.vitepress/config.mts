@@ -17,7 +17,6 @@ export default defineConfig({
                     { text: 'Quick start', link: '/quick-start' },
                     { text: 'Productivity', link: '/productivity' },
                     { text: 'Folder structure', link: '/folder-structure' },
-                    { text: 'Documentation', link: '/documentation' },
                     {
                         text: 'Http', items: [
                             { text: "Routing", link: '/http/routing' },
@@ -29,6 +28,7 @@ export default defineConfig({
                             { text: "Erorr handling", link: '/http/error-handling' },
                         ],
                     },
+                    { text: 'Reference', link: '/reference' },
                 ]
             }
         ],
