@@ -31,6 +31,7 @@ export default defineConfig({
                         ],
                     },
                     { text: 'Validation', link: '/validation' },
+                    { text: 'HTML', link: '/html' },
                     { text: 'Database', link: '/database' },
                     { text: 'Reference', link: '/reference' },
                 ]
