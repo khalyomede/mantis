@@ -25,6 +25,7 @@ export default defineConfig({
                             { text: "Request", link: '/http/request' },
                             { text: "View", link: '/http/view' },
                             { text: "Translation", link: '/http/translation' },
+                            { text: "Session (file)", link: '/http/session-file' },
                             { text: "Erorr handling", link: '/http/error-handling' },
                         ],
                     },
