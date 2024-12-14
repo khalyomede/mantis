@@ -7,12 +7,30 @@ Mantis provides two main methods for handling errors in your application:
 Use when you need to both report an error and return an error response:
 
 ```v
-import khalyomede.mantis.http { HttpError }
+module main
 
-return app.handle_error(HttpError{
-  code: .not_found
-  message: 'Page not found'
-})
+import khalyomede.mantis.http { create_app, App, Response, HttpError }
+import khalyomede.mantis.http.response
+import khalyomede.mantis.http.route
+
+fn main() {
+  app := create_app(
+    routes: [
+      route.get(name: "index", path: "/", callback: fn (app App) Response {
+        search := app.request.get("search") or {
+          return app.handle_error(HttpError{ // [!code focus:4]
+            code: .not_found
+            message: "The search term was missing."
+          })
+        }
+
+        return response.html(content: "You search is ${search}.")
+      })
+    ]
+  )
+
+  app.serve() or { panic(err) }
+}
 ```
 
 This will:
@@ -24,18 +42,31 @@ This will:
 Use when you need to log an error but want to continue processing:
 
 ```v
-import khalyomede.mantis.http { ValidationError }
+module main
+
+import khalyomede.mantis.http { create_app, App, Response, ValidationError }
 import khalyomede.mantis.http.response
-import khalyomede.mantis.html { div, p }
+import khalyomede.mantis.http.route
 
-// Report issue but continue with safe defaults for user settings
-app.report_error(ValidationError{
-  message: 'Could not load user theme preferences, falling back to light mode'
-})
+fn main() {
+  app := create_app(
+    routes: [
+      route.get(name: "index", path: "/", callback: fn (app App) Response {
+        theme := app.session.get("theme") or {
+          app.report_error(ValidationError{ // [!code focus:3]
+            message: 'Could not load user theme preferences, falling back to light mode'
+          })
 
-return response.html(content: div({}, [
-  p({}, ['Welcome to the homepage'])
-]))
+          "light"
+        }
+
+        return response.html(content: "Current theme: ${theme}")
+      })
+    ]
+  )
+
+  app.serve() or { panic(err) }
+}
 ```
 
 ## Error Types
@@ -76,25 +107,37 @@ Accept: application/json
 You can customize error handling by providing your own handler:
 
 ```v
+module main
+
 import khalyomede.mantis.http { create_app, App, Response, ErrorHandler }
 import khalyomede.mantis.html { h1 }
+import khalyomede.mantis.html { div, p }
+import khalyomede.mantis.http.response
+import khalyomede.mantis.http.route
+import khalyomede.mantis.console
 
-app := create_app(
-  error_handler: ErrorHandler{
-    report: fn (app App, err IError) {
-      // Custom error reporting logic
-      log_to_file(err.msg())
-    }
-    render: fn (app App, err IError) Response {
-      // Custom error rendering logic
-      return Response{
-        content: h1({}, ['Oops! Something went wrong'])
-        status: .server_error
-        headers: {
-          'Content-Type': ['text/html']
-        }
+fn main() {
+  app := create_app(
+    error_handler: ErrorHandler{ // [!code focus:13]
+      report: fn (app App, err IError) {
+        // Custom error reporting logic
+        console.error(err.msg())
+      }
+      render: fn (app App, err IError) Response {
+        // Custom error rendering logic
+        return response.html(
+          content: h1({}, ['Oops! Something went wrong'])
+          status: .server_error
+        )
       }
     }
-  }
-)
+    routes: [
+      route.get(name: "index", path: "/", callback: fn (app App) Response {
+        return response.html(content: div({}, ["Home page"]))
+      })
+    ]
+  )
+
+  app.serve() or { panic(err) }
+}
 ```
