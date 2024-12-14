@@ -29,6 +29,7 @@ export default defineConfig({
                             { text: "Erorr handling", link: '/http/error-handling' },
                         ],
                     },
+                    { text: 'Validation', link: '/validation' },
                     { text: 'Reference', link: '/reference' },
                 ]
             }
