@@ -210,6 +210,47 @@ fn test_can_retreive_session_data() {
     os.rmdir_all("misc/sessions") or {}
 }
 
+fn test_can_set_session_data() {
+    // Setup test session directory
+    session_id := "test-session-123"
+    os.mkdir_all("misc/sessions") or { panic(err) }
+
+    // Initial session data
+    initial_data := SessionData{
+        expires_at: time.now().unix() + 3600
+        data: {
+            "existing_key": "existing_value"
+        }
+    }
+    os.write_file("misc/sessions/${session_id}.json", json.encode(initial_data)) or {
+        panic(err)
+    }
+
+    app := http.create_app(
+        session: Session{
+            driver: .file
+            path: "misc/sessions"
+            lifetime: 3600
+            sliding: true
+            id: session_id
+        }
+    )
+
+    // Test setting new value
+    app.session.set("user_id", "123") or { panic(err) }
+
+    // Read file to verify changes
+    content := os.read_file("misc/sessions/${session_id}.json") or { panic(err) }
+    session_data := json.decode(SessionData, content) or { panic(err) }
+
+    // Verify original data preserved and new data added
+    expect(session_data.data["existing_key"]).to_be_equal_to("existing_value")
+    expect(session_data.data["user_id"]).to_be_equal_to("123")
+
+    // Clean up test files
+    os.rmdir_all("misc/sessions") or {}
+}
+
 fn test_returns_404_for_missing_route() {
     app := App{
         request: Request{
