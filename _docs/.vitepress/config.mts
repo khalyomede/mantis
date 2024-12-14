@@ -21,6 +21,7 @@ export default defineConfig({
                     {
                         text: 'Http', items: [
                             { text: "Routing", link: '/http/routing' },
+                            { text: "Response", link: '/http/response' },
                             { text: "Erorr handling", link: '/http/error-handling' },
                         ],
                     },
