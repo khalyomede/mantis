@@ -24,6 +24,7 @@ export default defineConfig({
                             { text: "Response", link: '/http/response' },
                             { text: "Request", link: '/http/request' },
                             { text: "View", link: '/http/view' },
+                            { text: "Translation", link: '/http/translation' },
                             { text: "Erorr handling", link: '/http/error-handling' },
                         ],
                     },
