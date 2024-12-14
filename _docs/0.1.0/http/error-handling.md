@@ -7,7 +7,7 @@ Mantis provides two main methods for handling errors in your application:
 Use when you need to both report an error and return an error response:
 
 ```v
-import mantis.http { HttpError }
+import khalyomede.mantis.http { HttpError }
 
 return app.handle_error(HttpError{
   code: .not_found
@@ -24,9 +24,9 @@ This will:
 Use when you need to log an error but want to continue processing:
 
 ```v
-import mantis.http { ValidationError }
-import mantis.http.response
-import mantis.html { div, p }
+import khalyomede.mantis.http { ValidationError }
+import khalyomede.mantis.http.response
+import khalyomede.mantis.html { div, p }
 
 // Report issue but continue with safe defaults for user settings
 app.report_error(ValidationError{
@@ -43,7 +43,7 @@ return response.html(content: div({}, [
 Mantis provides built-in error types for common scenarios:
 
 ```v
-import mantis.http { HttpError, ValidationError }
+import khalyomede.mantis.http { HttpError, ValidationError }
 
 // For HTTP errors
 HttpError{
@@ -76,8 +76,8 @@ Accept: application/json
 You can customize error handling by providing your own handler:
 
 ```v
-import mantis.http { create_app, App, Response, ErrorHandler }
-import mantis.html { h1 }
+import khalyomede.mantis.http { create_app, App, Response, ErrorHandler }
+import khalyomede.mantis.html { h1 }
 
 app := create_app(
   error_handler: ErrorHandler{

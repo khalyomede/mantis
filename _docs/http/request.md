@@ -57,9 +57,9 @@ app := create_app(
 Access cookie values using `request.cookies.get()`:
 
 ```v
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 app := create_app(
   routes: [
@@ -81,9 +81,9 @@ app := create_app(
 Access the client's IP address using `request.ip`:
 
 ```v
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 app := create_app(
   routes: [

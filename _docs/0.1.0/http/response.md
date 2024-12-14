@@ -7,9 +7,9 @@ Mantis provides a simple way to return responses to clients.
 Return HTML content using `response.html()`:
 
 ```v
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 app := create_app(
   routes: [
@@ -29,9 +29,9 @@ app := create_app(
 Set HTTP status codes using the `status` field:
 
 ```v
-import mantis.http { create_app, App, Response, Status }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, App, Response, Status }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 app := create_app(
   routes: [
@@ -54,9 +54,9 @@ app := create_app(
 Add custom headers to your response:
 
 ```v
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 app := create_app(
   routes: [
@@ -81,9 +81,9 @@ app := create_app(
 Redirect users to another URL:
 
 ```v
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 app := create_app(
   routes: [
@@ -101,9 +101,9 @@ app := create_app(
 You can also add query parameters:
 
 ```v
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 app := create_app(
   routes: [

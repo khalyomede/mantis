@@ -7,9 +7,9 @@ Mantis provides file-based session support for managing user state across reques
 Configure session handling in your application:
 
 ```v
-import mantis.http { create_app, App, Response, Session }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, App, Response, Session }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 app := create_app(
   session: Session{
@@ -34,9 +34,9 @@ app := create_app(
 Access session data using `session.get()`:
 
 ```v
-import mantis.http { create_app, App, Response, Session }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, App, Response, Session }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 app := create_app(
   session: Session{
@@ -61,9 +61,9 @@ app := create_app(
 Store data in the session using `session.set()`:
 
 ```v
-import mantis.http { create_app, App, Response, Session }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, App, Response, Session }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 app := create_app(
   session: Session{
@@ -91,9 +91,9 @@ app := create_app(
 Session sliding automatically extends the session lifetime each time the user interacts with your application. This is useful for keeping users logged in as long as they're active:
 
 ```v
-import mantis.http { create_app, App, Response, Session }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, App, Response, Session }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 app := create_app(
   session: Session{
@@ -115,4 +115,7 @@ app := create_app(
 )
 ```
 
-Note that the drawbacks is it involves **more writes on your disk** since each request will update the session data.
+
+::: warning
+Session sliding involves **more writes on your disk** since each request will update the session data.
+:::

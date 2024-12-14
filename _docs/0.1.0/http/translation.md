@@ -5,10 +5,10 @@
 Translate basic text strings:
 
 ```v
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
-import mantis.translation { Translation, Lang }
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
+import khalyomede.mantis.translation { Translation, Lang }
 
 app := create_app(
   translation: Translation{
@@ -45,10 +45,10 @@ app := create_app(
 Include dynamic values in translations:
 
 ```v
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
-import mantis.translation { Translation, Lang }
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
+import khalyomede.mantis.translation { Translation, Lang }
 
 app := create_app(
   translation: Translation{
@@ -91,10 +91,10 @@ app := create_app(
 Handle singular/plural forms:
 
 ```v
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
-import mantis.translation { Translation, Lang }
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
+import khalyomede.mantis.translation { Translation, Lang }
 
 app := create_app(
   translation: Translation{
@@ -139,10 +139,10 @@ app := create_app(
 Handle gender-specific translations:
 
 ```v
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
-import mantis.translation { Translation, Lang }
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
+import khalyomede.mantis.translation { Translation, Lang }
 
 app := create_app(
   translation: Translation{

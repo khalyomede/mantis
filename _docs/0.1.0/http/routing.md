@@ -7,9 +7,9 @@ Routes define how your application responds to client requests.
 Define routes in your application using `route.get()` or `route.post()`:
 
 ```v
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 app := create_app(
   routes: [
@@ -29,9 +29,9 @@ app := create_app(
 Capture URL segments using parameters:
 
 ```v
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 app := create_app(
   routes: [
@@ -55,9 +55,9 @@ app := create_app(
 Mantis supports GET and POST methods:
 
 ```v
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 app := create_app(
   routes: [
@@ -86,9 +86,9 @@ app := create_app(
 Routes can have multiple parameters:
 
 ```v
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 app := create_app(
   routes: [

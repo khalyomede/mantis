@@ -7,10 +7,10 @@ Mantis provides a type-safe approach to building HTML views using V functions.
 Create HTML views using Mantis's HTML utilities:
 
 ```v
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
-import mantis.html { html, head, title, body, div, p }
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
+import khalyomede.mantis.html { html, head, title, body, div, p }
 
 app := create_app(
   routes: [
@@ -41,10 +41,10 @@ app := create_app(
 Break down your views into reusable components:
 
 ```v
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
-import mantis.html { div, nav, a }
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
+import khalyomede.mantis.html { div, nav, a }
 
 fn navbar() string {
   return nav({}, [
@@ -77,10 +77,10 @@ app := create_app(
 Add HTML attributes to elements:
 
 ```v
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
-import mantis.html { div, button }
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
+import khalyomede.mantis.html { div, button }
 
 app := create_app(
   routes: [
@@ -111,10 +111,10 @@ app := create_app(
 Iterate over data to generate lists:
 
 ```v
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
-import mantis.html { ul, li }
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
+import khalyomede.mantis.html { ul, li }
 
 app := create_app(
   routes: [
