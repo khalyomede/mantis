@@ -6,7 +6,9 @@ Mantis provides type-safe HTML generation through V functions.
 
 Create HTML elements using Mantis's typed functions:
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { div, p, a }
@@ -25,11 +27,15 @@ fn main() {
 }
 ```
 
+:::
+
 ## Anonymous element
 
 If your HTML element is not included in the [available elements](#available-elements), you can create a custom one.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { anon }
@@ -43,9 +49,13 @@ fn main() {
 }
 ```
 
+:::
+
 If your custom element is not accepting content (an orphan), pass the last parameter to `true`.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { anon }
@@ -57,11 +67,15 @@ fn main() {
 }
 ```
 
+:::
+
 ## Attributes
 
 Every element accepts an attributes map as its first parameter:
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { div, a }
@@ -85,11 +99,15 @@ fn main() {
 }
 ```
 
+:::
+
 ## Component functions
 
 Break down your views into reusable functions:
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { button, div }
@@ -122,11 +140,15 @@ fn main() {
 }
 ```
 
+:::
+
 ## Iterating
 
 Loop through your items to create list of HTML elements:
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { ul, li }
@@ -150,6 +172,8 @@ fn main() {
   println(list) // <ul><li>John</li><li>Jane</li></ul>
 }
 ```
+
+:::
 
 ## Available elements
 
@@ -180,7 +204,9 @@ fn main() {
 
 Hyperlinks.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { a }
@@ -194,11 +220,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### body
 
 Contains the visible content of the document.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { body, div }
@@ -212,11 +242,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### button
 
 Clickable element.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { button }
@@ -230,11 +264,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### code
 
 Code snippets.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { code }
@@ -246,11 +284,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### div
 
 A generic container for flow content.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { div }
@@ -264,11 +306,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### footer
 
 The lower section of the docuemnt.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { footer }
@@ -282,11 +328,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### h1
 
 Level 1 title.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { h1 }
@@ -298,11 +348,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### head
 
 Contains metadata about the document.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { head, title }
@@ -316,11 +370,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### header
 
 Introductory content or navigation.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { header, h1 }
@@ -334,11 +392,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### html
 
 The root element of an HTML document.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { html, head, body }
@@ -353,11 +415,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### li
 
 List item.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { li }
@@ -369,11 +435,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### link
 
 Links to external resources like CSS files.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { link }
@@ -388,11 +458,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### main
 
 The dominant content of the document.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { main }
@@ -404,11 +478,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### nav
 
 Section with navigation links.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { nav, a }
@@ -423,9 +501,13 @@ fn main() {
 }
 ```
 
+:::
+
 ### p
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { p }
@@ -437,11 +519,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### pre
 
 Preformatted text.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { pre, code }
@@ -455,11 +541,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### script
 
 Adds JavaScript to the page.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { script }
@@ -473,11 +563,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### small
 
 Side comments or small print.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { small }
@@ -489,11 +583,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### span
 
 Inline container.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { span }
@@ -507,11 +605,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### style
 
 Adds CSS styles to the page.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { style }
@@ -525,11 +627,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### title
 
 Defines the document's title shown in browser tab.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { title }
@@ -541,11 +647,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### ul
 
 Unordered list.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.html { ul, li }
@@ -559,3 +669,5 @@ fn main() {
   println(content) // <ul><li>First item</li><li>Second item</li></ul>
 }
 ```
+
+:::

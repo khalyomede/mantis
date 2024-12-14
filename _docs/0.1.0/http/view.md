@@ -6,41 +6,55 @@ Mantis provides a type-safe approach to building HTML views using V functions.
 
 Create HTML views using Mantis's HTML utilities:
 
-```v
+::: code-group
+
+```v [main.v]
+module main
+
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response
 import khalyomede.mantis.html { html, head, title, body, div, p }
 
-app := create_app(
-  routes: [
-    route.get(
-      name: "index"
-      path: "/"
-      callback: fn (app App) Response {
-        content := html({}, [
-          head({}, [
-            title({}, ['Welcome'])
-          ]),
-          body({}, [
-            div({}, [
-              p({}, ['Hello world'])
+fn main() {
+  app := create_app(
+    routes: [
+      route.get(
+        name: "index"
+        path: "/"
+        callback: fn (app App) Response {
+          content := html({}, [
+            head({}, [
+              title({}, ['Welcome'])
+            ]),
+            body({}, [
+              div({}, [
+                p({}, ['Hello world'])
+              ])
             ])
           ])
-        ])
 
-        return response.html(content: content)
-      }
-    )
-  ]
-)
+          return response.html(content: content)
+        }
+      )
+    ]
+  )
+
+  app.serve() or { panic(err) }
+}
 ```
+
+:::
 
 ## Components
 
 Break down your views into reusable components:
 
-```v
+::: code-group
+
+```v [main.v]
+module main
+
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response
@@ -54,85 +68,109 @@ fn navbar() string {
   ])
 }
 
-app := create_app(
-  routes: [
-    route.get(
-      name: "index"
-      path: "/"
-      callback: fn (app App) Response {
-        content := div({}, [
-          navbar(),
-          div({}, ['Page content'])
-        ])
+fn main() {
+  app := create_app(
+    routes: [
+      route.get(
+        name: "index"
+        path: "/"
+        callback: fn (app App) Response {
+          content := div({}, [
+            navbar(),
+            div({}, ['Page content'])
+          ])
 
-        return response.html(content: content)
-      }
-    )
-  ]
-)
+          return response.html(content: content)
+        }
+      )
+    ]
+  )
+
+  app.serve() or { panic(err) }
+}
 ```
+
+:::
 
 ## Attributes
 
 Add HTML attributes to elements:
 
-```v
+::: code-group
+
+```v [main.v]
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response
 import khalyomede.mantis.html { div, button }
 
-app := create_app(
-  routes: [
-    route.get(
-      name: "index"
-      path: "/"
-      callback: fn (app App) Response {
-        content := div({
-          'class': 'container'
-        }, [
-          button({
-            'class': 'btn btn-primary'
-            'type': 'submit'
+fn main() {
+  app := create_app(
+    routes: [
+      route.get(
+        name: "index"
+        path: "/"
+        callback: fn (app App) Response {
+          content := div({
+            'class': 'container'
           }, [
-            'Click me'
+            button({
+              'class': 'btn btn-primary'
+              'type': 'submit'
+            }, [
+              'Click me'
+            ])
           ])
-        ])
 
-        return response.html(content: content)
-      }
-    )
-  ]
-)
+          return response.html(content: content)
+        }
+      )
+    ]
+  )
+
+  app.serve() or { panic(err) }
+}
 ```
+
+:::
 
 ## Lists
 
 Iterate over data to generate lists:
 
-```v
+::: code-group
+
+```v [main.v]
+module main
+
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response
 import khalyomede.mantis.html { ul, li }
 
-app := create_app(
-  routes: [
-    route.get(
-      name: "index"
-      path: "/"
-      callback: fn (app App) Response {
-        items := ['One', 'Two', 'Three']
+fn main() {
+  app := create_app(
+    routes: [
+      route.get(
+        name: "index"
+        path: "/"
+        callback: fn (app App) Response {
+          items := ['One', 'Two', 'Three']
 
-        list_items := items.map(fn (item string) string {
-          return li({}, [item])
-        })
+          list_items := items.map(fn (item string) string {
+            return li({}, [item])
+          })
 
-        content := ul({}, list_items)
+          content := ul({}, list_items)
 
-        return response.html(content: content)
-      }
-    )
-  ]
-)
+          return response.html(content: content)
+        }
+      )
+    ]
+  )
+
+  app.serve() or { panic(err) }
+}
 ```
+
+:::

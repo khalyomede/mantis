@@ -8,7 +8,9 @@ Mantis currently only supports SQLite databases.
 
 ## Basic Usage
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.database { Database, DatabaseConnection, DatabaseDriver }
@@ -44,11 +46,17 @@ fn main() {
 }
 ```
 
+:::
+
 ## Runnng raw queries
 
 Use run() for INSERT, UPDATE, DELETE operations:
 
-```v
+::: code-group
+
+```v [main.v]
+module main
+
 import khalyomede.mantis.database { Database, DatabaseConnection }
 
 fn main() {
@@ -78,3 +86,5 @@ fn main() {
   }
 }
 ```
+
+:::

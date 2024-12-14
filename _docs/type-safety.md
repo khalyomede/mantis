@@ -61,38 +61,46 @@ Clear Intent: The function signature clearly indicates if it can fail (!) or ret
 
 Here's a practical example from Mantis's routing:
 
-```v
+::: code-group
+
+```v [main.v]
+module main
+
 import mantis.http { create_app, App, Response }
 import mantis.http.route
 import mantis.http.response
 
-app := create_app(
+fn main() {
+  app := create_app(
     routes: [
-        route.get(
-            name: "post.show"
-            path: "/post/{id}"
-            callback: fn (app App) Response {
-                // The ? indicates this might not find an ID
-                id := app.route_parameter("id") or {
-                    return response.html(
-                        content: "Post not found",
-                        status: .not_found
-                    )
-                }
+      route.get(
+        name: "post.show"
+        path: "/post/{id}"
+        callback: fn (app App) Response {
+          // The ? indicates this might not find an ID
+          id := app.route_parameter("id") or {
+            return response.html(
+              content: "Post not found",
+              status: .not_found
+            )
+          }
 
-                // The ! indicates the database query might fail
-                post := app.database.find("posts", id) or {
-                    return response.html(
-                        content: "Database error: ${err.msg()}",
-                        status: .server_error
-                    )
-                }
+          // The ! indicates the database query might fail
+          post := app.database.find("posts", id) or {
+            return response.html(
+              content: "Database error: ${err.msg()}",
+              status: .server_error
+            )
+          }
 
-                return response.html(content: "Post: ${post.title}")
-            }
-        )
+          return response.html(content: "Post: ${post.title}")
+        }
+      )
     ]
-)
+  )
+
+  app.serve() or { panic(err) }
+}
 ```
 
 This pattern ensures that:

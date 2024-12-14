@@ -4,7 +4,11 @@
 
 Mantis is a web framework for V lang that prioritizes developer peace of mind through type safety and explicit code patterns. Built on the principle that code should be clear and predictable, Mantis helps you create web applications that are easy to maintain and scale.
 
-```v
+::: code-group
+
+```v [main.v]
+module main
+
 import khalyomede.mantis.html { create_app, App, Response }
 import khalyomede.mantis.html.route
 import khalyomede.mantis.html.response
@@ -23,6 +27,8 @@ fn main() {
   app.serve() or { panic(err) }
 }
 ```
+
+:::
 
 ## Why Another Framework?
 

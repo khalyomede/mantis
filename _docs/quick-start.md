@@ -16,7 +16,9 @@ docker compose version
 
 Create a file "docker-compose.yml" and paste this content:
 
-```yml
+::: code-group
+
+```yml [docker-compose.yml]
 services:
   v:
     image: thevlang/vlang:alpine
@@ -28,6 +30,8 @@ services:
     ports:
       - 80:80
 ```
+
+:::
 
 Ensure V is runnable:
 
@@ -47,7 +51,9 @@ docker compose run --rm v install khalyomede.mantis
 
 In a file called `main.v` at the root, add this content:
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.http { create_app, App, Response }
@@ -66,6 +72,8 @@ fn main() {
   app.serve() or { panic(err) }
 }
 ```
+
+:::
 
 ## Run the server
 

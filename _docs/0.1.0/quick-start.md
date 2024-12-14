@@ -1,45 +1,86 @@
 # Quick start
 
-This page demonstrates usage of some of the runtime APIs provided by VitePress.
+Learn how to run an hello world app in a few minutes.
 
-The main `useData()` API can be used to access site, theme, and page data for the current page. It works in both `.md` and `.vue` files:
+## Docker Compose
 
-```md
-<script setup>
-import { useData } from 'vitepress'
+Install [Docker Compose](https://docs.docker.com/compose/install/).
 
-const { theme, page, frontmatter } = useData()
-</script>
+Ensure it is running on a new terminal:
 
-## Results
-
-### Theme Data
-<pre>{{ theme }}</pre>
-
-### Page Data
-<pre>{{ page }}</pre>
-
-### Page Frontmatter
-<pre>{{ frontmatter }}</pre>
+```bash
+docker compose version
 ```
 
-<script setup>
-import { useData } from 'vitepress'
+## V executable
 
-const { site, theme, page, frontmatter } = useData()
-</script>
+Create a file "docker-compose.yml" and paste this content:
 
-## Results
+::: code-group
 
-### Theme Data
-<pre>{{ theme }}</pre>
+```yml [docker-compose.yml]
+services:
+  v:
+    image: thevlang/vlang:alpine
+    tty: true
+    entrypoint: v
+    working_dir: /home/v
+    volumes:
+      - .:/home/v
+    ports:
+      - 80:80
+```
 
-### Page Data
-<pre>{{ page }}</pre>
+:::
 
-### Page Frontmatter
-<pre>{{ frontmatter }}</pre>
+Ensure V is runnable:
 
-## More
+```bash
+docker compose run --rm v --version
+```
 
-Check out the documentation for the [full list of runtime APIs](https://vitepress.dev/reference/runtime-api#usedata).
+## V package installation
+
+Install Mantis:
+
+```bash
+docker compose run --rm v install khalyomede.mantis
+```
+
+## Create the web server
+
+In a file called `main.v` at the root, add this content:
+
+::: code-group
+
+```v [main.v]
+module main
+
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+
+fn main() {
+  app := create_app(
+    host: "0.0.0.0"
+    routes: [
+      route.get(path: "/", callback: fn (app App) Response {
+        return app.response.html("hello world")
+      })
+    ]
+  )
+
+  app.serve() or { panic(err) }
+}
+```
+
+:::
+
+## Run the server
+
+Run this command:
+
+```bash
+docker compose run --rm --service-ports v watch run main.v
+```
+
+Your app is running at [http://localhost](http://localhost) or [http://127.0.0.1](http://127.0.0.1)

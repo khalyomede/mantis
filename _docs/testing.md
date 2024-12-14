@@ -6,7 +6,9 @@ Mantis provides an expressive testing utility that makes it easy to write clear 
 
 The `expect` function allows you to write assertions in a natural, fluent style:
 
-```v
+::: code-group
+
+```v [tests/example_test.v]
 import mantis.test { expect }
 
 fn test_basic_assertions() {
@@ -21,6 +23,8 @@ fn test_basic_assertions() {
   expect(false).to_be_false()
 }
 ```
+
+:::
 
 ## Running tests
 
@@ -47,7 +51,9 @@ Here are some tips for writing effective tests with Mantis's testing utilities:
 
 Example of a well-structured test:
 
-```v
+::: code-group
+
+```v [tests/controllers/index_test.v]
 import khalyomede.mantis.html { create_app, App, Response, Request }
 import khalyomede.mantis.html.response
 import khalyomede.mantis.html.route
@@ -75,6 +81,8 @@ fn test_home_page_displays_hello_world() {
 }
 ```
 
+:::
+
 ## Available assertions
 
 - [to_be_equal_to](#to-be-equal-to)
@@ -99,7 +107,9 @@ fn test_home_page_displays_hello_world() {
 
 Asserts that a value equals another value. Works with basic types like numbers, strings, and booleans.
 
-```v
+::: code-group
+
+```v [tests/example_test.v]
 mantis.test { expect }
 
 fn test_equality() {
@@ -109,11 +119,15 @@ fn test_equality() {
 }
 ```
 
+:::
+
 ### to_be_different_than
 
 Asserts that a value is different than another value.
 
-```v
+::: code-group
+
+```v [tests/example_test.v]
 mantis.test { expect }
 
 fn test_inequality() {
@@ -123,11 +137,15 @@ fn test_inequality() {
 }
 ```
 
+:::
+
 ### to_be_between
 
 Asserts that a number falls between two other numbers (inclusive).
 
-```v
+::: code-group
+
+```v [tests/example_test.v]
 mantis.test { expect }
 
 fn test_between() {
@@ -137,11 +155,15 @@ fn test_between() {
 }
 ```
 
+:::
+
 ### to_be_greater_than
 
 Asserts that a number is greater than another number.
 
-```v
+::: code-group
+
+```v [tests/example_test.v]
 mantis.test { expect }
 
 fn test_greater_than() {
@@ -150,11 +172,15 @@ fn test_greater_than() {
 }
 ```
 
+:::
+
 ### to_be_greater_or_equal_to
 
 Asserts that a number is greater than or equal to another number.
 
-```v
+::: code-group
+
+```v [tests/example_test.v]
 mantis.test { expect }
 
 fn test_greater_or_equal() {
@@ -163,11 +189,15 @@ fn test_greater_or_equal() {
 }
 ```
 
+:::
+
 ### to_be_lower_than
 
 Asserts that a number is lower than another number.
 
-```v
+::: code-group
+
+```v [tests/example_test.v]
 mantis.test { expect }
 
 fn test_lower_than() {
@@ -176,11 +206,15 @@ fn test_lower_than() {
 }
 ```
 
+:::
+
 ### to_be_lower_or_equal_to
 
 Asserts that a number is lower than or equal to another number.
 
-```v
+::: code-group
+
+```v [tests/example_test.v]
 mantis.test { expect }
 
 fn test_lower_or_equal() {
@@ -189,11 +223,15 @@ fn test_lower_or_equal() {
 }
 ```
 
+:::
+
 ### to_be_true
 
 Asserts that a boolean value is true.
 
-```v
+::: code-group
+
+```v [tests/example_test.v]
 mantis.test { expect }
 
 fn test_is_true() {
@@ -202,11 +240,15 @@ fn test_is_true() {
 }
 ```
 
+:::
+
 ### to_be_false
 
 Asserts that a boolean value is false.
 
-```v
+::: code-group
+
+```v [tests/example_test.v]
 mantis.test { expect }
 
 fn test_is_false() {
@@ -215,11 +257,15 @@ fn test_is_false() {
 }
 ```
 
+:::
+
 ### to_end_with
 
 Asserts that a string ends with a given suffix.
 
-```v
+::: code-group
+
+```v [tests/example_test.v]
 mantis.test { expect }
 
 fn test_string_ending() {
@@ -228,11 +274,15 @@ fn test_string_ending() {
 }
 ```
 
+:::
+
 ### to_not_end_with
 
 Asserts that a string does not end with a given suffix.
 
-```v
+::: code-group
+
+```v [tests/example_test.v]
 mantis.test { expect }
 
 fn test_string_not_ending() {
@@ -241,11 +291,15 @@ fn test_string_not_ending() {
 }
 ```
 
+:::
+
 ### to_be_snake_case
 
 Asserts that a string follows snake_case convention.
 
-```v
+::: code-group
+
+```v [tests/example_test.v]
 mantis.test { expect }
 
 fn test_snake_case() {
@@ -254,11 +308,15 @@ fn test_snake_case() {
 }
 ```
 
+:::
+
 ### to_not_be_snake_case
 
 Asserts that a string does not follow snake_case convention.
 
-```v
+::: code-group
+
+```v [tests/example_test.v]
 mantis.test { expect }
 
 fn test_not_snake_case() {
@@ -267,11 +325,15 @@ fn test_not_snake_case() {
 }
 ```
 
+:::
+
 ### to_be_kebab_case
 
 Asserts that a string follows kebab-case convention.
 
-```v
+::: code-group
+
+```v [tests/example_test.v]
 mantis.test { expect }
 
 fn test_kebab_case() {
@@ -280,11 +342,15 @@ fn test_kebab_case() {
 }
 ```
 
+:::
+
 ### to_not_be_kebab_case
 
 Asserts that a string does not follow kebab-case convention.
 
-```v
+::: code-group
+
+```v [tests/example_test.v]
 mantis.test { expect }
 
 fn test_not_kebab_case() {
@@ -293,11 +359,15 @@ fn test_not_kebab_case() {
 }
 ```
 
+:::
+
 ### to_have_key_equal_to
 
 Asserts that a map contains a specific key with an expected value.
 
-```v
+::: code-group
+
+```v [tests/example_test.v]
 mantis.test { expect }
 
 fn test_map_key_value() {
@@ -310,11 +380,15 @@ fn test_map_key_value() {
 }
 ```
 
+:::
+
 ### to_contain
 
 Asserts that an array contains a specific element.
 
-```v
+::: code-group
+
+```v [tests/example_test.v]
 mantis.test { expect }
 
 fn test_array_contains() {
@@ -322,3 +396,5 @@ fn test_array_contains() {
   expect(fruits).to_contain("banana")
 }
 ```
+
+:::

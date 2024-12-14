@@ -6,7 +6,9 @@ Mantis provides a validation system that helps ensure your data meets specific c
 
 Here's a simple example validating user input:
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.validation { validate, Rule, Value, Min }
@@ -33,13 +35,17 @@ fn main() {
 }
 ```
 
+:::
+
 ## Custom rules
 
 You can create your own rules.
 
 They must implement two method: `validate(Value) bool` and `message(string) string`.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.validation { Rule, Value, validate }
@@ -84,11 +90,17 @@ fn main() {
 }
 ```
 
+:::
+
 ## Combining multiple rules
 
 You can chain multiple rules for a field. The catched error will correspond to the first rule that did not pass.
 
-```v
+::: code-group
+
+```v [main.v]
+module main
+
 import mantis.validation { validate, Rule, Value, Min, Max }
 
 fn main() {
@@ -109,9 +121,15 @@ fn main() {
 }
 ```
 
+:::
+
 ## HTTP Form validation example
 
-```v
+::: code-group
+
+```v [main.v]
+module main
+
 import mantis.http { create_app, App, Response }
 import mantis.http.route
 import mantis.http.response
@@ -136,46 +154,52 @@ fn (rule StrongPassword) message(key string) string {
   return "The ${key} must be at least 8 characters and contain both uppercase and lowercase letters."
 }
 
-app := create_app(
-  routes: [
-    route.post(
-      name: "register"
-      path: "/register"
-      callback: fn (app App) Response {
-        // Get form data
-        email := app.request.form("email") or { "" }
-        password := app.request.form("password") or { "" }
+fn main() {
+  app := create_app(
+    routes: [
+      route.post(
+        name: "register"
+        path: "/register"
+        callback: fn (app App) Response {
+          // Get form data
+          email := app.request.form("email") or { "" }
+          password := app.request.form("password") or { "" }
 
-        // Define validation rules
-        rules := {
-          "password": [
-            Rule(StrongPassword{})
-          ]
-        }
+          // Define validation rules
+          rules := {
+            "password": [
+              Rule(StrongPassword{})
+            ]
+          }
 
-        input := {
-          "email": Value(email)
-          "password": Value(password)
-        }
+          input := {
+            "email": Value(email)
+            "password": Value(password)
+          }
 
-        // Validate input
-        validate(input, rules) or {
+          // Validate input
+          validate(input, rules) or {
+            return response.html(
+              content: "Validation failed: ${err.msg()}"
+              status: .bad_request
+            )
+          }
+
+          // If we reach here, validation passed
           return response.html(
-            content: "Validation failed: ${err.msg()}"
-            status: .bad_request
+            content: "Registration successful!"
+            status: .created
           )
         }
+      )
+    ]
+  )
 
-        // If we reach here, validation passed
-        return response.html(
-          content: "Registration successful!"
-          status: .created
-        )
-      }
-    )
-  ]
+  app.serve() or { panic(err) }
 )
 ```
+
+:::
 
 ## Built-in Rules
 
@@ -186,7 +210,9 @@ app := create_app(
 
 Ensures the value has a minimum value.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.validation { validate, Rule, Value, Min }
@@ -208,11 +234,15 @@ fn main() {
 }
 ```
 
+:::
+
 ### Max
 
 Ensures the value does not pass over the given value.
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.validation { validate, Rule, Value, Max }
@@ -231,3 +261,5 @@ fn main() {
   println("The age is correct.")
 }
 ```
+
+:::

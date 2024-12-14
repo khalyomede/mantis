@@ -10,7 +10,9 @@ Mantis currently only supports SQLite databases.
 
 Configure your database connection in your HTTP App:
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.http { create_app, App, Response }
@@ -74,3 +76,6 @@ fn main() {
 
   app.serve() or { panic(err) }
 }
+```
+
+:::

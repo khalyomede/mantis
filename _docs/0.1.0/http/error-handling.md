@@ -6,7 +6,9 @@ Mantis provides two main methods for handling errors in your application:
 
 Use when you need to both report an error and return an error response:
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.http { create_app, App, Response, HttpError }
@@ -33,6 +35,8 @@ fn main() {
 }
 ```
 
+:::
+
 This will:
 1. Report the error (e.g., log it)
 2. Generate and return a response according to how the error handler is configured to render errors (see "Custom Error Handler" section to customize this behavior)
@@ -41,7 +45,9 @@ This will:
 
 Use when you need to log an error but want to continue processing:
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.http { create_app, App, Response, ValidationError }
@@ -68,6 +74,8 @@ fn main() {
   app.serve() or { panic(err) }
 }
 ```
+
+:::
 
 ## Error Types
 
@@ -106,7 +114,9 @@ Accept: application/json
 
 You can customize error handling by providing your own handler:
 
-```v
+::: code-group
+
+```v [main.v]
 module main
 
 import khalyomede.mantis.http { create_app, App, Response, ErrorHandler }
@@ -141,3 +151,5 @@ fn main() {
   app.serve() or { panic(err) }
 }
 ```
+
+:::
