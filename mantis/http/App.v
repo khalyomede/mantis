@@ -4,6 +4,7 @@ import mantis.console
 import mantis.env { Env }
 import mantis.validation { Rule, Min, Max, Value }
 import mantis.database { Database }
+import mantis.translation { Translation }
 import net
 import rand
 import time
@@ -22,6 +23,7 @@ pub struct App {
         session Session
         database Database
         error_handler ErrorHandler = default_error_handler()
+        translation Translation
 }
 
 pub fn (app App) route_parameter(key string) ?string {

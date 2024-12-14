@@ -3,6 +3,7 @@ import mantis.http { App, Route, Status, Request, Response, Session, SessionData
 import mantis.http.response
 import mantis.http.route
 import mantis.test { expect }
+import mantis.translation { Translation }
 import os { getwd }
 import time
 
@@ -301,4 +302,36 @@ fn test_handle_error_reports_and_renders_error() {
 
     expect(res.content).to_be_equal_to('Test error')
     expect(res.status).to_be_equal_to(Status.server_error)
+}
+
+fn test_can_translate_text() {
+    app := http.create_app(
+        translation: Translation{
+            keys: {
+                "Welcome": {
+                    .en: {
+                        .neutral: {
+                            .any: "Welcome"
+                        }
+                    }
+                    .fr: {
+                        .neutral: {
+                            .any: "Bienvenue"
+                        }
+                    }
+                }
+            }
+        }
+        request: Request{
+            path: "/"
+            method: .get
+        }
+    )
+
+    text := app.translation.translate(
+        key: "Welcome"
+        lang: .fr
+    )
+
+    expect(text).to_be_equal_to("Bienvenue")
 }
