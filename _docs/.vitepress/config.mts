@@ -23,6 +23,7 @@ export default defineConfig({
                             { text: "Routing", link: '/http/routing' },
                             { text: "Response", link: '/http/response' },
                             { text: "Request", link: '/http/request' },
+                            { text: "View", link: '/http/view' },
                             { text: "Erorr handling", link: '/http/error-handling' },
                         ],
                     },
