@@ -11,13 +11,13 @@ Configure session handling in your application:
 ```v [main.v]
 module main
 
-import khalyomede.mantis.http { create_app, App, Response, Session }
+import khalyomede.mantis.http { create_app, App, Response, Session } // [!code focus]
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
-    session: Session{
+    session: Session{ // [!code focus:5]
       driver: .file
       path: "storage/sessions"  // Where session files are stored
       lifetime: 3600           // Session lifetime in seconds
@@ -48,13 +48,13 @@ Access session data using `session.get()`:
 ```v [main.v]
 module main
 
-import khalyomede.mantis.http { create_app, App, Response, Session }
+import khalyomede.mantis.http { create_app, App, Response, Session } // [!code focus]
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
-    session: Session{
+    session: Session{ // [!code focus:4]
       driver: .file
       path: "storage/sessions"
     }
@@ -63,7 +63,7 @@ fn main() {
         name: "preferences"
         path: "/preferences"
         callback: fn (app App) Response {
-          theme := app.session.get("theme") or { "light" }
+          theme := app.session.get("theme") or { "light" } // [!code focus]
           return response.html(content: "Current theme: ${theme}")
         }
       )
@@ -83,13 +83,13 @@ Store data in the session using `session.set()`:
 ::: code-group
 
 ```v [main.v]
-import khalyomede.mantis.http { create_app, App, Response, Session }
+import khalyomede.mantis.http { create_app, App, Response, Session } // [!code focus]
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
-    session: Session{
+    session: Session{ // [!code focus:4]
       driver: .file
       path: "storage/sessions"
     }
@@ -98,7 +98,7 @@ fn main() {
         name: "theme.update"
         path: "/theme"
         callback: fn (app App) Response {
-          app.session.set("theme", "dark") or {
+          app.session.set("theme", "dark") or { // [!code focus:3]
             return response.html(content: "Could not save theme preference")
           }
 
@@ -121,13 +121,13 @@ Session sliding automatically extends the session lifetime each time the user in
 ```v [main.v]
 module main
 
-import khalyomede.mantis.http { create_app, App, Response, Session }
+import khalyomede.mantis.http { create_app, App, Response, Session } // [!code focus]
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
-    session: Session{
+    session: Session{ // [!code focus:6]
       driver: .file
       path: "storage/sessions"
       lifetime: 3600    // Session expires after 1 hour
@@ -138,7 +138,7 @@ fn main() {
         name: "dashboard"
         path: "/dashboard"
         callback: fn (app App) Response {
-          // Each request to dashboard will extend the session
+          // Each request to dashboard will extend the session // [!code focus]
           return response.html(content: "Welcome to dashboard")
         }
       )

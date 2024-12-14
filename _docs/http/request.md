@@ -20,7 +20,7 @@ fn main() {
         name: "search"
         path: "/search"
         callback: fn (app App) Response {
-          query := app.request.query("q") or {
+          query := app.request.query("q") or { // [!code focus:3]
             return response.html(content: "No search term provided")
           }
 
@@ -56,7 +56,7 @@ fn main() {
         name: "login.store"
         path: "/login"
         callback: fn (app App) Response {
-          email := app.request.form("email") or {
+          email := app.request.form("email") or { // [!code focus:3]
             return response.html(content: "Email is required")
           }
 
@@ -90,7 +90,7 @@ fn main() {
         name: "dashboard"
         path: "/dashboard"
         callback: fn (app App) Response {
-          theme := app.request.cookies.get("theme") or { "light" }
+          theme := app.request.cookies.get("theme") or { "light" } // [!code focus]
 
           return response.html(content: "Using ${theme} theme")
         }
@@ -124,7 +124,7 @@ fn main() {
         name: "welcome"
         path: "/welcome"
         callback: fn (app App) Response {
-          return response.html(content: "Your IP is ${app.request.ip}")
+          return response.html(content: "Your IP is ${app.request.ip}") // [!code focus]
         }
       )
     ]

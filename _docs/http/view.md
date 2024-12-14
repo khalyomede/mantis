@@ -14,7 +14,7 @@ module main
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response
-import khalyomede.mantis.html { html, head, title, body, div, p }
+import khalyomede.mantis.html { html, head, title, body, div, p } // [!code focus]
 
 fn main() {
   app := create_app(
@@ -23,7 +23,7 @@ fn main() {
         name: "index"
         path: "/"
         callback: fn (app App) Response {
-          content := html({}, [
+          content := html({}, [ // [!code focus:10]
             head({}, [
               title({}, ['Welcome'])
             ]),
@@ -58,9 +58,9 @@ module main
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response
-import khalyomede.mantis.html { div, nav, a }
+import khalyomede.mantis.html { div, nav, a } // [!code focus]
 
-fn navbar() string {
+fn navbar() string { // [!code focus:7]
   return nav({}, [
     a({'href': '/'}, ['Home']),
     a({'href': '/about'}, ['About']),
@@ -75,7 +75,7 @@ fn main() {
         name: "index"
         path: "/"
         callback: fn (app App) Response {
-          content := div({}, [
+          content := div({}, [ // [!code focus:4]
             navbar(),
             div({}, ['Page content'])
           ])
@@ -102,7 +102,7 @@ Add HTML attributes to elements:
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response
-import khalyomede.mantis.html { div, button }
+import khalyomede.mantis.html { div, button } // [!code focus]
 
 fn main() {
   app := create_app(
@@ -111,7 +111,7 @@ fn main() {
         name: "index"
         path: "/"
         callback: fn (app App) Response {
-          content := div({
+          content := div({ // [!code focus:10]
             'class': 'container'
           }, [
             button({
@@ -146,7 +146,7 @@ module main
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response
-import khalyomede.mantis.html { ul, li }
+import khalyomede.mantis.html { ul, li } // [!code focus]
 
 fn main() {
   app := create_app(
@@ -155,7 +155,7 @@ fn main() {
         name: "index"
         path: "/"
         callback: fn (app App) Response {
-          items := ['One', 'Two', 'Three']
+          items := ['One', 'Two', 'Three'] // [!code focus:7]
 
           list_items := items.map(fn (item string) string {
             return li({}, [item])

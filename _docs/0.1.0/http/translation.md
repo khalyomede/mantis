@@ -12,11 +12,11 @@ module main
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response
-import khalyomede.mantis.translation { Translation, Lang }
+import khalyomede.mantis.translation { Translation, Lang } // [!code focus]
 
 fn main() {
   app := create_app(
-    translation: Translation{
+    translation: Translation{ // [!code focus:16]
       keys: {
         "Hello World": {
           .en: {
@@ -37,7 +37,7 @@ fn main() {
         name: "index"
         path: "/"
         callback: fn (app App) Response {
-          text := app.translation.translate(key: "Hello World", lang: .fr)
+          text := app.translation.translate(key: "Hello World", lang: .fr) // [!code focus:2]
           return response.html(content: text)  // "Bonjour le monde"
         }
       )
@@ -62,11 +62,11 @@ module main
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response
-import khalyomede.mantis.translation { Translation, Lang }
+import khalyomede.mantis.translation { Translation, Lang } // [!code focus]
 
 fn main() {
   app := create_app(
-    translation: Translation{
+    translation: Translation{ // [!code focus:16]
       keys: {
         "Welcome {name}": {
           .en: {
@@ -87,7 +87,7 @@ fn main() {
         name: "welcome"
         path: "/welcome"
         callback: fn (app App) Response {
-          text := app.translation.translate(
+          text := app.translation.translate( // [!code focus:8]
             key: "Welcome {name}",
             lang: .fr,
             parameters: {
@@ -118,11 +118,11 @@ module main
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response
-import khalyomede.mantis.translation { Translation, Lang }
+import khalyomede.mantis.translation { Translation, Lang } // [!code focus]
 
 fn main() {
   app := create_app(
-    translation: Translation{
+    translation: Translation{ // [!code focus:20]
       keys: {
         "You have {count} messages": {
           .en: {
@@ -147,7 +147,7 @@ fn main() {
         name: "messages"
         path: "/messages"
         callback: fn (app App) Response {
-          text := app.translation.translate(
+          text := app.translation.translate( // [!code focus:6]
             key: "You have {count} messages",
             lang: .fr,
             count: 3
@@ -176,11 +176,11 @@ module main
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response
-import khalyomede.mantis.translation { Translation, Lang }
+import khalyomede.mantis.translation { Translation, Lang } // [!code focus]
 
 fn main() {
   app := create_app(
-    translation: Translation{
+    translation: Translation{ // [!code focus:22]
       keys: {
         "{name} updated their profile": {
           .en: {
@@ -207,7 +207,7 @@ fn main() {
         name: "profile.updated"
         path: "/profile/updated"
         callback: fn (app App) Response {
-          text := app.translation.translate(
+          text := app.translation.translate( // [!code focus:9]
             key: "{name} updated their profile",
             lang: .fr,
             gender: .feminine,
