@@ -28,6 +28,7 @@ export default defineConfig({
                             { text: "Session (file)", link: '/http/session-file' },
                             { text: "Database", link: '/http/database' },
                             { text: "Erorr handling", link: '/http/error-handling' },
+                            { text: "Extending", link: '/http/extending' },
                         ],
                     },
                     { text: 'Validation', link: '/validation' },
