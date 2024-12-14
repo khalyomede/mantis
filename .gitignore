@@ -26,3 +26,6 @@ _docs/.vitepress/cache
 
 # Node
 node_modules
+
+# Claude/RAG
+claude

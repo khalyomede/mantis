@@ -1,44 +1,48 @@
-#!/bin/bash
-
-# Usage: ./flatten.sh [-e exclude_dir] source_dir target_dir
-# Example: ./flatten.sh -e docs . claude
-
-exclude_dir=""
-
-# Parse command line options
-while getopts "e:" opt; do
-    case $opt in
-        e) exclude_dir="$OPTARG";;
-        \?) echo "Invalid option -$OPTARG" >&2; exit 1;;
-    esac
-done
-
-# Shift past the options to get positional arguments
-shift $((OPTIND-1))
-
-source_dir="${1:-.}"  # Default to current directory if not specified
-target_dir="${2:-claude}"  # Default to 'claude' if not specified
+#!/usr/bin/env bash
 
 # Create or clean target directory
+target_dir="claude"
 if [ -d "$target_dir" ]; then
     echo "Cleaning $target_dir directory..."
-    rm -f "$target_dir"/*.{v,md,yml}
+    rm -f "$target_dir"/*
 else
     echo "Creating $target_dir directory..."
     mkdir -p "$target_dir"
 fi
 
-# Build the find command with exclusions
-find_cmd="find $source_dir -type f \( -name \"*.v\" -o -name \"*.md\" -o -name \"*.yml\" \) -not -path \"*/$target_dir/*\""
-if [ -n "$exclude_dir" ]; then
-    find_cmd="$find_cmd -not -path \"*/$exclude_dir/*\""
-    echo "Excluding directory: $exclude_dir"
-fi
+# Function to check if a path should be included
+should_include() {
+    local file="$1"
 
-# Execute the find command and process files
-eval "$find_cmd" | while read -r file; do
-    # Get the relative path from source_dir
-    rel_path="${file#$source_dir/}"
+    # Only include specific folders
+    [[ ! "$file" =~ ^\./(tests|mantis|_docs)/ ]] && return 1
+
+    # Only include specific file extensions
+    [[ ! "$file" =~ \.(v|md)$ ]] && return 1
+
+    # Exclude specific _docs paths
+    [[ "$file" =~ ^\./_docs/[0-9]+\. ]] && return 1
+    [[ "$file" =~ ^\./_docs/\.vitepress ]] && return 1
+
+    # For _docs, only include first level and http folder
+    if [[ "$file" =~ ^\./_docs/ ]]; then
+        # Allow first level files
+        [[ "$file" =~ ^\./_docs/[^/]+$ ]] && return 0
+        # Allow http folder
+        [[ "$file" =~ ^\./_docs/http ]] && return 0
+        return 1
+    fi
+
+    return 0
+}
+
+# Find and process files
+find . -type f | while read -r file; do
+    # Skip if file shouldn't be included
+    should_include "$file" || continue
+
+    # Remove leading ./ from path
+    rel_path="${file#./}"
 
     # Replace directory separators with underscores
     new_name=$(echo "$rel_path" | sed 's/\//_/g')
