@@ -23,6 +23,7 @@ bin/
 *.db
 *.js
 !docs/**/*.js
+_docs/.vitepress/cache
 
 # Node
 node_modules
