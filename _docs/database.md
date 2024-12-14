@@ -48,7 +48,7 @@ fn main() {
 
 :::
 
-## Runnng raw queries
+## Running raw queries
 
 Use run() for INSERT, UPDATE, DELETE operations:
 
