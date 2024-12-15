@@ -55,6 +55,7 @@ export default defineConfig({
                         text: 'Testing', items: [
                             { text: 'Assertion', link: '/testing/assertion' },
                             { text: 'HTTP', link: '/testing/http' },
+                            { text: 'Console', link: '/testing/console' },
                         ]
                     },
                     { text: 'Versioning policy', link: '/versioning-policy' },
