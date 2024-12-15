@@ -37,6 +37,8 @@ export default defineConfig({
                         text: 'Console', items: [
                             { text: "Routing", link: '/console/routing' },
                             { text: "Command", link: '/console/command' },
+                            { text: "Argument", link: '/console/argument' },
+                            { text: "Flag", link: '/console/flag' },
                         ],
                     },
                     { text: 'Validation', link: '/validation' },
