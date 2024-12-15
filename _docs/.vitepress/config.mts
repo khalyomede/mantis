@@ -53,7 +53,8 @@ export default defineConfig({
                     },
                     {
                         text: 'Testing', items: [
-                            { text: 'Assertion', link: '/testing/assertion' }
+                            { text: 'Assertion', link: '/testing/assertion' },
+                            { text: 'HTTP', link: '/testing/http' },
                         ]
                     },
                     { text: 'Versioning policy', link: '/versioning-policy' },
