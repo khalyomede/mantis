@@ -31,6 +31,15 @@ pub fn (app App) render() ?Response {
     return command.callback(mut scoped_app)
 }
 
+pub fn (app App) serve() {
+  res := app.render() or {
+    eprintln(err.msg())
+    exit(1)
+  }
+
+  exit(res.code)
+}
+
 pub fn (mut app App) info(message string) {
     app.output << message
 
