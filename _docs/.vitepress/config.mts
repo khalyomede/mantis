@@ -14,6 +14,7 @@ export default defineConfig({
             {
                 items: [
                     { text: 'Introduction', link: '/introduction' },
+                    { text: 'Upgrade', link: '/upgrade' },
                     { text: 'Quick start', link: '/quick-start' },
                     { text: 'Productivity', link: '/productivity' },
                     { text: 'Folder structure', link: '/folder-structure' },
@@ -35,6 +36,7 @@ export default defineConfig({
                     { text: 'HTML', link: '/html' },
                     { text: 'Database', link: '/database' },
                     { text: 'Testing', link: '/testing' },
+                    { text: 'Versioning policy', link: '/versioning-policy' },
                     { text: 'Reference', link: '/reference' },
                 ]
             }
