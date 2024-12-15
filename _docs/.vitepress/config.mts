@@ -51,7 +51,11 @@ export default defineConfig({
                             { text: 'Query', link: '/database/query' }
                         ]
                     },
-                    { text: 'Testing', link: '/testing' },
+                    {
+                        text: 'Testing', items: [
+                            { text: 'Assertion', link: '/testing/assertion' }
+                        ]
+                    },
                     { text: 'Versioning policy', link: '/versioning-policy' },
                     { text: 'Reference', link: '/reference' },
                 ]
