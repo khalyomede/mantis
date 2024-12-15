@@ -35,6 +35,7 @@ export default defineConfig({
                     },
                     { text: 'Validation', link: '/validation' },
                     { text: 'HTML', link: '/html' },
+                    { text: 'URL', link: '/url' },
                     { text: 'Environment', link: '/environment' },
                     { text: 'Database', link: '/database' },
                     { text: 'Testing', link: '/testing' },
