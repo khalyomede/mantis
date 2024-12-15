@@ -33,6 +33,11 @@ export default defineConfig({
                             { text: "Extending", link: '/http/extending' },
                         ],
                     },
+                    {
+                        text: 'Console', items: [
+                            { text: "Routing", link: '/console/routing' },
+                        ],
+                    },
                     { text: 'Validation', link: '/validation' },
                     { text: 'HTML', link: '/html' },
                     { text: 'URL', link: '/url' },
