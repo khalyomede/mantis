@@ -46,7 +46,11 @@ export default defineConfig({
                     { text: 'HTML', link: '/html' },
                     { text: 'URL', link: '/url' },
                     { text: 'Environment', link: '/environment' },
-                    { text: 'Database', link: '/database' },
+                    {
+                        text: 'Database', items: [
+                            { text: 'Query', link: '/database/query' }
+                        ]
+                    },
                     { text: 'Testing', link: '/testing' },
                     { text: 'Versioning policy', link: '/versioning-policy' },
                     { text: 'Reference', link: '/reference' },
