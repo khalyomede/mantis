@@ -34,6 +34,7 @@ export default defineConfig({
                     },
                     { text: 'Validation', link: '/validation' },
                     { text: 'HTML', link: '/html' },
+                    { text: 'Environment', link: '/environment' },
                     { text: 'Database', link: '/database' },
                     { text: 'Testing', link: '/testing' },
                     { text: 'Versioning policy', link: '/versioning-policy' },
