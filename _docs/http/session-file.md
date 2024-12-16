@@ -112,6 +112,8 @@ fn main() {
 }
 ```
 
+:::
+
 ## Session Sliding
 
 Session sliding automatically extends the session lifetime each time the user interacts with your application. This is useful for keeping users logged in as long as they're active:
