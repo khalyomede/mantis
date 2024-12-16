@@ -133,7 +133,7 @@ module main
 import mantis.http { create_app, App, Response }
 import mantis.http.route
 import mantis.http.response
-import mantis.validation { validate, Rule, Value, Min, Max }
+import mantis.validation { validate, Rule, Value, Min, Max } // [!code focus:22]
 
 // Custom validation rule for passwords
 struct StrongPassword {}
@@ -165,7 +165,7 @@ fn main() {
           email := app.request.form("email") or { "" }
           password := app.request.form("password") or { "" }
 
-          // Define validation rules
+          // Define validation rules // [!code focus:19]
           rules := {
             "password": [
               Rule(StrongPassword{})
