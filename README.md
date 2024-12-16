@@ -11,7 +11,6 @@ import mantis.http.response
 
 fn main() {
   app := create_app(
-    mode: .standalone
     cpus: 8
     routes: [
       route.get(name: "index", path: "/", callback: fn (app App) Response {
@@ -89,8 +88,6 @@ import mantis.http.response
 fn main() {
   app := App{
     mode: .standalone
-    host: "0.0.0.0"
-    port: 80
     routes: [
       route.get(name: "index", path: "/", callback: fn (app App) Response {
         return response.html(content: "hello world")
