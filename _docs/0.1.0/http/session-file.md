@@ -64,6 +64,7 @@ fn main() {
         path: "/preferences"
         callback: fn (app App) Response {
           theme := app.session.get("theme") or { "light" } // [!code focus]
+
           return response.html(content: "Current theme: ${theme}")
         }
       )

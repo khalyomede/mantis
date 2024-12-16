@@ -38,6 +38,7 @@ fn main() {
         path: "/"
         callback: fn (app App) Response {
           text := app.translation.translate(key: "Hello World", lang: .fr) // [!code focus:2]
+
           return response.html(content: text)  // "Bonjour le monde"
         }
       )
@@ -94,6 +95,7 @@ fn main() {
               "name": "John"
             }
           )
+
           return response.html(content: text)  // "Bienvenue John"
         }
       )
@@ -152,6 +154,7 @@ fn main() {
             lang: .fr,
             count: 3
           )
+
           return response.html(content: text)  // "Vous avez 3 messages"
         }
       )
@@ -215,6 +218,7 @@ fn main() {
               "name": "Marie"
             }
           )
+
           return response.html(content: text)  // "Marie a mise à jour son profil"
         }
       )

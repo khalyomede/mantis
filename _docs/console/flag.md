@@ -116,8 +116,9 @@ fn main() {
           }
         ]
         callback: fn (mut app App) Response {
-          if app.has_flag("help") { // [!code focus:4]
+          if app.has_flag("help") { // [!code focus:5]
             app.info(app.help_text())
+
             return app.exit(0)
           }
 

@@ -54,17 +54,17 @@ import khalyomede.mantis.validation { Rule, Value }
 struct Email {}
 
 fn (rule Email) validate(value Value) bool {
-    return match value {
-        string {
-            // Simple email check for demonstration
-            value.contains('@') && value.contains('.')
-        }
-        else { false }
+  return match value {
+    string {
+      // Simple email check for demonstration
+      value.contains('@') && value.contains('.')
     }
+    else { false }
+  }
 }
 
 fn (rule Email) message(key string) string {
-    return "The ${key} must be a valid email address."
+  return "The ${key} must be a valid email address."
 }
 
 fn main() {

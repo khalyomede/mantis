@@ -111,11 +111,13 @@ fn main() {
         callback: fn (mut app App) Response {
           source := app.arguments.get("source") or { // [!code focus:9]
             app.info("Source file required")
+
             return app.exit(1)
           }
 
           destination := app.arguments.get("destination") or {
             app.info("Destination path required")
+
             return app.exit(1)
           }
 

@@ -9,18 +9,18 @@ Option types (written as `?Type`) represent values that may or may not exist:
 ```v
 // A function that might not find what you're looking for
 fn get_user_theme() ?string {
-    // If not found, return none
-    return "dark"
+  // If not found, return none
+  return "dark"
 }
 
 // Using the Option type
 fn display_theme() string {
-    // Must handle both cases
-    theme := get_user_theme() or {
-        return "light" // Default fallback
-    }
+  // Must handle both cases
+  theme := get_user_theme() or {
+    return "light" // Default fallback
+  }
 
-    return theme
+  return theme
 }
 ```
 
@@ -31,22 +31,22 @@ Result types (written as !Type) represent operations that might fail:
 ```v
 // A function that could fail
 fn save_post(title string) ! {
-    if title.len == 0 {
-        return error("Title cannot be empty")
-    }
+  if title.len == 0 {
+    return error("Title cannot be empty")
+  }
 
-    // Success case just returns
-    return
+  // Success case just returns
+  return
 }
 
 // Using the Result type
 fn create_post() ! {
-    // Must handle potential error
-    save_post("My First Post") or {
-        return error("Failed to save post: ${err.msg()}")
-    }
+  // Must handle potential error
+  save_post("My First Post") or {
+    return error("Failed to save post: ${err.msg()}")
+  }
 
-    // Success!
+  // Success!
 }
 ```
 
