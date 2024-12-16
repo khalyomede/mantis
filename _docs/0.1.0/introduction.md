@@ -15,7 +15,6 @@ import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
-    mode: .standalone
     cpus: 8
     routes: [
       route.get(name: "index", path: "/", callback: fn (app App) Response {

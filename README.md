@@ -87,7 +87,6 @@ import mantis.http.response
 
 fn main() {
   app := App{
-    mode: .standalone
     routes: [
       route.get(name: "index", path: "/", callback: fn (app App) Response {
         return response.html(content: "hello world")
