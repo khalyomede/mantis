@@ -18,15 +18,19 @@ module main
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response
-import khalyomede.mantis.database { DatabaseConnection } // [!code focus]
+import khalyomede.mantis.database { Database, DatabaseConnection }
+
+struct Post {
+  id int
+  title string
+}
 
 fn main() {
   app := create_app(
-    database: Database{ // [!code focus:7]
+    database: Database{
       connection: DatabaseConnection{
-        by_default: true
         driver: .sqlite
-        database: 'blog.db'
+        database: 'database.sqlite'
       }
     }
     routes: [
@@ -34,41 +38,32 @@ fn main() {
         name: "post.show"
         path: "/post/{id}"
         callback: fn (app App) Response {
-          struct Post { // [!code focus:5]
-            id int
-            title string
-            views u64
-          }
-
+          // The ? indicates this might not find an ID
           id := app.route_parameter("id") or {
             return response.html(
-              content: "Post not found"
+              content: "Post not found",
               status: .not_found
             )
           }
 
-          posts := app.database.all[Post](' // [!code focus:11]
-            SELECT id, title, views
-            FROM posts
-            WHERE id = ${id}
-            LIMIT 1
-          ') or {
+          mut app_ref := app
+
+          // The ! indicates the database query might fail
+          posts := app_ref.database.all[Post]("SELECT id, title FROM posts") or {
             return response.html(
-              content: "Database error: ${err.msg()}"
+              content: "Database error: ${err.msg()}",
               status: .server_error
             )
           }
 
-          if posts.len == 0 {
+          post := posts[0] or {
             return response.html(
-              content: "Post not found"
+              content: "Post not found",
               status: .not_found
             )
           }
 
-          return response.html(
-            content: "Post: ${posts[0].title}"
-          )
+          return response.html(content: "Post (id ${id}): ${post.title}")
         }
       )
     ]

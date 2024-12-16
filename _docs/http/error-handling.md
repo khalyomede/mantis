@@ -11,7 +11,7 @@ Use when you need to both report an error and return an error response:
 ```v [main.v]
 module main
 
-import khalyomede.mantis.http { create_app, App, Response, HttpError }
+import khalyomede.mantis.http { create_app, App, Response, HttpError } // [!code focus]
 import khalyomede.mantis.http.response
 import khalyomede.mantis.http.route
 
@@ -19,7 +19,7 @@ fn main() {
   app := create_app(
     routes: [
       route.get(name: "index", path: "/", callback: fn (app App) Response {
-        search := app.request.get("search") or {
+        search := app.request.query("search") or {
           return app.handle_error(HttpError{ // [!code focus:4]
             code: .not_found
             message: "The search term was missing."
@@ -50,7 +50,7 @@ Use when you need to log an error but want to continue processing:
 ```v [main.v]
 module main
 
-import khalyomede.mantis.http { create_app, App, Response, ValidationError }
+import khalyomede.mantis.http { create_app, App, Response, HttpError } // [!code:focus]
 import khalyomede.mantis.http.response
 import khalyomede.mantis.http.route
 
@@ -59,7 +59,8 @@ fn main() {
     routes: [
       route.get(name: "index", path: "/", callback: fn (app App) Response {
         theme := app.session.get("theme") or {
-          app.report_error(ValidationError{ // [!code focus:3]
+          app.report_error(HttpError{ // [!code focus:4]
+            code: .unprocessable_entity
             message: 'Could not load user theme preferences, falling back to light mode'
           })
 
@@ -119,9 +120,8 @@ You can customize error handling by providing your own handler:
 ```v [main.v]
 module main
 
-import khalyomede.mantis.http { create_app, App, Response, ErrorHandler }
-import khalyomede.mantis.html { h1 }
-import khalyomede.mantis.html { div, p }
+import khalyomede.mantis.http { create_app, App, Response, ErrorHandler } // [!code focus]
+import khalyomede.mantis.html { h1, div, p }
 import khalyomede.mantis.http.response
 import khalyomede.mantis.http.route
 import khalyomede.mantis.console

@@ -15,15 +15,15 @@ import khalyomede.mantis.html { div, p, a }
 
 fn main() {
   // Simple element
-  content := div({}, ['Hello world'])
+  intro := div({}, ['Hello world'])
 
   // Nested elements
-  content := div({}, [
+  landing := div({}, [
     p({}, ['A paragraph']),
     a({'href': '/'}, ['Home'])
   ])
 
-  println(content) // <div><p>A paragraph</p><a href="/">Home</a></div>
+  println(landing) // <div><p>A paragraph</p><a href="/">Home</a></div>
 }
 ```
 
@@ -43,7 +43,7 @@ import khalyomede.mantis.html { anon }
 fn main() {
   content := anon("x-searchable-dropdown", {}, [
     "Search by name"
-  ] false)
+  ], false)
 
   println(content) // <x-searchable-dropdown>Search by name</x-searchable-dropdown>
 }
@@ -61,7 +61,7 @@ module main
 import khalyomede.mantis.html { anon }
 
 fn main() {
-  content := anon("x-alert", {}, [] true)
+  content := anon("x-alert", {}, [], true)
 
   println(content) // <x-alert />
 }

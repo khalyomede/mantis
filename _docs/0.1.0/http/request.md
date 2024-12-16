@@ -9,9 +9,9 @@ Access URL query parameters using `request.query()`:
 ```v [main.v]
 module main
 
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
@@ -45,9 +45,9 @@ Access form data from POST requests using `request.form()`:
 ```v [main.v]
 module main
 
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
@@ -79,6 +79,8 @@ Access cookie values using `request.cookies.get()`:
 ::: code-group
 
 ```v [main.v]
+module main
+
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response

@@ -99,6 +99,8 @@ Add HTML attributes to elements:
 ::: code-group
 
 ```v [main.v]
+module main
+
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response

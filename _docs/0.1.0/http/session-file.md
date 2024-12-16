@@ -83,6 +83,8 @@ Store data in the session using `session.set()`:
 ::: code-group
 
 ```v [main.v]
+module main
+
 import khalyomede.mantis.http { create_app, App, Response, Session } // [!code focus]
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response

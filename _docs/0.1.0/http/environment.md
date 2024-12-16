@@ -62,8 +62,10 @@ fn main() {
         name: "status.index"
         path: "/status"
         callback: fn (app App) Response {
-          app_name := app.env.get('APP_NAME') or { 'My App' } // [!code focus:4]
-          app_mode := app.env.get('APP_MODE') or { 'development' }
+          mut instance := app
+
+          app_name := instance.env.get('APP_NAME') or { 'My App' } // [!code focus:4]
+          app_mode := instance.env.get('APP_MODE') or { 'development' }
 
           return response.html(content: '${app_name} running in ${app_mode} mode')
         }
@@ -128,12 +130,14 @@ fn main() {
         name: "config.index"
         path: "/config"
         callback: fn (app App) Response {
+          mut instance := app
+
           // Provide defaults for missing values // [!code focus:8]
           config := {
-            'name': app.env.get('APP_NAME') or { 'My App' }
-            'mode': app.env.get('APP_MODE') or { 'development' }
-            'port': app.env.get('APP_PORT') or { '8080' }
-            'debug': app.env.get('APP_DEBUG') or { 'false' }
+            'name': instance.env.get('APP_NAME') or { 'My App' }
+            'mode': instance.env.get('APP_MODE') or { 'development' }
+            'port': instance.env.get('APP_PORT') or { '8080' }
+            'debug': instance.env.get('APP_DEBUG') or { 'false' }
           }
 
           return response.html(content: 'Configuration loaded')

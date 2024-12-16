@@ -126,7 +126,7 @@ fn main() {
         name: "profile"
         path: "/profile"
         callback: fn (app App) Response {
-          return response.redirect("/login") // [!code focus]
+          return response.redirect("/login", {}) // [!code focus]
         }
       )
     ]

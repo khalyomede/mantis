@@ -9,9 +9,9 @@ Mantis is a web framework for V lang that prioritizes developer peace of mind th
 ```v [main.v]
 module main
 
-import khalyomede.mantis.html { create_app, App, Response }
-import khalyomede.mantis.html.route
-import khalyomede.mantis.html.response
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(

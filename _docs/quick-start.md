@@ -58,13 +58,13 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
-    host: "0.0.0.0"
     routes: [
       route.get(path: "/", callback: fn (app App) Response {
-        return app.response.html("hello world")
+        return response.html(content: "hello world")
       })
     ]
   )

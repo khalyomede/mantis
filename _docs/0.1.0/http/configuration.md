@@ -51,8 +51,8 @@ module main
 import khalyomede.mantis.http { create_app }
 
 fn main() {
-  app := create_app( // [!code focus:3]
-    cpus: 8  // Use 8 CPU cores
+  app := create_app(
+    cpus: 8  // Use 8 CPU cores // [!code focus]
   )
 
   app.serve() or { panic(err) }

@@ -48,7 +48,7 @@ They must implement two method: `validate(Value) bool` and `message(string) stri
 ```v [main.v]
 module main
 
-import khalyomede.mantis.validation { Rule, Value, validate }
+import khalyomede.mantis.validation { Rule, Value }
 
 // Custom email validation rule
 struct Email {}
@@ -80,7 +80,7 @@ fn main() {
     ]
   }
 
-  validate(data, rules) or {
+  validation.validate(data, rules) or {
     eprintln(err.msg())
 
     exit(1)
@@ -101,10 +101,14 @@ You can chain multiple rules for a field. The catched error will correspond to t
 ```v [main.v]
 module main
 
-import mantis.validation { validate, Rule, Value, Min, Max }
+import khalyomede.mantis.validation { validate, Rule, Value, Min, Max }
 
 fn main() {
   post := {
+    "title": Value("Structure and Interpretation of Computer Programs")
+  }
+
+  rules := {
     "title": [
       Rule(Min{5})
       Rule(Max{100})
@@ -130,10 +134,10 @@ fn main() {
 ```v [main.v]
 module main
 
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
-import mantis.validation { validate, Rule, Value, Min, Max } // [!code focus:22]
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
+import khalyomede.mantis.validation { Rule, Value, Min, Max } // [!code focus:22]
 
 // Custom validation rule for passwords
 struct StrongPassword {}
@@ -178,7 +182,7 @@ fn main() {
           }
 
           // Validate input
-          validate(input, rules) or {
+          validation.validate(input, rules) or {
             return response.html(
               content: "Validation failed: ${err.msg()}"
               status: .bad_request
@@ -196,7 +200,7 @@ fn main() {
   )
 
   app.serve() or { panic(err) }
-)
+}
 ```
 
 :::
