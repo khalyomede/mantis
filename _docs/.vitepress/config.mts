@@ -30,6 +30,7 @@ export default defineConfig({
                             { text: "Environment", link: '/http/environment' },
                             { text: "Database", link: '/http/database' },
                             { text: "Erorr handling", link: '/http/error-handling' },
+                            { text: "Configuration", link: '/http/configuration' },
                             { text: "Extending", link: '/http/extending' },
                         ],
                     },
