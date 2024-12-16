@@ -12,18 +12,19 @@ import regex
 
 pub struct App {
     pub:
-        port u16
-        host string
-        cores int = 1
+        port u16 = 80
+        host string = "0.0.0.0"
         routes []Route
         request Request
         mode ServeMode
-        cpus u8
-        env Env
+        cpus u8 = 1
         session Session
-        database Database
         error_handler ErrorHandler = default_error_handler()
         translation Translation
+
+    pub mut:
+        env Env
+        database Database
 }
 
 pub fn (app App) route_parameter(key string) ?string {
