@@ -41,6 +41,7 @@ export default defineConfig({
                             { text: "Argument", link: '/console/argument' },
                             { text: "Flag", link: '/console/flag' },
                             { text: "Option", link: '/console/option' },
+                            { text: "Logging", link: '/console/logging' },
                         ],
                     },
                     { text: 'Validation', link: '/validation' },
