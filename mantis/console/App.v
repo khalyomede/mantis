@@ -1,5 +1,8 @@
 module console
 
+import os
+import flag { new_flag_parser, FlagConfig }
+
 pub struct App {
     pub:
         commands []Command
@@ -20,6 +23,10 @@ pub fn (app App) render() ?Response {
     // 1. Here check at compile time that no arguments has reserved names "_program" or "_command".
     // 2. Instead of app.arguments[2..], remove them by name using a .filter()
 
+    return app.render_command(command)
+}
+
+fn (app App) render_command(command Command) ?Response {
     mut scoped_app := App{
         ...app
         arguments: app.extract_arguments()
@@ -32,7 +39,40 @@ pub fn (app App) render() ?Response {
 }
 
 pub fn (app App) serve() {
-  res := app.render() or {
+    console_arguments := os.args
+
+    /*
+        TODO: display a list of all available commands instead.
+    */
+    signature := app.get_minimal_console_signature(console_arguments) or {
+        eprintln(err.msg())
+
+        exit(1)
+    }
+
+    partially_hydrated_app := App{
+        ...app,
+        console_signature: signature
+    }
+
+    /*
+        TODO: display a list of all available commands instead.
+    */
+    command := partially_hydrated_app.find_command() or {
+        eprintln(err.msg())
+
+        exit(1)
+    }
+
+    hydrated_app := App{
+        ...partially_hydrated_app,
+        console_signature: app.get_complete_console_signature(console_arguments, command)
+    }
+
+    /*
+        TODO: display a list of all available commands instead.
+    */
+  res := hydrated_app.render_command(command) or {
     eprintln(err.msg())
     exit(1)
   }
@@ -268,4 +308,67 @@ fn (app App) extract_options() []Opt {
     }
 
     return options
+}
+
+/*
+    TODO: Add some tests.
+
+    This will get all the arguments from the console, and create their ConsolePart counterpart. For example, Console Part "Name" will be the first element. And so on...
+*/
+fn (app App) get_minimal_console_signature(arguments []string) ?[]ConsolePart {
+    mut console_parts := []ConsolePart{}
+
+    // First item is the program name
+    program_name := arguments[0] or {
+        return none
+    }
+
+    // Second item is the Mantis command name
+    command_name := arguments[1] or {
+        return none
+    }
+
+    console_parts << Program{program_name}
+    console_parts << Name{command_name}
+
+    return console_parts
+}
+
+fn (app App) get_complete_console_signature(arguments []string, command Command) []ConsolePart {
+    mut console_parts := app.console_signature.clone()
+
+    // Parsing all flags
+    mut flag_parser := new_flag_parser(arguments)
+
+    command_flags := command.signature.filter(it is Flag).map(it as Flag)
+
+    for command_flag in command_flags {
+        present := flag_parser.bool(command_flag.long, command_flag.short.u8(), false, "", FlagConfig{})
+
+        if !present {
+            continue
+        }
+
+        console_parts << command_flag
+    }
+
+    command_options := command.signature.filter(it is Opt).map(it as Opt)
+
+    for command_option in command_options {
+        value := flag_parser.string(command_option.long, command_option.short.u8(), "", "", FlagConfig{})
+        value_is_empty := value.trim_space().len == 0
+
+        if value_is_empty {
+            continue
+        }
+
+        opt := Opt{
+            ...command_option as Opt
+            value: value
+        }
+
+        console_parts << opt
+    }
+
+    return console_parts
 }
