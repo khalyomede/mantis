@@ -5,9 +5,9 @@ Type-safe, exception-free no magic web framework for people that like to sleep a
 ```v
 module main
 
-import mantis.http { create_app, Response }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
@@ -81,9 +81,9 @@ In your "index.v" file, write the minimal code:
 ```v
 module main
 
-import mantis.http { create_app, Response }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 fn main() {
   app := App{

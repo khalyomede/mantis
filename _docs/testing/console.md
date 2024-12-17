@@ -8,8 +8,8 @@ Test simple command responses:
 
 ::: code-group
 ```v [tests/console/basic_test.v]
-import mantis.console { App, Command, Response }
-import mantis.test { expect }
+import khalyomede.mantis.console { App, Command, Response }
+import khalyomede.mantis.test { expect }
 
 fn test_basic_command() {
   app := App{

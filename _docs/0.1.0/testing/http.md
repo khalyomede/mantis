@@ -8,10 +8,10 @@ Test simple route responses:
 
 ::: code-group
 ```v [tests/http/basic_test.v]
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
-import mantis.test { expect }
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
+import khalyomede.mantis.test { expect }
 
 fn test_basic_route() {
   app := create_app(

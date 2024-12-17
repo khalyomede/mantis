@@ -66,9 +66,9 @@ Here's a practical example from Mantis's routing:
 ```v [main.v]
 module main
 
-import mantis.http { create_app, App, Response }
-import mantis.http.route
-import mantis.http.response
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(

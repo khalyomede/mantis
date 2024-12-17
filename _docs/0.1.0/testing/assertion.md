@@ -9,7 +9,7 @@ The `expect` function allows you to write assertions in a natural, fluent style:
 ::: code-group
 
 ```v [tests/example_test.v]
-import mantis.test { expect }
+import khalyomede.mantis.test { expect }
 
 fn test_basic_assertions() {
   // Equality
