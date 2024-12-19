@@ -1,5 +1,5 @@
-import mantis.console { App, Command, Response, Argument, Example, Name, Flag, Program, Opt }
-import mantis.test { expect }
+import console { App, Command, Response, Argument, Example, Name, Flag, Program, Opt }
+import test { expect }
 
 fn test_it_can_return_correct_response_code_for_basic_command() {
     app := App{

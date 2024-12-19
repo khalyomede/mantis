@@ -1,6 +1,6 @@
 module route
 
-import mantis.http { Route }
+import http { Route }
 
 pub fn post(parameters Route) Route {
     return Route{

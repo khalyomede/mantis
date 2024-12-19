@@ -1,5 +1,5 @@
-import mantis.validation { Min, Rule, Value }
-import mantis.test { expect }
+import validation { Min, Rule, Value }
+import test { expect }
 
 // Custom rule
 

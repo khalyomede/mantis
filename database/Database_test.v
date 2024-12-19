@@ -1,5 +1,5 @@
-import mantis.test { expect }
-import mantis.database { Database, DatabaseConnection, DatabaseDriver }
+import test { expect }
+import database { Database, DatabaseConnection, DatabaseDriver }
 
 struct Post {
     id int

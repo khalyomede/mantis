@@ -1,5 +1,5 @@
-import mantis.http { encode_url }
-import mantis.test { expect }
+import http { encode_url }
+import test { expect }
 
 fn test_encodes_space_to_plus() {
     expect(encode_url('hello world')).to_be_equal_to('hello+world')

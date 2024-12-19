@@ -1,10 +1,10 @@
 module http
 
-import mantis.console
-import mantis.env { Env }
-import mantis.validation { Rule, Min, Max, Value }
-import mantis.database { Database }
-import mantis.translation { Translation }
+import console
+import env { Env }
+import validation { Rule, Min, Max, Value }
+import database { Database }
+import translation { Translation }
 import net
 import rand
 import time

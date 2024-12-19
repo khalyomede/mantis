@@ -1,6 +1,6 @@
 module http
 
-import mantis.console
+import console
 
 pub struct ErrorHandler {
     pub:

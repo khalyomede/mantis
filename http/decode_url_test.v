@@ -1,5 +1,5 @@
-import mantis.http { decode_url }
-import mantis.test { expect }
+import http { decode_url }
+import test { expect }
 
 fn test_decodes_plus_sign_to_space() {
     expect(decode_url('hello+world')).to_be_equal_to('hello world')

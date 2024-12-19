@@ -1,5 +1,5 @@
-import mantis.translation { Translation }
-import mantis.test { expect }
+import translation { Translation }
+import test { expect }
 
 fn test_it_translate_simple_text() {
     i18n := Translation{

@@ -1,9 +1,9 @@
 import json
-import mantis.http { App, Route, Status, Request, Response, Session, SessionData, ErrorHandler, HttpError }
-import mantis.http.response
-import mantis.http.route
-import mantis.test { expect }
-import mantis.translation { Translation }
+import http { App, Route, Status, Request, Response, Session, SessionData, ErrorHandler, HttpError }
+import http.response
+import http.route
+import test { expect }
+import translation { Translation }
 import os { getwd }
 import time
 

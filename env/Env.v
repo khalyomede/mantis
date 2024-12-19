@@ -10,14 +10,14 @@ pub struct Env {
         cached map[string]string
 }
 
-pub fn (mut env Env) get(key string) ?string {
+pub fn (mut environment Env) get(key string) ?string {
     // Return from cache if exists
-    if value := env.cached[key] {
+    if value := environment.cached[key] {
         return value
     }
 
     // Parse line by line looking for key
-    content := env.file.to_string()
+    content := environment.file.to_string()
     lines := content.split_into_lines()
     for line in lines {
         if line.starts_with('#') || !line.contains('=') {
@@ -27,7 +27,7 @@ pub fn (mut env Env) get(key string) ?string {
         parts := line.split('=')
         if parts[0].trim_space() == key {
             value := parts[1].trim_space().trim('"')
-            env.cached[key] = value // Cache for next time
+            environment.cached[key] = value // Cache for next time
             return value
         }
     }

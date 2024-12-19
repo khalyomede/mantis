@@ -1,5 +1,5 @@
-import mantis.http { Url }
-import mantis.test { expect }
+import http { Url }
+import test { expect }
 
 fn test_can_build_url_with_scheme_domain_and_tld() {
     url := Url{

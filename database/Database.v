@@ -1,7 +1,7 @@
 module database
 
 import db.sqlite
-import mantis.console
+import console
 
 pub struct Database {
     pub:

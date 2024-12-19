@@ -1,4 +1,4 @@
-import mantis.test { expect }
+import test { expect }
 
 fn test_can_assert_two_number_are_equal() {
     expect(1).to_be_equal_to(1)

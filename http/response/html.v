@@ -1,6 +1,6 @@
 module response
 
-import mantis.http { Response }
+import http { Response }
 
 pub fn html(parameters Response) Response {
     response_headers := {
