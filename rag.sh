@@ -14,26 +14,24 @@ fi
 should_include() {
     local file="$1"
 
-    # Only include specific folders
-    [[ ! "$file" =~ ^\./(tests|mantis|_docs)/ ]] && return 1
-
-    # Only include specific file extensions
-    [[ ! "$file" =~ \.(v|md)$ ]] && return 1
-
-    # Exclude specific _docs paths
-    [[ "$file" =~ ^\./_docs/[0-9]+\. ]] && return 1
-    [[ "$file" =~ ^\./_docs/\.vitepress ]] && return 1
-
-    # For _docs, only include first level and http folder
-    if [[ "$file" =~ ^\./_docs/ ]]; then
-        # Allow first level files
-        [[ "$file" =~ ^\./_docs/[^/]+$ ]] && return 0
-        # Allow http folder
-        [[ "$file" =~ ^\./_docs/http ]] && return 0
+    # Include only v files from mantis and tests folders
+    if [[ "$file" =~ ^\./(mantis|tests)/ ]]; then
+        [[ "$file" =~ \.v$ ]] && return 0
         return 1
     fi
 
-    return 0
+    # For _docs, include only direct files and ignore version numbers and .vitepress
+    if [[ "$file" =~ ^\./_docs/ ]]; then
+        # Exclude .vitepress folder
+        [[ "$file" =~ ^\./_docs/\.vitepress ]] && return 1
+        # Exclude version number folders
+        [[ "$file" =~ ^\./_docs/[0-9]+\.[0-9]+\.[0-9]+ ]] && return 1
+        # Include only .md files
+        [[ "$file" =~ \.md$ ]] && return 0
+        return 1
+    fi
+
+    return 1
 }
 
 # Find and process files
