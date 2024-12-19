@@ -61,6 +61,11 @@ export default defineConfig({
                             { text: 'Console', link: '/testing/console' },
                         ]
                     },
+                    {
+                        text: "Comparison", items: [
+                            { text: "Laravel", link: "/comparison/laravel" }
+                        ]
+                    },
                     { text: 'Versioning policy', link: '/versioning-policy' },
                     { text: 'Reference', link: '/reference' },
                 ]
