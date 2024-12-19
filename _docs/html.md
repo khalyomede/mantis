@@ -177,28 +177,13 @@ fn main() {
 
 ## Available elements
 
-- [a](#a)
-- [body](#body)
-- [button](#button)
-- [code](#code)
-- [div](#div)
-- [footer](#footer)
-- [h1](#h1)
-- [head](#head)
-- [header](#header)
-- [html](#html)
-- [li](#li)
-- [link](#link)
-- [main](#main)
-- [nav](#nav)
-- [p](#p)
-- [pre](#pre)
-- [script](#script)
-- [small](#small)
-- [span](#span)
-- [style](#style)
-- [title](#title)
-- [ul](#ul)
+| [a](#a)           | [body](#body)     | [button](#button) | [code](#code)   |
+| ----------------- | ----------------- | ----------------- | --------------- |
+| [div](#div)       | [footer](#footer) | [h1](#h1)         | [head](#head)   |
+| [header](#header) | [html](#html)     | [li](#li)         | [link](#link)   |
+| [main](#main)     | [nav](#nav)       | [p](#p)           | [pre](#pre)     |
+| [script](#script) | [small](#small)   | [span](#span)     | [style](#style) |
+| [title](#title)   | [ul](#ul)         |                   |                 |
 
 ### a
 
