@@ -18,7 +18,7 @@ module main
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 import khalyomede.mantis.http.response
-import khalyomede.mantis.database { Database, DatabaseConnection }
+import khalyomede.mantis.database { Database, DatabaseConnection } // [!code focus:6]
 
 struct Post {
   id int
@@ -27,7 +27,7 @@ struct Post {
 
 fn main() {
   app := create_app(
-    database: Database{
+    database: Database{ // [!code focus:6]
       connection: DatabaseConnection{
         driver: .sqlite
         database: 'database.sqlite'
@@ -48,8 +48,7 @@ fn main() {
 
           mut app_ref := app
 
-          // The ! indicates the database query might fail
-          posts := app_ref.database.all[Post]("SELECT id, title FROM posts") or {
+          posts := app_ref.database.all[Post]("SELECT id, title FROM posts") or { // [!code focus:6]
             return response.html(
               content: "Database error: ${err.msg()}",
               status: .server_error
