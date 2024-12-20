@@ -23,117 +23,9 @@ fn main() {
 }
 ```
 
-## Philosophy
+## Documentation
 
-Mantis embraces explicit over implicit, making code easy to follow and maintain:
-
-- No hidden middleware chains
-- Type-safe from database to views
-- Function-based components for clear dependencies
-- Explicit error handling
-- Clear and predictable request flow
-
-## Pre-release disclaimer
-
-Mantis is not ready for production. The online documentation is not done yet.
-
-However if you're already enthusiastic about it, the best way to get a deeper understanding of how to use it is to dive into the "tests" folder.
-
-## Suggested folder structure
-
-```bash
-your-app
-├── actions
-│   └── post
-│     ├── store.v
-│     └── find.v
-├── commands
-│   └── post
-│     ├── find.v
-│     └── store.v
-├── controllers
-│   ├── index.v
-│   └── post
-│     ├── create.v
-│     ├── find.v
-│     └── store.v
-├── validators
-│   └── post
-│     └── store.v
-├── views
-│   ├── components
-│   │   └── dropdown.v
-│   └── layouts
-│     ├── guest.v
-│     └── logged.v
-└── main.v
-```
-
-## Getting started
-
-Get a little knowledge on:
-
-- [V lang](https://vlang.io/) (the programming language used within this framework)
-- [Docker](https://docs.docker.com/get-started/docker-overview/) & [Docker Compose](https://docs.docker.com/compose/intro/compose-application-model/) (no deep understanding, just basics)
-
-In your "index.v" file, write the minimal code:
-
-```v
-module main
-
-import khalyomede.mantis.http { create_app, Response }
-import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
-
-fn main() {
-  app := App{
-    routes: [
-      route.get(name: "index", path: "/", callback: fn (app App) Response {
-        return response.html(content: "hello world")
-      }}
-    ]
-  }
-
-  app.serve() or { panic(err) }
-}
-```
-
-Create a "docker-compose.yml" file and paste this code:
-
-```yml
-services:
-  v:
-  image: thevlang/vlang:alpine
-  tty: true
-  entrypoint: v
-  working_dir: /home/v
-  volumes:
-    - .:/home/v
-  ports:
-    - 80:80
-```
-
-Run these commands:
-
-```bash
-docker compose up -d
-docker compose exec v sh
-```
-
-Then inside the container start the server:
-
-```bash
-v watch run main.v
-```
-
-Now you should be able to view your app at [http://localhost](http://localhost) or [http://127.0.0.1](http://127.0.0.1).
-
-## Compile for production
-
-```bash
-v -N -W -prod -os linux -obfuscate -skip-unused -o main main.v
-chmod +x -r -w main
-```
+Browse [khalyomede.github.io/mantis](https://khalyomede.github.io/mantis).
 
 ## License
 
@@ -145,7 +37,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ## Roadmap
 
-██░░░░░░░░░░░░░░░░░░ (21/93 - 22%)
+██░░░░░░░░░░░░░░░░░░ (24/95 - 25%)
 
 - Routing
   - ✅ Get routes
@@ -154,6 +46,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 - Views
   - ⏳ HTML components
   - ⏳ HTML enum attributes
+  - ⏳ Static pages
 - Translations / internationalization (i18n)
   - ✅ Simple texts
   - ✅ Translation parameters
@@ -181,7 +74,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 - Response
   - ✅ Basic HTML response
   - ✅ Response headers
-  - ⏳ Redirect responses
+  - ✅ Redirect responses
   - ⏳ Streamed response
   - ⏳ Keep-alive response
   - ⏳ Chunked transfer encoding
@@ -266,6 +159,8 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
     - ⏳ Mocking utilities
   - Assets bundling
     - ⏳ Vite.js
+- Performance
+  - ⏳ Improved concurrency performance
 - Production running
   - ⏳ On-demand mode
   - ✅ Standalone mode (multi-cores)
@@ -273,7 +168,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
   - ✅ Expect test-style
   - ⏳ HTTP expectations
 - Comparisons
-  - ⏳ Laravel
+  - ✅ Laravel
   - ⏳ Rails
   - ⏳ AdonisJS
   - ⏳ Express
@@ -281,4 +176,4 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 - Examples
   - ⏳ With HTMX
   - ⏳ Inertia adapter
-- ⏳ Exhaustive online documentation
+- ✅ Online documentation
