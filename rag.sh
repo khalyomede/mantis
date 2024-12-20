@@ -14,10 +14,15 @@ fi
 should_include() {
     local file="$1"
 
-    # Include only v files from mantis and tests folders
-    if [[ "$file" =~ ^\./(mantis|tests)/ ]]; then
-        [[ "$file" =~ \.v$ ]] && return 0
-        return 1
+    # Exclude claude directory
+    [[ "$file" =~ ^./claude/ ]] && return 1
+
+    # Include .v files from anywhere except certain directories
+    if [[ "$file" =~ \.v$ ]]; then
+        # Exclude certain directories if needed
+        [[ "$file" =~ /\..* ]] && return 1  # Exclude hidden directories
+        [[ "$file" =~ /build/ ]] && return 1 # Exclude build directory
+        return 0
     fi
 
     # For _docs, include only direct files and ignore version numbers and .vitepress
