@@ -1,10 +1,10 @@
 # Laravel
 
-Laravel is an incredibly productive web framework written in PHP. If you seek for the fastest time-to-market, huge store of packages for real-world busineess use case and exceptional local-to-production experience, battle tested components and dead-simple deployment, Laravel is the go-to choice for teams that want to ship fast.
+[Laravel](https://laravel.com/) is an incredibly productive web framework written in [PHP](https://www.php.net/). If you seek for the fastest time-to-market, huge store of packages for real-world busineess use case and exceptional local-to-production experience, battle tested components and dead-simple deployment, [Laravel](https://laravel.com/) is the go-to choice for teams that want to ship fast.
 
 ## Hello world
 
-Here is a simple hello world written on both Laravel and Mantis.
+Here is a simple hello world written on both [Laravel](https://laravel.com/) and Mantis.
 
 ::: code-group
 
