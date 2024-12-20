@@ -39,12 +39,42 @@ Ensure V is runnable:
 docker compose run --rm v --version
 ```
 
+## Initialize your project
+
+Run `docker compose run --rm v init` and follow the instructions.
+
 ## V package installation
 
-Install Mantis:
+### Package manager
+
+Install Mantis using the included package manager:
 
 ```bash
 docker compose run --rm v install khalyomede.mantis
+```
+
+### Manual installation
+
+1. Go to https://github.com/khalyomede/mantis
+2. On the green button "Code", click on "Download zip"
+3. On your root folder, create the folder "khalyomede"
+4. On the folder "khalyomede", create the folder "mantis"
+5. Unzip your folder content into "mantis"
+
+You should end up with the following folder tree:
+
+```
+your-folder
+├── khalyomede
+│   └── mantis
+│       ├── _docs
+│       ├── console
+│       ├── css
+│       ├── database
+│       └── ...
+├── docker-compose.yml
+├── main.v
+└── v.mod
 ```
 
 ## Create the web server
