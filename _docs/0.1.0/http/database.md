@@ -3,7 +3,7 @@
 Learn how to use databases within your HTTP app.
 
 ::: tip Notice
-Mantis currently only supports SQLite databases.
+Mantis currently only supports [SQLite](https://www.sqlite.org/) databases.
 :::
 
 ## Configuration

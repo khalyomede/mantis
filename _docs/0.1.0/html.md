@@ -1,6 +1,6 @@
 # HTML
 
-Mantis provides type-safe HTML generation through V functions.
+Mantis provides type-safe HTML generation through [V](https://vlang.io/) functions.
 
 ## Elements
 

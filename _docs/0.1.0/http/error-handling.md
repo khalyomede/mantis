@@ -39,7 +39,7 @@ fn main() {
 
 This will:
 1. Report the error (e.g., log it)
-2. Generate and return a response according to how the error handler is configured to render errors (see "Custom Error Handler" section to customize this behavior)
+2. Generate and return a response according to how the error handler is configured to render errors (see the [custom error handler](#custom-error-handler) section)
 
 ## report_error
 

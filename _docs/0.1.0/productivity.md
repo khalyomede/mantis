@@ -1,6 +1,6 @@
 # Productivity
 
-Here is some quick aliases to run V without Docker Compose prefixes.
+Here is some quick aliases to run [V](https://vlang.io/) without Docker Compose prefixes.
 
 ::: code-group
 
@@ -20,7 +20,7 @@ alias vs="docker compose run --rm --service-ports v"
 
 ## Running V in development
 
-V can watch your files when you save. It will recompile your files and let you know of any errors.
+[V](https://vlang.io/) can watch your files when you save. It will recompile your files and let you know of any errors.
 
 ```bash
 v watch run main.v
@@ -28,7 +28,7 @@ v watch run main.v
 
 ## Running V in production mode
 
-V will compile your whole web app into a single executable.
+[V](https://vlang.io/) will compile your whole web app into a single executable.
 
 You need to target the OS where your executable will be run using the `-os` flag.
 

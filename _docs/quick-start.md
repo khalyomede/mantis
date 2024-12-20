@@ -33,7 +33,7 @@ services:
 
 :::
 
-Ensure V is runnable:
+Ensure [V](https://vlang.io/) is runnable:
 
 ```bash
 docker compose run --rm v --version
@@ -48,7 +48,7 @@ Run `docker compose run --rm v init` and follow the instructions.
 ### Package manager
 
 ::: warning
-Due to a bug, VPM is not able to receive new package submission. Please use the [manual installation](#manual-installation) in the mean time.
+Due to a bug, [VPM](https://vpm.vlang.io/) is not able to receive new package submission. Please use the [manual installation](#manual-installation) in the mean time.
 :::
 
 Install Mantis using the included package manager:

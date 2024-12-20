@@ -45,7 +45,7 @@ AUTH_ENABLED=true
 
 ## Reading Values
 
-Use the `get()` method to read values. It returns an Option type, allowing safe handling of missing values:
+Use the `get()` method to read values. It returns an [Option type](https://docs.vlang.io/type-declarations.html#optionresult-types-and-error-handling), allowing safe handling of missing values:
 
 ::: code-group
 

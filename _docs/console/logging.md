@@ -29,7 +29,7 @@ fn main() {
 
 Each message is automatically formatted with:
 
-- Timestamp in RFC3339 format
+- Timestamp in [RFC3339](https://www.rfc-editor.org/rfc/rfc3339) format
 - Severity level indicator
 - Your message
 

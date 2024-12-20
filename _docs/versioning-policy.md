@@ -6,7 +6,7 @@ Here is what you need to know about the maintenance and evolution of versions fo
 
 Breaking changes may occur in any minor version increment (0.x.0).
 
-This follows the SemVer specification for initial development, which states that anything may change at any time during this phase.
+This follows the [SemVer](https://semver.org/lang/fr/) specification for initial development, which states that anything may change at any time during this phase.
 
 Read the [upgrade instructions](/upgrade) for details on required changes between versions.
 

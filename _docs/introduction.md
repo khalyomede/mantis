@@ -2,7 +2,7 @@
 
 ## What is Mantis?
 
-Mantis is a web framework for V lang that that emphasize on explicit code and type safety.
+Mantis is a web framework for [V lang](https://vlang.io/) that that emphasize on explicit code and type safety.
 
 ::: code-group
 
@@ -47,8 +47,8 @@ Mantis promise is to be a high-level toolbox for your API and web apps. It offer
 
 ## V lang
 
-V is a modern type-safe immutable fast general purpose programming language. Think of Go with the strict-typing and simple syntax you were expecting.
+[V](https://vlang.io/) is a modern type-safe immutable fast general purpose programming language. Think of [Go](https://go.dev/) with the strict-typing and simple syntax you were expecting.
 
 ::: tip NOTICE
-Mantis is not replacing [veb](https://github.com/vlang/v/tree/master/vlib/veb), the official V web framework. Please check it first to see if it fits your needs.
+Mantis is not replacing [veb](https://github.com/vlang/v/tree/master/vlib/veb), the official [V](https://vlang.io/) web framework. Please check it first to see if it fits your needs.
 :::

@@ -1,9 +1,9 @@
 # Query
 
-Mantis provides type-safe database operations that map directly to V structs.
+Mantis provides type-safe database operations that map directly to [V](https://vlang.io/) structs.
 
 ::: tip Notice
-Mantis currently only supports SQLite databases.
+Mantis currently only supports [SQLite](https://www.sqlite.org/) databases.
 :::
 
 ## Basic Usage
