@@ -78,6 +78,7 @@ struct CreateRequestParameters {
     ip string @[required]
     http_version string @[required]
     headers map[string][]string
+    form map[string]string
 }
 
 fn create_request(parameters CreateRequestParameters) Request {
@@ -113,6 +114,7 @@ fn create_request(parameters CreateRequestParameters) Request {
         ip: parameters.ip
         http_version: parameters.http_version
         queries: parse_queries(parameters.path)
+        form: parameters.form
         headers: parameters.headers
         cookies: cookies
     }
@@ -322,6 +324,7 @@ fn handle_connection(mut connection net.TcpConn, app App) {
         path: path
         ip: ip
         http_version: version
+        form: form
     )
 
     session := Session{
