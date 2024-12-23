@@ -376,3 +376,24 @@ fn test_can_translate_text() {
 
     expect(text).to_be_equal_to("Bienvenue")
 }
+
+fn test_can_set_different_port_number() {
+    app := http.create_app(
+        port: u16(3000)
+        routes: [
+            route.get(path: "/", callback: fn (app App) Response {
+                return Response{
+                    content: "hello world"
+                }
+            })
+        ]
+        request: Request{
+            path: '/'
+            method: .get
+        }
+    )
+
+    res := app.render()
+
+    expect(res.content).to_be_equal_to("hello world")
+}

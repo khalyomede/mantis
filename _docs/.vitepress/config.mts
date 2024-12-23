@@ -60,6 +60,7 @@ export default defineConfig({
                             { text: 'Console', link: '/testing/console' },
                         ]
                     },
+                    { text: "Deploy", link: "/deploy" },
                     {
                         text: "Comparison", items: [
                             { text: "Laravel", link: "/comparison/laravel" }
