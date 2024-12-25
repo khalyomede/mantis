@@ -8,7 +8,7 @@ pub struct ValidationError {
 }
 
 pub fn (error ValidationError) msg() string {
-    return error.rule.message(error.key)
+    return error.rule.message(error.value, error.key, []string{})
 }
 
 pub fn (error ValidationError) code() int {
