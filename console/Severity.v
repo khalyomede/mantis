@@ -15,7 +15,7 @@ pub fn (severity Severity) to_string() string {
     return match severity {
         .debug      { "DBUG" }
         .info       { "INFO" }
-        .notice     { "NOTI" }
+        .notice     { "NTCE" }
         .warning    { "WARN" }
         .error      { "ERRO" }
         .critical   { "CRIT" }
