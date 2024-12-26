@@ -29,6 +29,7 @@ export default defineConfig({
                             { text: "Environment", link: '/http/environment' },
                             { text: "Database", link: '/http/database' },
                             { text: "Erorr handling", link: '/http/error-handling' },
+                            { text: "Logging", link: "/http/logging.md" },
                             { text: "Configuration", link: '/http/configuration' },
                             { text: "Extending", link: '/http/extending' },
                         ],
@@ -53,6 +54,7 @@ export default defineConfig({
                             { text: 'Query', link: '/database/query' }
                         ]
                     },
+                    { text: 'Logging', link: '/logging' },
                     {
                         text: 'Testing', items: [
                             { text: 'Assertion', link: '/testing/assertion' },

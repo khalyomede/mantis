@@ -14,7 +14,7 @@ import khalyomede.mantis.http { create_app }
 fn main() {
   app := create_app( // [!code focus:6]
     host: "0.0.0.0" // Network interface to bind to
-    port: 8080 // Port to listen on
+    port: u16(8080) // Port to listen on
     mode: .standalone // Server operation mode
     cpus: 8 // Number of CPU cores to use
   )

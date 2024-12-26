@@ -4,6 +4,7 @@ import console
 import env { Env }
 import validation { Rule, Min, Max, Value }
 import database { Database }
+import logging { Log }
 import translation { Translation }
 import net
 import rand
@@ -25,6 +26,7 @@ pub struct App {
     pub mut:
         env Env
         database Database
+        log Log
 }
 
 pub fn (app App) route_parameter(key string) ?string {

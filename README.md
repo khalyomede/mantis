@@ -37,7 +37,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ## Roadmap
 
-██░░░░░░░░░░░░░░░░░░ (24/95 - 25%)
+██░░░░░░░░░░░░░░░░░░ (25/95 - 25%)
 
 - Routing
   - ✅ Get routes
@@ -145,7 +145,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
   - ⏳ Database
 - Monitoring
   - Logging drivers
-    - ⏳ Local file
+    - ✅ Local file
     - ⏳ Syslog
     - ⏳ Papertrail
   - Error tracking drivers

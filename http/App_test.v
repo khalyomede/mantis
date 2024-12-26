@@ -2,6 +2,8 @@ import json
 import http { App, Route, Status, Request, Response, Session, SessionData, ErrorHandler, HttpError }
 import http.response
 import http.route
+import logging { Log }
+import logging.channel { File }
 import test { expect }
 import translation { Translation }
 import os { getwd }
@@ -396,4 +398,31 @@ fn test_can_set_different_port_number() {
     res := app.render()
 
     expect(res.content).to_be_equal_to("hello world")
+}
+
+fn test_it_can_log_debug_info() {
+    log_file_path := "misc/http_mantis.log"
+
+    defer {
+        os.rm(log_file_path) or {
+            panic(err)
+        }
+    }
+
+    mut app := App{
+        log: Log{
+            channel: File{
+                path: log_file_path
+            }
+        }
+    }
+
+    app.log.debug("test") or {
+        panic(err)
+    }
+
+    content := os.read_file(log_file_path) or { "" }
+
+    // TODO: add assertion to match format "[nanosec] [severity] value"
+    expect(content).to_end_with("test")
 }
