@@ -31,7 +31,9 @@ fn main() {
 
 :::
 
-You can also manually set the severity:
+## Dynamic severity
+
+You can choose the severity at runtime.
 
 ::: code-group
 
@@ -56,6 +58,30 @@ fn main() {
 
 ```log [logs/mantis.log]
 [2024-12-26T17:41:19.933122161Z] [ERRO] Database connection lost.
+```
+
+:::
+
+## Available severities
+
+::: code-group
+
+```v [main.v]
+module main
+
+import khalyomede.mantis.logging { Log }
+import khalyomede.mantis.logging.channel { File }
+
+fn main() {
+  log.log(.emergency, "System cannot serve response.") or { panic(err) } // [!code focus:8]
+  log.log(.alert, "Disk space threshold reached.") or { panic(err) }
+  log.log(.critical, "Request mitigation process does not respond.") or { panic(err) }
+  log.log(.error, "Database connection lost.") or { panic(err) }
+  log.log(.warning, "Cache key not found.") or { panic(err) }
+  log.log(.notice, "Using in memory cache driver is not recommended in production.") or { panic(err) }
+  log.log(.info, "Switching to fallback SMTP.") or { panic(err) }
+  log.log(.debug, "Email sent.") or { panic(err) }
+}
 ```
 
 :::
