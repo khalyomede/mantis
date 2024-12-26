@@ -20,8 +20,37 @@ pub fn (mut file File) log(severity Severity, value string) ! {
         file.close()
     }
 
-    file.disk_file.write_string("\n[${now().format_rfc3339_nano()}] [${severity.str()}] ${value}")!
+    file.disk_file.write_string("\n[${now().format_rfc3339_nano()}] [${severity.to_string()}] ${value}")!
 }
+
+pub fn (mut file File) emergency(value string) ! {
+    file.log(.emergency, value)!
+}
+
+pub fn (mut file File) alert(value string) ! {
+    file.log(.alert, value)!
+}
+
+pub fn (mut file File) critical(value string) ! {
+    file.log(.critical, value)!
+}
+
+pub fn (mut file File) error(value string) ! {
+    file.log(.error, value)!
+}
+
+pub fn (mut file File) warning(value string) ! {
+    file.log(.warning, value)!
+}
+
+pub fn (mut file File) notice(value string) ! {
+    file.log(.notice, value)!
+}
+
+pub fn (mut file File) info(value string) ! {
+    file.log(.info, value)!
+}
+
 
 pub fn (mut file File) debug(value string) ! {
     file.log(.debug, value)!
