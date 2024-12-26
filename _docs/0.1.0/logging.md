@@ -19,7 +19,9 @@ fn main() {
     }
   }
 
-  log.debug("Email sent.")
+  log.debug("Email sent.") or {
+    panic(err)
+  }
 }
 ```
 
@@ -46,7 +48,9 @@ fn main() {
     }
   }
 
-  log.log(.error, "Database connection lost.") // [!code focus]
+  log.log(.error, "Database connection lost.") or { // [!code focus]
+    panic(err)
+  }
 }
 ```
 

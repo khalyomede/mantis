@@ -24,7 +24,7 @@ fn main() {
     }
     routes: [
       route.post(name: "contact.store", path: "/contact", callback: fn (app App) Response {
-        app.log.debug("Contact form sent.") // [!code focus]
+        app.log.debug("Contact form sent.") or {} // [!code focus]
 
         return response.redirect("/", {})
       })
