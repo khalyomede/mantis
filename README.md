@@ -37,7 +37,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ## Roadmap
 
-██░░░░░░░░░░░░░░░░░░ (25/96 - 25%)
+██░░░░░░░░░░░░░░░░░░ (25/97 - 25%)
 
 - Routing
   - ✅ Get routes
@@ -168,6 +168,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
   - ✅ Expect test-style
   - ⏳ HTTP expectations
   - ⏳ Error stack trace (like built-in assert)
+  - ⏳ Fake data generator 
 - Comparisons
   - ✅ Laravel
   - ⏳ Rails
