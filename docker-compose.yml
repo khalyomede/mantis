@@ -1,6 +1,6 @@
 services:
   v:
-    image: thevlang/vlang:alpine
+    build: ./docker/v
     tty: true
     entrypoint: v
     working_dir: /home/v
