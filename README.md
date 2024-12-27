@@ -35,6 +35,12 @@ Mantis is open-sourced software licensed under the [MIT license](LICENSE.md).
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
+## Alternatives
+
+- [veb](https://modules.vlang.io/veb.html): the official V web framework
+- [awesome-v](https://github.com/vlang/awesome-v): a curated list of V packages including web tools
+- [vpm](https://vpm.vlang.io/): the official V package registry 
+
 ## Roadmap
 
 ██░░░░░░░░░░░░░░░░░░ (25/97 - 25%)
