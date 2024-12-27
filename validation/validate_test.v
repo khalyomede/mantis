@@ -4,6 +4,7 @@ import test { expect }
 // Custom rule
 
 struct Palindrome {}
+struct User { age int }
 
 pub fn (rule Palindrome) validate(value Value) bool {
     return match value {
@@ -89,8 +90,6 @@ fn test_can_validate_structs() {
             Rule(Min{0})
         ]
     }
-
-    struct User { age int }
 
     validated := validation.validate_struct[User](data, rules) or {
         panic(err)
