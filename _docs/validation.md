@@ -37,6 +37,46 @@ fn main() {
 
 :::
 
+## Struct validation
+
+You can get back a struct when validating data. Useful for form validation for example.
+
+::: code-group
+
+```v [main.v]
+module main
+
+import validation { validate_struct, Rule, Value, Min, Max }
+
+struct ContactForm {
+  email string
+  message string
+}
+
+fn main() {
+  email := "john.doe@example.com"
+  message := "Tech companies 2024 survey."
+
+  contact_form := validate_struct[ContactForm]({
+    "email": Value(email)
+    "message": Value(message)
+  }, {
+    "email": [
+      Rule(Min{3})
+    ]
+    "message": [
+      Rule(Min{3})
+      Rule(Max{2000})
+    ]
+  }) or { panic(err) }
+
+  assert contact_form.email == "john.doe@example.com"
+  assert contact_form.message == "Tech companies 2024 survey."
+}
+```
+
+:::
+
 ## Custom rules
 
 You can create your own rules.
