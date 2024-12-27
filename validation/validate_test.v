@@ -78,3 +78,23 @@ fn test_can_validate_on_custom_rule() {
 
     expect(validated["sentence"] or { "" }).to_be_equal_to(Value("Never odd or even"))
 }
+
+fn test_can_validate_structs() {
+    data := {
+        "age": Value(200)
+    }
+
+    rules := {
+        "age": [
+            Rule(Min{0})
+        ]
+    }
+
+    struct User { age int }
+
+    validated := validation.validate_struct[User](data, rules) or {
+        panic(err)
+    }
+
+    expect(validated.age).to_be_equal_to(200)
+}
