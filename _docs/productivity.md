@@ -25,13 +25,3 @@ alias vs="docker compose run --rm --service-ports v"
 ```bash
 v watch run main.v
 ```
-
-## Running V in production mode
-
-[V](https://vlang.io/) will compile your whole web app into a single executable.
-
-You need to target the OS where your executable will be run using the `-os` flag.
-
-```bash
-v -N -W -prod -compress -os linux -obfuscate -skip-unused -o main main.v
-```
