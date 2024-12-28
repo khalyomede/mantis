@@ -66,10 +66,10 @@ v -N -W test .
   - ✅ Gender translation (feminine/masculine)
 - Session management
   - Drivers
-  - ✅ Local file
-  - ✅ Cookie (client read-only)
-  - ⏳ Database
-  - ⏳ Redis
+    - ✅ Local file
+    - ✅ Cookie (client read-only)
+    - ⏳ Database
+    - ⏳ Redis
 - Validation
   - ✅ Basic validation
   - ⏳ Rules
@@ -112,7 +112,7 @@ v -N -W test .
     - ⏳ Pusher
 - Security
   - Authentication drivers
-  - ⏳ Database
+    - ⏳ Database
   - Single Sign-On
     - ⏳ Google
     - ⏳ Facebook
