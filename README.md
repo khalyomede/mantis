@@ -39,7 +39,13 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 - [veb](https://modules.vlang.io/veb.html): the official V web framework
 - [awesome-v](https://github.com/vlang/awesome-v): a curated list of V packages including web tools
-- [vpm](https://vpm.vlang.io/): the official V package registry 
+- [vpm](https://vpm.vlang.io/): the official V package registry
+
+## Run tests
+
+```bash
+v -N -W test .
+```
 
 ## Roadmap
 
@@ -174,7 +180,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
   - ✅ Expect test-style
   - ⏳ HTTP expectations
   - ⏳ Error stack trace (like built-in assert)
-  - ⏳ Fake data generator 
+  - ⏳ Fake data generator
 - Comparisons
   - ✅ Laravel
   - ⏳ Rails
