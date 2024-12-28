@@ -6,10 +6,24 @@ on:
     branches:
       - master
 jobs:
-  tests:
+  tests-latest:
     runs-on: ubuntu-22.04
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
       - name: Tests
         run: docker compose run --rm v test .
+  tests-0.4.9:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+      - name: Tests
+        run: docker compose run --rm v049 test .
+  tests-0.4.8:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+      - name: Tests
+        run: docker compose run --rm v048 test .
