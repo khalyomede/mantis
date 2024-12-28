@@ -107,3 +107,21 @@ fn main() {
   log.log(.debug, "Email sent.") or { panic(err) }
 }
 ```
+
+## Default logger
+
+By default the logger will simply log in console.
+
+::: code-group
+
+```v [main.v]
+module main
+
+import logging { Log }
+
+fn main() {
+  mut log := Log{}
+
+  log.info("hey there!") or { panic(err) }
+}
+```
