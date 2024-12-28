@@ -41,7 +41,7 @@ fn test_can_validate_number_must_be_greater_than_zero() {
         {"age": Value(err.msg())}
     }
 
-    expect(validated["age"]).to_be_equal_to(Value(31))
+    expect(validated).to_have_key_equal_to("age", Value(31))
 }
 
 fn test_can_return_validation_error_when_validating_number_greater_than_zero() {

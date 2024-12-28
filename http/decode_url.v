@@ -50,7 +50,7 @@ fn decode_hex_byte(hex string) ?u8 {
     return u8(high << 4 | low)
 }
 
-fn decode_hex_digit(c u8) ?int {
+fn decode_hex_digit(c u8) ?u8 {
     return match c {
         `0`...`9` { int(c - `0`) }
         `a`...`f` { int(c - `a` + 10) }

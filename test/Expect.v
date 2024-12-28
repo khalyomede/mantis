@@ -84,11 +84,11 @@ pub fn (expect Expect[string]) to_not_be_kebab_case() {
 }
 
 pub fn (expect Expect[T]) to_have_key_equal_to[U, V](expected_key U, expected_value V) {
-    if !expect.actual.keys().contains(expected_key) {
+    actual_value := expect.actual[expected_key] or {
         assert false, "Expected map to contain key ${expected_key}."
-    }
 
-    actual_value := expect.actual[expected_key]
+        return
+    }
 
     assert actual_value == expected_value, "Expected map key \"${expected_key}\" with value ${actual_value} to be = \"${expected_value}\"."
 }

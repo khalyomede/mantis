@@ -4,7 +4,7 @@ import console { Severity }
 
 pub struct Log implements LogChannel {
     pub mut:
-        channel LogChannel
+        channel LogChannel = Console{}
 }
 
 pub fn (mut log Log) log(severity Severity, value string) ! {
@@ -42,4 +42,43 @@ pub fn (mut log Log) info(value string) ! {
 
 pub fn (mut log Log) debug(value string) ! {
     log.channel.debug(value)!
+}
+
+struct Console implements LogChannel {}
+
+fn (mut c Console) log(severity Severity, value string) ! {
+    console.log(severity, value)
+}
+
+fn (mut c Console) emergency(value string) ! {
+    console.log(.emergency, value)
+}
+
+fn (mut c Console) alert(value string) ! {
+    console.log(.alert, value)
+}
+
+fn (mut c Console) critical(value string) ! {
+    console.log(.critical, value)
+}
+
+fn (mut c Console) error(value string) ! {
+    console.log(.error, value)
+}
+
+fn (mut c Console) warning(value string) ! {
+    console.log(.warning, value)
+}
+
+fn (mut c Console) notice(value string) ! {
+    console.log(.notice, value)
+}
+
+fn (mut c Console) info(value string) ! {
+    console.log(.info, value)
+}
+
+
+fn (mut c Console) debug(value string) ! {
+    console.log(.debug, value)
 }
