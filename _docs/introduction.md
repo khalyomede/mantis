@@ -52,3 +52,7 @@ Mantis promise is to be a high-level toolbox for your API and web apps. It offer
 ::: tip NOTICE
 Mantis is not replacing [veb](https://github.com/vlang/v/tree/master/vlib/veb), the official [V](https://vlang.io/) web framework. Please check it first to see if it fits your needs.
 :::
+
+## Supported V versions
+
+Mantis support V > 0.4.8.

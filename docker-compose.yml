@@ -1,6 +1,6 @@
 services:
   v:
-    build: ./docker/v
+    build: ./docker/v/latest
     tty: true
     entrypoint: v
     working_dir: /home/v
@@ -8,6 +8,20 @@ services:
       - .:/home/v
     ports:
       - 80:80
+
+  v049:
+    build: ./docker/v/0.4.9
+    entrypoint: v
+    working_dir: /home/alpine/app
+    volumes:
+      - .:/home/alpine/app
+
+  v048:
+    build: ./docker/v/0.4.8
+    entrypoint: v
+    working_dir: /home/alpine/app
+    volumes:
+      - .:/home/alpine/app
 
   npm:
     image: node:23-alpine
