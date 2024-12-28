@@ -108,7 +108,7 @@ CACHE_DRIVER=redis  # Supported: "redis", "memcached"
 
 ## Default Values
 
-Handle missing environment variables gracefully using [V](https://vlang.io/)'s [Option type](https://docs.vlang.io/type-declarations.html#optionresult-types-and-error-handling):
+Handle missing environment variables gracefully using V's [Option type](https://docs.vlang.io/type-declarations.html#optionresult-types-and-error-handling):
 
 ::: code-group
 

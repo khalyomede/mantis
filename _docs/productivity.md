@@ -20,7 +20,7 @@ alias vs="docker compose run --rm --service-ports v"
 
 ## Running V in development
 
-[V](https://vlang.io/) can watch your files when you save. It will recompile your files and let you know of any errors.
+V can watch your files when you save. It will recompile your files and let you know of any errors.
 
 ```bash
 v watch run main.v
