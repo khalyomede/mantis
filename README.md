@@ -49,7 +49,7 @@ v -N -W test .
 
 ## Roadmap
 
-██░░░░░░░░░░░░░░░░░░ (25/97 - 25%)
+██░░░░░░░░░░░░░░░░░░ (26/98 - 25%)
 
 - Routing
   - ✅ Get routes
@@ -173,6 +173,7 @@ v -N -W test .
     - ⏳ Vite.js
 - Performance
   - ⏳ Improved concurrency performance
+  - ⏳ Memory efficient Fake data generator
 - Production running
   - ⏳ On-demand mode
   - ✅ Standalone mode (multi-cores)
@@ -180,7 +181,7 @@ v -N -W test .
   - ✅ Expect test-style
   - ⏳ HTTP expectations
   - ⏳ Error stack trace (like built-in assert)
-  - ⏳ Fake data generator
+  - ✅ Fake data generator
 - Comparisons
   - ✅ Laravel
   - ⏳ Rails
