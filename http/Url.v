@@ -5,7 +5,7 @@ pub struct Url {
         scheme Scheme = .undefined
         sub_domain string
         domain string
-        tld string
+        tld string // TODO: rename to "top_level_domain"
         port u16
         paths []string
         queries map[string]string

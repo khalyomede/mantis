@@ -60,6 +60,7 @@ export default defineConfig({
                             { text: 'Assertion', link: '/testing/assertion' },
                             { text: 'HTTP', link: '/testing/http' },
                             { text: 'Console', link: '/testing/console' },
+                            { text: 'Fake data', link: '/testing/fake-data' },
                         ]
                     },
                     { text: "Deploy", link: "/deploy" },

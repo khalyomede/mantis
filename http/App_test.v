@@ -4,17 +4,25 @@ import http.response
 import http.route
 import logging { Log }
 import logging.channel { File }
-import test { expect }
+import test { expect, Fake }
 import translation { Translation }
 import os { getwd }
 import time
 
+const fake := Fake{}
+
 fn test_serves_200_response_for_simple_get_route() {
+    content := fake.sentence()
+
     app := http.create_app(
         routes: [
-            Route{name: "index", path: "/", callback: fn (app App) Response {
-                return response.html(content: "hello world")
-            }}
+            route.get(
+                name: "index"
+                path: "/"
+                callback: fn [content] (app App) Response {
+                    return response.html(content: content)
+                }
+            )
         ],
         request: Request{
             path: "/"
@@ -25,35 +33,39 @@ fn test_serves_200_response_for_simple_get_route() {
     res := app.render()
 
     expect(res.status).to_be_equal_to(Status.ok)
-    expect(res.content).to_be_equal_to("hello world")
+    expect(res.content).to_be_equal_to(content)
     expect(res.headers["Content-Type"]).to_contain("text/html")
 }
 
 fn test_serves_200_response_for_route_with_parameters() {
+    content := fake.sentence()
+
     app := http.create_app(
         routes: [
             route.get(
                 name: "post.show",
                 path: "/post/{post}",
-                callback: fn (app App) Response {
-                    return response.html(content: "post details")
+                callback: fn [content] (app App) Response {
+                    return response.html(content: content)
                 }
             )
         ]
         request: Request{
-            path: "/post/25c1c7bfc6514c84b5a7148389e22c84"
+            path: "/post/${fake.uuid.v4()}"
             method: .get
         }
     )
 
     res := app.render()
 
-    expect(res.content).to_be_equal_to("post details")
+    expect(res.content).to_be_equal_to(content)
     expect(res.status).to_be_equal_to(Status.ok)
     expect(res.headers["Content-Type"]).to_contain("text/html")
 }
 
 fn test_can_get_route_parameter() {
+    comment_id := fake.uuid.v4()
+
     app := http.create_app(
         routes: [
             route.get(
@@ -66,17 +78,19 @@ fn test_can_get_route_parameter() {
             )
         ]
         request: Request{
-            path: "/post/25c1c7bfc6514c84b5a7148389e22c84/comment/a90ede34f14645bc90aed2db39907b97"
+            path: "/post/${fake.uuid.v4()}/comment/${comment_id}"
             method: .get
         }
     )
 
     res := app.render()
 
-    expect(res.content).to_be_equal_to("showing comment a90ede34f14645bc90aed2db39907b97")
+    expect(res.content).to_be_equal_to("showing comment ${comment_id}")
 }
 
 fn test_can_get_query() {
+    lang := fake.lang()
+
     app := http.create_app(
         routes: [
             route.get(name: "index", path: "/", callback: fn (app App) Response {
@@ -89,23 +103,25 @@ fn test_can_get_query() {
         ],
         request: Request{
             path: "/"
-            queries: {"lang": "fr"}
+            queries: {"lang": lang}
         }
     )
 
     res := app.render()
 
-    expect(res.content).to_be_equal_to("fr")
+    expect(res.content).to_be_equal_to(lang)
 }
 
 fn test_can_set_response_headers() {
-   app := http.create_app(
+    company_name := fake.company.name()
+
+    app := http.create_app(
         routes: [
-            route.get(name: "index", path: "/", callback: fn (app App) Response {
+            route.get(name: "index", path: "/", callback: fn [company_name] (app App) Response {
                 return Response{
                     content: "hello"
                     headers: {
-                        "X-Powered-By": ["Mantis"]
+                        "X-Powered-By": [company_name]
                     }
                 }
             })
@@ -118,7 +134,7 @@ fn test_can_set_response_headers() {
 
     res := app.render()
 
-    expect(res.headers["X-Powered-By"]).to_contain("Mantis")
+    expect(res.headers["X-Powered-By"]).to_contain(company_name)
 }
 
 fn test_can_redirect_to_url_with_query_parameters() {
@@ -143,6 +159,9 @@ fn test_can_redirect_to_url_with_query_parameters() {
 }
 
 fn test_can_parse_form_body_in_post_request() {
+    user_name := fake.person.name()
+    user_email := fake.email()
+
     app := http.create_app(
         routes: [
             route.post(name: "login.store", path: "/login", callback: fn (app App) Response {
@@ -155,24 +174,25 @@ fn test_can_parse_form_body_in_post_request() {
             path: "/login"
             method: .post
             form: {
-                "name": "John Doe"
-                "email": "john@example.com"
+                "name": user_name
+                "email": user_email
             }
         }
     )
 
     res := app.render()
 
-    expect(res.content).to_be_equal_to("John Doe - john@example.com")
+    expect(res.content).to_be_equal_to("${user_name} - ${user_email}")
 }
 
 fn test_can_retreive_session_data() {
     // Setup test session file
-    session_id := "e647b6d6-42a4-4a23-9e9b-99c6a851ccba"
+    session_id := fake.uuid.v4()
+    user_id := fake.uuid.v4()
     session_data := SessionData{
         expires_at: time.now().unix() + 3600
         data: {
-            "user_uuid": "8fa97b8a-e840-4316-87ba-ad0c528eafba"
+            "user_uuid": user_id
         }
     }
 
@@ -187,7 +207,7 @@ fn test_can_retreive_session_data() {
             path: "misc/sessions"
             lifetime: 3600
             sliding: true
-            id: "e647b6d6-42a4-4a23-9e9b-99c6a851ccba"
+            id: session_id
         },
         routes: [
             route.get(name: "dashboard.index", path: "/dashboard", callback: fn (app App) Response {
@@ -206,7 +226,7 @@ fn test_can_retreive_session_data() {
 
     res := app.render()
 
-    expect(res.content).to_be_equal_to("User uuid is 8fa97b8a-e840-4316-87ba-ad0c528eafba.")
+    expect(res.content).to_be_equal_to("User uuid is ${user_id}.")
 
     // Clean up test files
     os.rmdir_all("misc/sessions") or {}
@@ -214,14 +234,16 @@ fn test_can_retreive_session_data() {
 
 fn test_can_set_session_data() {
     // Setup test session directory
-    session_id := "test-session-123"
+    user_id := fake.database.primary_key()
+    session_id := "test-session-${user_id}"
+    user_name := fake.person.name()
     os.mkdir_all("misc/sessions") or { panic(err) }
 
     // Initial session data
     initial_data := SessionData{
         expires_at: time.now().unix() + 3600
         data: {
-            "existing_key": "existing_value"
+            "name": user_name
         }
     }
     os.write_file("misc/sessions/${session_id}.json", json.encode(initial_data)) or {
@@ -239,15 +261,15 @@ fn test_can_set_session_data() {
     )
 
     // Test setting new value
-    app.session.set("user_id", "123") or { panic(err) }
+    app.session.set("user_id", user_id.str()) or { panic(err) }
 
     // Read file to verify changes
     content := os.read_file("misc/sessions/${session_id}.json") or { panic(err) }
     session_data := json.decode(SessionData, content) or { panic(err) }
 
     // Verify original data preserved and new data added
-    expect(session_data.data["existing_key"]).to_be_equal_to("existing_value")
-    expect(session_data.data["user_id"]).to_be_equal_to("123")
+    expect(session_data.data["name"]).to_be_equal_to(user_name)
+    expect(session_data.data["user_id"]).to_be_equal_to(user_id.str())
 
     // Clean up test files
     os.rmdir_all("misc/sessions") or {}
@@ -417,12 +439,14 @@ fn test_it_can_log_debug_info() {
         }
     }
 
-    app.log.debug("test") or {
+    data := fake.sentence()
+
+    app.log.debug(data) or {
         panic(err)
     }
 
     content := os.read_file(log_file_path) or { "" }
 
     // TODO: add assertion to match format "[nanosec] [severity] value"
-    expect(content).to_end_with("test")
+    expect(content).to_end_with(data)
 }

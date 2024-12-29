@@ -1,4 +1,6 @@
-import test { expect }
+import test { expect, Fake }
+
+const fake := Fake{}
 
 fn test_can_assert_two_number_are_equal() {
     expect(1).to_be_equal_to(1)
@@ -33,9 +35,15 @@ fn test_can_assert_number_is_lower_or_equal_to_another() {
 }
 
 fn test_can_assert_text_ends_with_something() {
-    expect("hello world").to_end_with("world")
+    begining := fake.word()
+    end := fake.word()
+
+    expect("${begining} ${end}").to_end_with(end)
 }
 
 fn test_can_assert_map_contains_value_in_key() {
-    expect({"hello": "world"}).to_have_key_equal_to("hello", "world")
+    key := fake.word()
+    value := fake.sentence()
+
+    expect({"${key}": "${value}"}).to_have_key_equal_to(key, value)
 }

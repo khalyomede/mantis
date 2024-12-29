@@ -5,6 +5,7 @@ pub struct Max {
         value int
 }
 
+// TODO: use generic
 fn (rule Max) validate(value Value) bool {
     return match value {
         string {
@@ -17,6 +18,14 @@ fn (rule Max) validate(value Value) bool {
 
         u16 {
             value < rule.value
+        }
+
+        u64 {
+            value < u64(rule.value)
+        }
+
+        i64 {
+            value > i64(rule.value)
         }
     }
 }

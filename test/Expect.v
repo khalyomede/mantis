@@ -96,3 +96,15 @@ pub fn (expect Expect[T]) to_have_key_equal_to[U, V](expected_key U, expected_va
 pub fn (expect Expect[[]string]) to_contain(expected string) {
     assert expect.actual.contains(expected), "Expected array ${expect.actual} to contain \"${expected}\"."
 }
+
+pub fn (expect Expect[string]) to_not_be_empty() {
+    assert expect.actual.trim_space().len > 0
+}
+
+pub fn (expect Expect[string]) to_have_length(length int) {
+    assert expect.actual.len == length, "Expected \"${expect.actual}\" to have length = ${length} (actual length = ${expect.actual.len})."
+}
+
+pub fn (expect Expect[i64]) to_be_negative() {
+    assert expect.actual < i64(0), "Expected ${expect.actual} to be < 0."
+}

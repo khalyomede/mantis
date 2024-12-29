@@ -1,71 +1,94 @@
 import http { Url }
-import test { expect }
+import test { expect, Fake }
+
+const fake := Fake{}
 
 fn test_can_build_url_with_scheme_domain_and_tld() {
+    domain := fake.internet.domain()
+    tld := fake.internet.top_level_domain()
+
     url := Url{
         scheme: .https
-        domain: 'example'
-        tld: 'com'
+        domain: domain
+        tld: tld
     }
 
-    expect(url.str()).to_be_equal_to('https://example.com')
+    expect(url.str()).to_be_equal_to('https://${domain}.${tld}')
 }
 
 fn test_can_build_url_with_subdomain() {
+    sub_domain := fake.word().to_lower()
+    domain := fake.internet.domain()
+    tld := fake.internet.top_level_domain()
+
     url := Url{
         scheme: .https
-        sub_domain: 'blog'
-        domain: 'example'
-        tld: 'com'
+        sub_domain: sub_domain
+        domain: domain
+        tld: tld
     }
 
-    expect(url.str()).to_be_equal_to('https://blog.example.com')
+    expect(url.str()).to_be_equal_to('https://${sub_domain}.${domain}.${tld}')
 }
 
 fn test_can_build_url_with_port() {
+    domain := fake.internet.domain()
+    port := fake.internet.port()
+
     url := Url{
         scheme: .http
-        domain: 'localhost'
+        domain: domain
         tld: ''
-        port: 8080
+        port: port
     }
 
-    expect(url.str()).to_be_equal_to('http://localhost:8080')
+    expect(url.str()).to_be_equal_to('http://${domain}:${port}')
 }
 
 fn test_can_build_url_with_paths() {
+    domain := fake.internet.domain()
+    tld := fake.internet.top_level_domain()
+    post_id := fake.database.primary_key()
+
     url := Url{
         scheme: .https
-        domain: 'example'
-        tld: 'com'
-        paths: ['blog', 'posts', '123']
+        domain: domain
+        tld: tld
+        paths: ['blog', 'posts', post_id.str()]
     }
 
-    expect(url.str()).to_be_equal_to('https://example.com/blog/posts/123')
+    expect(url.str()).to_be_equal_to('https://${domain}.${tld}/blog/posts/${post_id}')
 }
 
 fn test_can_build_url_with_query_parameters() {
+    domain := fake.internet.domain()
+    tld := fake.internet.top_level_domain()
+    page := fake.integer.between(1, 10)
+
     url := Url{
         scheme: .https
-        domain: 'example'
-        tld: 'com'
+        domain: domain
+        tld: tld
         paths: ['search']
         queries: {
             'q': 'hello world'
-            'page': '1'
+            'page': page.str()
         }
     }
 
-    expect(url.str()).to_be_equal_to('https://example.com/search?q=hello+world&page=1')
+    expect(url.str()).to_be_equal_to('https://${domain}.${tld}/search?q=hello+world&page=${page}')
 }
 
 fn test_can_build_url_with_hash() {
+    domain := fake.internet.domain()
+    tld := fake.internet.top_level_domain()
+
     url := Url{
         scheme: .https
-        domain: 'example'
-        tld: 'com'
+        domain: domain
+        tld: tld
         hash: 'section-1'
     }
 
-    expect(url.str()).to_be_equal_to('https://example.com#section-1')
+    expect(url.str()).to_be_equal_to('https://${domain}.${tld}#section-1')
 }

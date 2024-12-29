@@ -1,10 +1,12 @@
 import validation { Min, Rule, Value }
-import test { expect }
+import test { expect, Fake }
 
 // Custom rule
 
 struct Palindrome {}
 struct User { age int }
+
+const fake := Fake{}
 
 pub fn (rule Palindrome) validate(value Value) bool {
     return match value {
@@ -27,8 +29,10 @@ pub fn (rule Palindrome) message(key string) string {
 // Tests
 
 fn test_can_validate_number_must_be_greater_than_zero() {
+    age := fake.integer.between(1, 99)
+
     data := {
-        "age": Value(31)
+        "age": Value(age)
     }
 
     rules := {
@@ -41,12 +45,12 @@ fn test_can_validate_number_must_be_greater_than_zero() {
         {"age": Value(err.msg())}
     }
 
-    expect(validated).to_have_key_equal_to("age", Value(31))
+    expect(validated).to_have_key_equal_to("age", Value(age))
 }
 
 fn test_can_return_validation_error_when_validating_number_greater_than_zero() {
     data := {
-        "age": Value(-200)
+        "age": Value(fake.negative_integer())
     }
 
     rules := {
@@ -81,8 +85,10 @@ fn test_can_validate_on_custom_rule() {
 }
 
 fn test_can_validate_structs() {
+    age := int(fake.integer.between(1, 99))
+
     data := {
-        "age": Value(200)
+        "age": Value(age)
     }
 
     rules := {
@@ -95,5 +101,5 @@ fn test_can_validate_structs() {
         panic(err)
     }
 
-    expect(validated.age).to_be_equal_to(200)
+    expect(validated.age).to_be_equal_to(age)
 }

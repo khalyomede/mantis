@@ -1,4 +1,4 @@
-import test { expect }
+import test { expect, Fake }
 import database { Database, DatabaseConnection, DatabaseDriver }
 
 struct Post {
@@ -26,14 +26,19 @@ fn test_can_query_all_records() {
         db.close() or { panic(err) }
     }
 
+    fake := Fake{}
+
+    post_title := fake.sentence()
+    post_views := fake.integer.between(1, 10)
+
     db.run('DROP TABLE IF EXISTS posts')!
     db.run('CREATE TABLE posts (id INTEGER PRIMARY KEY, title TEXT, views INTEGER)')!
-    db.run("INSERT INTO posts (title, views) VALUES ('First post', 42)")!
+    db.run("INSERT INTO posts (title, views) VALUES ('${post_title}', ${post_views})")!
 
     posts := db.all[Post]('SELECT id, title, views FROM posts')!
 
     expect(posts.len).to_be_equal_to(1)
-    expect(posts[0].title).to_be_equal_to('First post')
+    expect(posts[0].title).to_be_equal_to(post_title)
     expect(posts[0].id).to_be_equal_to(1)
-    expect(posts[0].views).to_be_equal_to(42)
+    expect(posts[0].views).to_be_equal_to(post_views)
 }

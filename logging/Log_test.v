@@ -1,7 +1,9 @@
-import test { expect }
+import test { expect, Fake }
 import logging { Log }
 import logging.channel { File }
 import os
+
+const fake := Fake{}
 
 fn test_it_logs_emergency_data_on_file() {
     log_file_path := "misc/mantis.log"
@@ -18,14 +20,16 @@ fn test_it_logs_emergency_data_on_file() {
         }
     }
 
-    log.emergency("test") or {
+    data := fake.sentence()
+
+    log.emergency(data) or {
         panic(err)
     }
 
     content := os.read_file(log_file_path) or { "" }
 
     // TODO: add assertion to match format "[nanosec] [severity] value"
-    expect(content).to_end_with("[EMRG] test")
+    expect(content).to_end_with("[EMRG] ${data}")
 }
 
 fn test_it_logs_alert_data_on_file() {
@@ -43,14 +47,16 @@ fn test_it_logs_alert_data_on_file() {
         }
     }
 
-    log.alert("test") or {
+    data := fake.sentence()
+
+    log.alert(data) or {
         panic(err)
     }
 
     content := os.read_file(log_file_path) or { "" }
 
     // TODO: add assertion to match format "[nanosec] [severity] value"
-    expect(content).to_end_with("[ALRT] test")
+    expect(content).to_end_with("[ALRT] ${data}")
 }
 
 fn test_it_logs_critical_data_on_file() {
@@ -68,14 +74,16 @@ fn test_it_logs_critical_data_on_file() {
         }
     }
 
-    log.critical("test") or {
+    data := fake.sentence()
+
+    log.critical(data) or {
         panic(err)
     }
 
     content := os.read_file(log_file_path) or { "" }
 
     // TODO: add assertion to match format "[nanosec] [severity] value"
-    expect(content).to_end_with("[CRIT] test")
+    expect(content).to_end_with("[CRIT] ${data}")
 }
 
 fn test_it_logs_error_data_on_file() {
@@ -93,14 +101,16 @@ fn test_it_logs_error_data_on_file() {
         }
     }
 
-    log.error("test") or {
+    data := fake.sentence()
+
+    log.error(data) or {
         panic(err)
     }
 
     content := os.read_file(log_file_path) or { "" }
 
     // TODO: add assertion to match format "[nanosec] [severity] value"
-    expect(content).to_end_with("[ERRO] test")
+    expect(content).to_end_with("[ERRO] ${data}")
 }
 
 fn test_it_logs_warning_data_on_file() {
@@ -118,14 +128,16 @@ fn test_it_logs_warning_data_on_file() {
         }
     }
 
-    log.warning("test") or {
+    data := fake.sentence()
+
+    log.warning(data) or {
         panic(err)
     }
 
     content := os.read_file(log_file_path) or { "" }
 
     // TODO: add assertion to match format "[nanosec] [severity] value"
-    expect(content).to_end_with("[WARN] test")
+    expect(content).to_end_with("[WARN] ${data}")
 }
 
 fn test_it_logs_notice_data_on_file() {
@@ -143,14 +155,16 @@ fn test_it_logs_notice_data_on_file() {
         }
     }
 
-    log.notice("test") or {
+    data := fake.sentence()
+
+    log.notice(data) or {
         panic(err)
     }
 
     content := os.read_file(log_file_path) or { "" }
 
     // TODO: add assertion to match format "[nanosec] [severity] value"
-    expect(content).to_end_with("[NTCE] test")
+    expect(content).to_end_with("[NTCE] ${data}")
 }
 
 fn test_it_logs_info_data_on_file() {
@@ -168,14 +182,16 @@ fn test_it_logs_info_data_on_file() {
         }
     }
 
-    log.info("test") or {
+    data := fake.sentence()
+
+    log.info(data) or {
         panic(err)
     }
 
     content := os.read_file(log_file_path) or { "" }
 
     // TODO: add assertion to match format "[nanosec] [severity] value"
-    expect(content).to_end_with("[INFO] test")
+    expect(content).to_end_with("[INFO] ${data}")
 }
 
 fn test_it_logs_debug_data_on_file() {
@@ -193,12 +209,14 @@ fn test_it_logs_debug_data_on_file() {
         }
     }
 
-    log.debug("test") or {
+    data := fake.sentence()
+
+    log.debug(data) or {
         panic(err)
     }
 
     content := os.read_file(log_file_path) or { "" }
 
     // TODO: add assertion to match format "[nanosec] [severity] value"
-    expect(content).to_end_with("[DBUG] test")
+    expect(content).to_end_with("[DBUG] ${data}")
 }
