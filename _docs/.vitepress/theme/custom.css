@@ -18,3 +18,13 @@ code {
     line-height: 2rem;
     font-size: 1rem;
 }
+
+/* Turn language selector into "versions" */
+.VPNavBarTranslations .vpi-languages {
+    display: none !important;
+}
+
+.VPNavBarTranslations .text::before {
+    content: "versions";
+    margin-right: 4px;
+}
