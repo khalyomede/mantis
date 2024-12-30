@@ -7,7 +7,7 @@ pub enum Method {
 
 pub fn (method Method) to_string() string {
     return match method {
-        .get    { "GET" }
-        .post   { "POST" }
+        .get        { "GET" }
+        .post       { "POST" }
     }
 }
