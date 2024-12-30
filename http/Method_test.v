@@ -16,3 +16,7 @@ fn test_method_put_to_string_return_as_expected() {
     expect(Method.put.to_string()).to_be_equal_to("PUT")
 }
 
+fn test_method_delete_to_string_return_as_expected() {
+    expect(Method.delete.to_string()).to_be_equal_to("DELETE")
+}
+
