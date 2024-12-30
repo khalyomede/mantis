@@ -8,6 +8,7 @@ pub enum Method {
     options
     patch
     post
+    put
 }
 
 pub fn (method Method) to_string() string {
@@ -19,5 +20,6 @@ pub fn (method Method) to_string() string {
         .options    { "OPTIONS" }
         .patch      { "PATCH" }
         .post       { "POST" }
+        .put        { "PUT" }
     }
 }
