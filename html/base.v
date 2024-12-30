@@ -1,5 +1,5 @@
 module html
 
-pub fn base(attributes map[string]AttributeValue, children []string) string {
-    return anon("base", attributes, children, true)
+pub fn base(attributes map[string]AttributeValue) string {
+    return anon("base", attributes, [], true)
 }

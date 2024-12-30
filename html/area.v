@@ -1,5 +1,5 @@
 module html
 
-pub fn area(attributes map[string]AttributeValue, children []string) string {
-    return anon("area", attributes, children, true)
+pub fn area(attributes map[string]AttributeValue) string {
+    return anon("area", attributes, [], true)
 }
