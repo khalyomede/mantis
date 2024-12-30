@@ -12,3 +12,7 @@ fn test_method_post_to_string_return_as_expected() {
     expect(Method.post.to_string()).to_be_equal_to("POST")
 }
 
+fn test_method_put_to_string_return_as_expected() {
+    expect(Method.put.to_string()).to_be_equal_to("PUT")
+}
+
