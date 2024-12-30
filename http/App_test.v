@@ -451,3 +451,28 @@ fn test_it_can_log_debug_info() {
     // TODO: add assertion to match format "[nanosec] [severity] value"
     expect(content).to_end_with(data)
 }
+
+fn test_it_respond_to_put_route() {
+    post_id := fake.database.primary_key()
+
+    app := http.create_app(
+        routes: [
+            route.put(path: "/post/{post}", callback: fn (app App) Response {
+                id := app.route_parameter("post") or {
+                    return response.html(status: .not_found)
+                }
+
+                return response.html(content: "post ${id} updated")
+            })
+        ]
+        request: Request{
+            method: .put
+            path: "/post/${post_id}"
+        }
+    )
+
+    res := app.render()
+
+    expect(res.status).to_be_equal_to(Status.ok)
+    expect(res.content).to_be_equal_to("post ${post_id} updated")
+}

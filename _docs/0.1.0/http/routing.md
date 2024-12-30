@@ -70,47 +70,6 @@ fn main() {
 
 :::
 
-## HTTP Methods
-
-Mantis supports GET and POST methods:
-
-::: code-group
-
-```v [main.v]
-module main
-
-import khalyomede.mantis.http { create_app, App, Response }
-import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
-
-fn main() {
-  app := create_app(
-    routes: [
-      // GET request
-      route.get(
-        name: "post.create"
-        path: "/post/create"
-        callback: fn (app App) Response {
-          return response.html(content: "Create post form")
-        }
-      ),
-      // POST request
-      route.post(
-        name: "post.store"
-        path: "/post"
-        callback: fn (app App) Response {
-          return response.html(content: "Post created")
-        }
-      )
-    ]
-  )
-
-  app.serve() or { panic(err) }
-}
-```
-
-:::
-
 ## Multiple Parameters
 
 Routes can have multiple parameters:
@@ -148,3 +107,103 @@ fn main() {
   app.serve() or { panic(err) }
 }
 ```
+
+## HTTP Methods
+
+- [GET](#get)
+- [POST](#post)
+- [PUT](#put)
+
+### GET
+
+::: code-group
+
+```v{10} [main.v]
+module main
+
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
+
+fn main() {
+  app := create_app(
+    routes: [
+      route.get(
+        name: "post.create"
+        path: "/post/create"
+        callback: fn (app App) Response {
+          return response.html(content: "Create post form")
+        }
+      )
+    ]
+  )
+
+  app.serve() or { panic(err) }
+}
+```
+
+:::
+
+### POST
+
+::: code-group
+
+```v{10} [main.v]
+module main
+
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
+
+fn main() {
+  app := create_app(
+    routes: [
+      route.post(
+        name: "post.store"
+        path: "/post"
+        callback: fn (app App) Response {
+          return response.html(content: "Post created")
+        }
+      )
+    ]
+  )
+
+  app.serve() or { panic(err) }
+}
+```
+
+:::
+
+### PUT
+
+::: code-group
+
+```v{10} [main.v]
+module main
+
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.route
+import khalyomede.mantis.http.response
+
+fn main() {
+  app := create_app(
+    routes: [
+      route.put(
+        name: "post.update"
+        path: "/post/{post}"
+        callback: fn (app App) Response {
+          post_id := app.route_parameter("post") or {
+            return response.html(status: .not_found)
+          }
+
+          return response.html(content: "Post ${post_id} updated")
+        }
+      )
+    ]
+  )
+
+  app.serve() or { panic(err) }
+}
+```
+
+:::
