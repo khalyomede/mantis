@@ -58,7 +58,7 @@ v --version
 Run the tests:
 
 ```bash
-v test src
+v -stats -N -W test .
 ```
 
 ## 4. Get familiar with testings

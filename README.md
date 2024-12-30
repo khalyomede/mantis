@@ -44,7 +44,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 ## Run tests
 
 ```bash
-v -N -W test .
+v -stats -N -W test .
 ```
 
 ## Roadmap

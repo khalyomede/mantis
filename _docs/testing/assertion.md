@@ -31,13 +31,13 @@ fn test_basic_assertions() {
 Run this command to run all assertions:
 
 ```bash
-v test .
+v -stats -N -W test .
 ```
 
 To run tests from a specific file:
 
 ```bash
-v test tests/controllers/posts/store_test.v
+v -stats -N -W test tests/controllers/posts/store_test.v
 ```
 
 ## Tips for good tests
