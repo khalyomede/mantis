@@ -6,6 +6,7 @@ pub enum Method {
     get
     head
     options
+    patch
     post
 }
 
@@ -16,6 +17,7 @@ pub fn (method Method) to_string() string {
         .get        { "GET" }
         .head       { "HEAD" }
         .options    { "OPTIONS" }
+        .patch      { "PATCH" }
         .post       { "POST" }
     }
 }
