@@ -28,3 +28,7 @@ fn test_method_options_to_string_return_as_expected() {
     expect(Method.options.to_string()).to_be_equal_to("OPTIONS")
 }
 
+fn test_method_trace_to_string_return_as_expected() {
+    expect(Method.trace.to_string()).to_be_equal_to("TRACE")
+}
+
