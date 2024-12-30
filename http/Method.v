@@ -5,6 +5,7 @@ pub enum Method {
     delete
     get
     head
+    options
     post
 }
 
@@ -14,6 +15,7 @@ pub fn (method Method) to_string() string {
         .delete     { "DELETE" }
         .get        { "GET" }
         .head       { "HEAD" }
+        .options    { "OPTIONS" }
         .post       { "POST" }
     }
 }
