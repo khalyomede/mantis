@@ -21,7 +21,7 @@ Create a file "docker-compose.yml" and paste this content:
 ```yml [docker-compose.yml]
 services:
   v:
-    image: thevlang/vlang:alpine
+    image: khalyomede/vlang:latest-alpine
     tty: true
     entrypoint: v
     working_dir: /home/v
