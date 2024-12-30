@@ -9,6 +9,7 @@ pub enum Method {
     patch
     post
     put
+    trace
 }
 
 pub fn (method Method) to_string() string {
@@ -21,5 +22,6 @@ pub fn (method Method) to_string() string {
         .patch      { "PATCH" }
         .post       { "POST" }
         .put        { "PUT" }
+        .trace      { "TRACE" }
     }
 }
