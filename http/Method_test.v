@@ -8,3 +8,7 @@ fn test_method_head_to_string_return_as_expected() {
     expect(Method.head.to_string()).to_be_equal_to("HEAD")
 }
 
+fn test_method_post_to_string_return_as_expected() {
+    expect(Method.post.to_string()).to_be_equal_to("POST")
+}
+
