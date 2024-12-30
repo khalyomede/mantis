@@ -102,6 +102,7 @@ fn test_can_get_query() {
             })
         ],
         request: Request{
+            method: .get
             path: "/"
             queries: {"lang": lang}
         }
