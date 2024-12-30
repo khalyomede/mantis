@@ -24,3 +24,7 @@ fn test_method_connect_to_string_return_as_expected() {
     expect(Method.connect.to_string()).to_be_equal_to("CONNECT")
 }
 
+fn test_method_options_to_string_return_as_expected() {
+    expect(Method.options.to_string()).to_be_equal_to("OPTIONS")
+}
+
