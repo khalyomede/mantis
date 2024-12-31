@@ -2,6 +2,7 @@ module css
 
 type PropertyValue = string|int
 
+// TODO: use a generic
 pub fn selector(name string, properties map[string]PropertyValue) string {
     mut content := "${name} {"
 
