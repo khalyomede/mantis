@@ -501,3 +501,28 @@ fn test_it_can_respond_to_patch_route() {
     expect(res.status).to_be_equal_to(Status.ok)
     expect(res.content).to_be_equal_to("comment ${comment_id} modified")
 }
+
+fn test_it_can_respond_to_delete_route() {
+    post_id := fake.database.primary_key()
+
+    app := http.create_app(
+        routes: [
+            route.delete(path: "/post/{post}", callback: fn (app App) Response {
+                id := app.route_parameter("post") or {
+                    return response.html(status: .not_found)
+                }
+
+                return response.html(content: "post ${id} deleted")
+            })
+        ]
+        request: Request{
+            method: .delete
+            path: "/post/${post_id}"
+        }
+    )
+
+    res := app.render()
+
+    expect(res.status).to_be_equal_to(Status.ok)
+    expect(res.content).to_be_equal_to("post ${post_id} deleted")
+}

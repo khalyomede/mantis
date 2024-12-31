@@ -110,10 +110,41 @@ fn main() {
 
 ## HTTP Methods
 
+- [DELETE](#delete)
 - [GET](#get)
 - [PATCH](#patch)
 - [POST](#post)
 - [PUT](#put)
+
+### DELETE
+
+::: code-group
+
+```v{10} [main.v]
+module main
+
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.response
+import khalyomede.mantis.http.route
+
+fn main() {
+  app := http.create_app(
+    routes: [
+      route.delete(path: "/post/{post}", callback: fn (app App) Response {
+        id := app.route_parameter("post") or {
+          return response.html(status: .not_found)
+        }
+
+        return response.html(content: "post ${id} deleted")
+      })
+    ]
+  )
+
+  app.serve() or { panic(err) }
+}
+```
+
+:::
 
 ### GET
 
