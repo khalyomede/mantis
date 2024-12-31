@@ -44,6 +44,7 @@ fn (app App) address() string {
 }
 
 pub fn (app App) serve()! {
+    app.ensure_no_head_route_is_registered()!
     app.validate_options()!
 
     console.info("listening on ${app.address()}")
@@ -229,6 +230,8 @@ pub fn (app App) find_route() ?Route {
 }
 
 pub fn (app App) render() Response {
+    app.ensure_no_head_route_is_registered() or { panic(err) }
+
     route := app.find_route() or {
         return app.handle_error(HttpError{
             code: .not_found
@@ -253,6 +256,16 @@ pub fn (app App) render() Response {
     }
 
     return response
+}
+
+fn (app App) ensure_no_head_route_is_registered()! {
+    // TODO: Replace it by a Validation Rule.
+    // [!] Last attempt resulted in a C compilation error.
+    for route in app.routes {
+        if route.method == .head {
+            return error("Route ${route.path} respond to HEAD requests, but GET routes already respond to HEAD request automatically.")
+        }
+    }
 }
 
 /**
