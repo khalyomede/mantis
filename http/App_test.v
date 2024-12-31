@@ -526,3 +526,30 @@ fn test_it_can_respond_to_delete_route() {
     expect(res.status).to_be_equal_to(Status.ok)
     expect(res.content).to_be_equal_to("post ${post_id} deleted")
 }
+
+fn test_head_request_returns_same_headers_as_get_without_body() {
+    content := fake.sentence()
+
+    app := http.create_app(
+        routes: [
+            route.get(
+                name: "index"
+                path: "/"
+                callback: fn [content] (app App) Response {
+                    return response.html(content: content)
+                }
+            )
+        ]
+        request: Request{
+            path: "/"
+            method: .head
+        }
+    )
+
+    res := app.render()
+
+    expect(res.status).to_be_equal_to(Status.ok)
+    expect(res.content).to_be_equal_to("")
+    expect(res.headers).to_have_key_equal_to("Content-Type", ["text/html"])
+    expect(res.headers).to_have_key_equal_to("Content-Length", [content.len.str()])
+}

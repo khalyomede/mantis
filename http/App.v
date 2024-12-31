@@ -236,7 +236,23 @@ pub fn (app App) render() Response {
         })
     }
 
-    return route.callback(app)
+    response := route.callback(app)
+
+    // Strip body for HEAD requests that matched GET routes
+    if app.request.method == .head && route.method == .get {
+        r := Response{
+            ...response
+            content: ""
+            headers: {
+                ...response.headers,
+                "Content-Length": [response.content.len.str()]
+            }
+        }
+
+        return r
+    }
+
+    return response
 }
 
 /**

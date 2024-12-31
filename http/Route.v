@@ -13,12 +13,21 @@ pub struct Route {
 }
 
 fn (route Route) matches(request Request) bool {
+    // Allow HEAD requests to match GET routes
+    if request.method == .head && route.method == .get {
+        return route.matches_path(request.path)
+    }
+
     if route.method != request.method {
         return false
     }
 
+    return route.matches_path(request.path)
+}
+
+fn (route Route) matches_path(path string) bool {
     // Build regex pattern by replacing {param} with ([^/]+)
-    mut pattern := route.path
+    mut pattern := path
 
     // Extract parameter names from route
     mut re := regex.regex_opt(r"\{([^}]+)\}") or {
@@ -38,7 +47,7 @@ fn (route Route) matches(request Request) bool {
         return false
     }
 
-    return re.matches_string(request.path)
+    return re.matches_string(path)
 }
 
 pub fn (route Route) parameters(path string) ?map[string]string {

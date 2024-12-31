@@ -34,6 +34,10 @@ fn main() {
 
 :::
 
+::: tip NOTICE
+GET routes automatically respond to HEAD routes as well. Lean more on the [MDN HEAD documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD).
+:::
+
 ## Route Parameters
 
 Capture URL segments using parameters:
