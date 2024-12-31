@@ -476,3 +476,28 @@ fn test_it_respond_to_put_route() {
     expect(res.status).to_be_equal_to(Status.ok)
     expect(res.content).to_be_equal_to("post ${post_id} updated")
 }
+
+fn test_it_can_respond_to_patch_route() {
+    comment_id := fake.database.primary_key()
+
+    app := http.create_app(
+        routes: [
+            route.patch(path: "/post/{post}/comment/{comment}", callback: fn (app App) Response {
+                id := app.route_parameter("comment") or {
+                    return response.html(status: .not_found)
+                }
+
+                return response.html(content: "comment ${id} modified")
+            })
+        ]
+        request: Request{
+            method: .patch
+            path: "/post/${fake.database.primary_key()}/comment/${comment_id}"
+        }
+    )
+
+    res := app.render()
+
+    expect(res.status).to_be_equal_to(Status.ok)
+    expect(res.content).to_be_equal_to("comment ${comment_id} modified")
+}

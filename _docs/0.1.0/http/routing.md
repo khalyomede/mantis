@@ -111,6 +111,7 @@ fn main() {
 ## HTTP Methods
 
 - [GET](#get)
+- [PATCH](#patch)
 - [POST](#post)
 - [PUT](#put)
 
@@ -135,6 +136,36 @@ fn main() {
           return response.html(content: "Create post form")
         }
       )
+    ]
+  )
+
+  app.serve() or { panic(err) }
+}
+```
+
+:::
+
+### PATCH
+
+::: code-group
+
+```v{10} [main.v]
+module main
+
+import khalyomede.mantis.http { create_app, App, Response }
+import khalyomede.mantis.http.response
+import khalyomede.mantis.http.route
+
+fn main() {
+  app := http.create_app(
+    routes: [
+      route.patch(path: "/post/{post}/comment/{comment}", callback: fn (app App) Response {
+        comment_id := app.route_parameter("comment") or {
+          return response.html(status: .not_found)
+        }
+
+        return response.html(content: "comment ${comment_id} modified")
+      })
     ]
   )
 
