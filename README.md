@@ -13,7 +13,7 @@ fn main() {
   app := create_app(
     cpus: 8
     routes: [
-      route.get(name: "index", path: "/", callback: fn (app App) Response {
+      route.get(name: "index", path: "/", callback: fn (app App) !Response {
         return response.html(content: "hello world")
       })
     ]
