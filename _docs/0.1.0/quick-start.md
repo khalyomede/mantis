@@ -130,7 +130,7 @@ import khalyomede.mantis.http.response
 fn main() {
   app := create_app(
     routes: [
-      route.get(path: "/", callback: fn (app App) Response {
+      route.get(path: "/", callback: fn (app App) !Response {
         return response.html(content: "hello world")
       })
     ]

@@ -21,7 +21,7 @@ fn main() {
       route.get(
         name: "index"
         path: "/"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           return response.html(content: "hello world")
         }
       )
@@ -57,7 +57,7 @@ fn main() {
       route.get(
         name: "post.show"
         path: "/post/{id}"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           id := app.route_parameter("id") or {
             return response.html(content: "Post not found")
           }
@@ -93,7 +93,7 @@ fn main() {
       route.get(
         name: "post.comment"
         path: "/post/{post_id}/comment/{comment_id}"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           post_id := app.route_parameter("post_id") or {
             return response.html(content: "Post not found")
           }
@@ -134,7 +134,7 @@ import khalyomede.mantis.http.route
 fn main() {
   app := http.create_app(
     routes: [
-      route.delete(path: "/post/{post}", callback: fn (app App) Response {
+      route.delete(path: "/post/{post}", callback: fn (app App) !Response {
         id := app.route_parameter("post") or {
           return response.html(status: .not_found)
         }
@@ -167,7 +167,7 @@ fn main() {
       route.get(
         name: "post.create"
         path: "/post/create"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           return response.html(content: "Create post form")
         }
       )
@@ -194,7 +194,7 @@ import khalyomede.mantis.http.route
 fn main() {
   app := http.create_app(
     routes: [
-      route.patch(path: "/post/{post}/comment/{comment}", callback: fn (app App) Response {
+      route.patch(path: "/post/{post}/comment/{comment}", callback: fn (app App) !Response {
         comment_id := app.route_parameter("comment") or {
           return response.html(status: .not_found)
         }
@@ -227,7 +227,7 @@ fn main() {
       route.post(
         name: "post.store"
         path: "/post"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           return response.html(content: "Post created")
         }
       )
@@ -257,7 +257,7 @@ fn main() {
       route.put(
         name: "post.update"
         path: "/post/{post}"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           post_id := app.route_parameter("post") or {
             return response.html(status: .not_found)
           }

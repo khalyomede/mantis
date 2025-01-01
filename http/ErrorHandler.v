@@ -5,7 +5,8 @@ import console
 pub struct ErrorHandler {
     pub:
         report fn(app App, err IError) @[required]
-        render fn(app App, err IError) Response @[required]
+
+    render fn(app App, err IError) Response @[required]
 }
 
 pub fn default_error_handler() ErrorHandler {

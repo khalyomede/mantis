@@ -26,7 +26,7 @@ fn main() {
       route.get(
         name: "index"
         path: "/"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           return response.html(content: "hello world")
         }
       )
@@ -62,7 +62,7 @@ fn main() {
       route.get(
         name: "preferences"
         path: "/preferences"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           theme := app.session.get("theme") or { "light" } // [!code focus]
 
           return response.html(content: "Current theme: ${theme}")
@@ -100,10 +100,8 @@ fn main() {
       route.post(
         name: "theme.update"
         path: "/theme"
-        callback: fn (app App) Response {
-          app.session.set("theme", "dark") or { // [!code focus:3]
-            return response.html(content: "Could not save theme preference")
-          }
+        callback: fn (app App) !Response {
+          app.session.set("theme", "dark")! // [!code focus]
 
           return response.html(content: "Theme updated")
         }
@@ -142,7 +140,7 @@ fn main() {
       route.get(
         name: "dashboard"
         path: "/dashboard"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           // Each request to dashboard will extend the session // [!code focus]
           return response.html(content: "Welcome to dashboard")
         }

@@ -19,7 +19,7 @@ fn test_basic_route() {
       route.get(
         name: "index"
         path: "/"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           return response.html(content: "hello world")
         }
       )
@@ -49,7 +49,7 @@ fn test_route_with_parameters() {
       route.get(
         name: "post.show"
         path: "/post/{id}"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           id := app.route_parameter("id") or {
             return response.html(
               content: "Post not found"
@@ -89,7 +89,7 @@ fn test_form_submission() {
       route.post(
         name: "login"
         path: "/login"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           email := app.request.form("email") or {
             return response.html(
               content: "Email required"
@@ -143,8 +143,8 @@ fn test_custom_error_handler() {
       route.get(
         name: "error"
         path: "/error"
-        callback: fn (app App) Response {
-          return app.handle_error(HttpError{
+        callback: fn (app App) !Response {
+          return error(HttpError{
             code: .server_error
             message: "Something went wrong"
           })
@@ -179,7 +179,7 @@ fn test_response_headers() {
       route.get(
         name: "api"
         path: "/api"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           return Response{
             content: "API Response"
             headers: {

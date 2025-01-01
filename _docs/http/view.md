@@ -22,7 +22,7 @@ fn main() {
       route.get(
         name: "index"
         path: "/"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           content := html({}, [ // [!code focus:10]
             head({}, [
               title({}, ['Welcome'])
@@ -74,7 +74,7 @@ fn main() {
       route.get(
         name: "index"
         path: "/"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           content := div({}, [ // [!code focus:4]
             navbar(),
             div({}, ['Page content'])
@@ -112,7 +112,7 @@ fn main() {
       route.get(
         name: "index"
         path: "/"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           content := div({ // [!code focus:10]
             'class': 'container'
           }, [
@@ -156,7 +156,7 @@ fn main() {
       route.get(
         name: "index"
         path: "/"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           items := ['One', 'Two', 'Three'] // [!code focus:7]
 
           list_items := items.map(fn (item string) string {

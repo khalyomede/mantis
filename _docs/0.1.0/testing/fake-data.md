@@ -19,7 +19,7 @@ fn test_it_returns_200_for_home_page() {
 
   app := create_app(
     routes: [
-      route.get(path: "/", callback: fn [content] (app App) Response {
+      route.get(path: "/", callback: fn [content] (app App) !Response {
         return response.html(content: content)
       })
     ]

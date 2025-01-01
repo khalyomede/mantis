@@ -36,7 +36,7 @@ fn main() {
       route.get(
         name: "index"
         path: "/"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           text := app.translation.translate(key: "Hello World", lang: .fr) // [!code focus:2]
 
           return response.html(content: text)  // "Bonjour le monde"
@@ -87,7 +87,7 @@ fn main() {
       route.get(
         name: "welcome"
         path: "/welcome"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           text := app.translation.translate( // [!code focus:8]
             key: "Welcome {name}",
             lang: .fr,
@@ -148,7 +148,7 @@ fn main() {
       route.get(
         name: "messages"
         path: "/messages"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           text := app.translation.translate( // [!code focus:6]
             key: "You have {count} messages",
             lang: .fr,
@@ -209,7 +209,7 @@ fn main() {
       route.get(
         name: "profile.updated"
         path: "/profile/updated"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           text := app.translation.translate( // [!code focus:9]
             key: "{name} updated their profile",
             lang: .fr,

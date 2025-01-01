@@ -37,7 +37,7 @@ fn main() {
       route.get(
         name: "post.show"
         path: "/post/{id}"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           // The ? indicates this might not find an ID
           id := app.route_parameter("id") or {
             return response.html(
@@ -48,12 +48,7 @@ fn main() {
 
           mut app_ref := app
 
-          posts := app_ref.database.all[Post]("SELECT id, title FROM posts") or { // [!code focus:6]
-            return response.html(
-              content: "Database error: ${err.msg()}",
-              status: .server_error
-            )
-          }
+          posts := app_ref.database.all[Post]("SELECT id, title FROM posts")! // [!code focus]
 
           post := posts[0] or {
             return response.html(

@@ -25,7 +25,7 @@ fn main() {
       route.get(
         name: "index"
         path: "/"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           return response.html(content: "hello world")
         }
       )
@@ -61,7 +61,7 @@ fn main() {
       route.get(
         name: "status.index"
         path: "/status"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           mut instance := app
 
           app_name := instance.env.get('APP_NAME') or { 'My App' } // [!code focus:4]
@@ -129,7 +129,7 @@ fn main() {
       route.get(
         name: "config.index"
         path: "/config"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           mut instance := app
 
           // Provide defaults for missing values // [!code focus:8]

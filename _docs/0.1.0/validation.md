@@ -204,12 +204,12 @@ fn main() {
       route.post(
         name: "register"
         path: "/register"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           // Get form data
           email := app.request.form("email") or { "" }
           password := app.request.form("password") or { "" }
 
-          // Define validation rules // [!code focus:19]
+          // Define validation rules // [!code focus:14]
           rules := {
             "password": [
               Rule(StrongPassword{})
@@ -222,12 +222,7 @@ fn main() {
           }
 
           // Validate input
-          validation.validate(input, rules) or {
-            return response.html(
-              content: "Validation failed: ${err.msg()}"
-              status: .bad_request
-            )
-          }
+          validation.validate(input, rules)!
 
           // If we reach here, validation passed
           return response.html(

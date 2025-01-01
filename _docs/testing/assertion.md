@@ -63,7 +63,7 @@ fn test_home_page_displays_hello_world() {
   // 1. Arrange
   app := create_app(
     routes: [
-      route.get(name: "index", path: "/", callback: fn (app App) Response {
+      route.get(name: "index", path: "/", callback: fn (app App) !Response {
         return response.html(content: "hello world")
       })
     ],

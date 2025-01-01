@@ -21,7 +21,7 @@ fn main() {
       route.get(
         name: "index"
         path: "/"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           return response.html(content: "hello world") // [!code focus]
         }
       )
@@ -53,7 +53,7 @@ fn main() {
       route.post(
         name: "post.store"
         path: "/post"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           return response.html(
             content: "Post created successfully"
             status: .created // [!code focus:4]
@@ -88,7 +88,7 @@ fn main() {
       route.get(
         name: "cache.example"
         path: "/cached-page"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           return response.html(
             content: "This page is cached"
             headers: { // [!code focus:3]
@@ -125,7 +125,7 @@ fn main() {
       route.get(
         name: "profile"
         path: "/profile"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           return response.redirect("/login", {}) // [!code focus]
         }
       )
@@ -153,7 +153,7 @@ fn main() {
       route.get(
         name: "admin"
         path: "/admin"
-        callback: fn (app App) Response {
+        callback: fn (app App) !Response {
           return response.redirect("/login", { // [!code focus:3]
             'return_to': '/admin'
           })

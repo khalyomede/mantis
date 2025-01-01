@@ -9,7 +9,7 @@ pub struct Route {
         name string
         path string
         method Method = .get
-        callback fn (App) Response @[required]
+        callback fn (App) !Response @[required]
 }
 
 fn (route Route) matches(request Request) bool {

@@ -26,7 +26,7 @@ import khalyomede.mantis.http.response
 fn main() {
   app := create_app(
     routes: [
-      route.get(name: "index", path: "/", callback: fn (app App) Response {
+      route.get(name: "index", path: "/", callback: fn (app App) !Response {
         return response.html(content: "hello world")
       })
     ]
@@ -99,14 +99,12 @@ fn main() {
         database: 'database.sqlite'
     }
     routes: [
-      route.get(name: "post.update", path: "/post/{post}", callback: fn (app App) Response {
+      route.get(name: "post.update", path: "/post/{post}", callback: fn (app App) !Response {
         id := app.route_parameter("post") or {
           return response.html(status: .not_found)
         }
 
-        posts := app.database.all[Post]("SELECT title, excerpt FROM posts WHERE id = ${id}") or {
-          return response.html(status: .server_error)
-        }
+        posts := app.database.all[Post]("SELECT title, excerpt FROM posts WHERE id = ${id}")!
 
         post := posts[0] or {
           return response.html(status: .not_found)
@@ -134,16 +132,9 @@ fn main() {
           ]
         }
 
-        validate(data, rules) or {
-          return response.html(
-            content: err.msg()
-            status: .unprocessable_entity
-          )
-        }
+        validate(data, rules)!
 
-        app.database.run("UPDATE posts SET title = ${title}, excerpt = ${excerpt} WHERE id = ${id}") or {
-          return response.html(status: .server_error)
-        }
+        app.database.run("UPDATE posts SET title = ${title}, excerpt = ${excerpt} WHERE id = ${id}")!
 
         return response.redirect("/post/{$id}", {})
       })

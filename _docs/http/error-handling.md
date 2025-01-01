@@ -2,29 +2,37 @@
 
 Mantis provides two main methods for handling errors in your application:
 
-## handle_error
+## Handling error
 
-Use when you need to both report an error and return an error response:
+All routes callbacks have the `!` before `!Response`, indicating you can bubble errors without having to explicitly call the error handler: any error bubbled will be handled by your error handler.
 
 ::: code-group
 
 ```v [main.v]
 module main
 
-import khalyomede.mantis.http { create_app, App, Response, HttpError } // [!code focus]
+import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.response
 import khalyomede.mantis.http.route
+import khalyomede.mantis.validation { validate, Min, Value, Rule }
 
 fn main() {
   app := create_app(
     routes: [
-      route.get(name: "index", path: "/", callback: fn (app App) Response {
-        search := app.request.query("search") or {
-          return app.handle_error(HttpError{ // [!code focus:4]
-            code: .not_found
-            message: "The search term was missing."
-          })
+      route.get(name: "index", path: "/", callback: fn (app App) !Response {
+        search := app.request.query("search") or { "" }
+
+        data := {
+          "search": Value(search)
         }
+
+        rules := {
+          "search": [
+            Rule(Min{3})
+          ]
+        }
+
+        validate(data, rules)! // any errors will be rendered/reported // [!code focus]
 
         return response.html(content: "You search is ${search}.")
       })
@@ -40,6 +48,10 @@ fn main() {
 This will:
 1. Report the error (e.g., log it)
 2. Generate and return a response according to how the error handler is configured to render errors (see the [custom error handler](#custom-error-handler) section)
+
+::: tip NOTICE
+Refer to V documentation about the [built-in error type](https://docs.vlang.io/type-declarations.html#optionresult-types-and-error-handling) for more information.
+:::
 
 ## report_error
 
@@ -57,15 +69,8 @@ import khalyomede.mantis.http.route
 fn main() {
   app := create_app(
     routes: [
-      route.get(name: "index", path: "/", callback: fn (app App) Response {
-        theme := app.session.get("theme") or {
-          app.report_error(HttpError{ // [!code focus:4]
-            code: .unprocessable_entity
-            message: 'Could not load user theme preferences, falling back to light mode'
-          })
-
-          "light"
-        }
+      route.get(name: "index", path: "/", callback: fn (app App) !Response {
+        theme := app.session.get("theme")! // [!code focus]
 
         return response.html(content: "Current theme: ${theme}")
       })
@@ -142,7 +147,7 @@ fn main() {
       }
     }
     routes: [
-      route.get(name: "index", path: "/", callback: fn (app App) Response {
+      route.get(name: "index", path: "/", callback: fn (app App) !Response {
         return response.html(content: div({}, ["Home page"]))
       })
     ]

@@ -19,7 +19,7 @@ fn test_serves_200_response_for_simple_get_route() {
             route.get(
                 name: "index"
                 path: "/"
-                callback: fn [content] (app App) Response {
+                callback: fn [content] (app App) !Response {
                     return response.html(content: content)
                 }
             )
@@ -45,7 +45,7 @@ fn test_serves_200_response_for_route_with_parameters() {
             route.get(
                 name: "post.show",
                 path: "/post/{post}",
-                callback: fn [content] (app App) Response {
+                callback: fn [content] (app App) !Response {
                     return response.html(content: content)
                 }
             )
@@ -71,7 +71,7 @@ fn test_can_get_route_parameter() {
             route.get(
                 name: "post.comment.edit",
                 path: "/post/{post}/comment/{comment}",
-                callback: fn (app App) Response {
+                callback: fn (app App) !Response {
                     comment := app.route_parameter("comment") or { "" }
                     return response.html(content: "showing comment ${comment}")
                 }
@@ -93,7 +93,7 @@ fn test_can_get_query() {
 
     app := http.create_app(
         routes: [
-            route.get(name: "index", path: "/", callback: fn (app App) Response {
+            route.get(name: "index", path: "/", callback: fn (app App) !Response {
                 lang := app.request.query("lang") or {
                     "en"
                 }
@@ -118,7 +118,7 @@ fn test_can_set_response_headers() {
 
     app := http.create_app(
         routes: [
-            route.get(name: "index", path: "/", callback: fn [company_name] (app App) Response {
+            route.get(name: "index", path: "/", callback: fn [company_name] (app App) !Response {
                 return Response{
                     content: "hello"
                     headers: {
@@ -141,7 +141,7 @@ fn test_can_set_response_headers() {
 fn test_can_redirect_to_url_with_query_parameters() {
     app := http.create_app(
         routes: [
-            route.get(name: "index", path: "/", callback: fn (app App) Response {
+            route.get(name: "index", path: "/", callback: fn (app App) !Response {
                 return response.redirect("/login", {
                     "error": "invalid_credentials"
                     "email": "user@example.com"
@@ -165,7 +165,7 @@ fn test_can_parse_form_body_in_post_request() {
 
     app := http.create_app(
         routes: [
-            route.post(name: "login.store", path: "/login", callback: fn (app App) Response {
+            route.post(name: "login.store", path: "/login", callback: fn (app App) !Response {
                 name := app.request.form("name") or { "" }
                 email := app.request.form("email") or { "" }
                 return response.html(content: "${name} - ${email}")
@@ -211,7 +211,7 @@ fn test_can_retreive_session_data() {
             id: session_id
         },
         routes: [
-            route.get(name: "dashboard.index", path: "/dashboard", callback: fn (app App) Response {
+            route.get(name: "dashboard.index", path: "/dashboard", callback: fn (app App) !Response {
                 user_uuid := app.session.get("user_uuid") or { return response.html(status: .server_error) }
                 return response.html(content: "User uuid is ${user_uuid}.")
             })
@@ -406,7 +406,7 @@ fn test_can_set_different_port_number() {
     app := http.create_app(
         port: u16(3000)
         routes: [
-            route.get(path: "/", callback: fn (app App) Response {
+            route.get(path: "/", callback: fn (app App) !Response {
                 return Response{
                     content: "hello world"
                 }
@@ -457,7 +457,7 @@ fn test_it_respond_to_put_route() {
 
     app := http.create_app(
         routes: [
-            route.put(path: "/post/{post}", callback: fn (app App) Response {
+            route.put(path: "/post/{post}", callback: fn (app App) !Response {
                 id := app.route_parameter("post") or {
                     return response.html(status: .not_found)
                 }
@@ -482,7 +482,7 @@ fn test_it_can_respond_to_patch_route() {
 
     app := http.create_app(
         routes: [
-            route.patch(path: "/post/{post}/comment/{comment}", callback: fn (app App) Response {
+            route.patch(path: "/post/{post}/comment/{comment}", callback: fn (app App) !Response {
                 id := app.route_parameter("comment") or {
                     return response.html(status: .not_found)
                 }
@@ -507,7 +507,7 @@ fn test_it_can_respond_to_delete_route() {
 
     app := http.create_app(
         routes: [
-            route.delete(path: "/post/{post}", callback: fn (app App) Response {
+            route.delete(path: "/post/{post}", callback: fn (app App) !Response {
                 id := app.route_parameter("post") or {
                     return response.html(status: .not_found)
                 }
@@ -535,7 +535,7 @@ fn test_head_request_returns_same_headers_as_get_without_body() {
             route.get(
                 name: "index"
                 path: "/"
-                callback: fn [content] (app App) Response {
+                callback: fn [content] (app App) !Response {
                     return response.html(content: content)
                 }
             )
