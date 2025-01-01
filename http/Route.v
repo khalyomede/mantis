@@ -9,6 +9,7 @@ pub struct Route {
         name string
         path string
         method Method = .get
+        cors Cors
         callback fn (App) !Response @[required]
 }
 

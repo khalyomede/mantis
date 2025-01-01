@@ -35,7 +35,7 @@ fn main() {
 :::
 
 ::: tip NOTICE
-GET routes automatically respond to HEAD routes as well. Lean more on the [MDN HEAD documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD).
+GET routes automatically respond to [HEAD](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD) and [OPTIONS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/OPTIONS) requests. You do not have to register these routes.
 :::
 
 ## Route Parameters

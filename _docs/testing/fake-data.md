@@ -80,7 +80,9 @@ fn test_it_can_generate_payment_status() {
 - [Database primary key](#database-primary-key)
 - [Email](#email)
 - [Integer between](#integer-between)
+- [Internet base url](#internet-base-url)
 - [Internet domain](#internet-domain)
+- [Internet protocol](#internet-protocol)
 - [Internet top level domain](#internet-top-level-domain)
 - [Internet port](#internet-port)
 - [Lang](#lang)
@@ -200,6 +202,24 @@ fn main() {
 
 :::
 
+### Internet base url
+
+::: code-group
+
+```v [main.v]
+module main
+
+import khalyomede.mantis.test { Fake }
+
+fn main() {
+  fake := Fake{}
+
+  base_url := fake.internet.base_url() // "https://example.com"
+}
+```
+
+:::
+
 ### Internet domain
 
 ::: code-group
@@ -213,6 +233,24 @@ fn main() {
   fake := Fake{}
 
   domain := fake.internet.domain() // "example"
+}
+```
+
+:::
+
+### Internet protocol
+
+::: code-group
+
+```v [main.v]
+module main
+
+import khalyomede.mantis.test { Fake }
+
+fn main() {
+  fake := Fake{}
+
+  protocol := fake.internet.protocol() // "https"
 }
 ```
 

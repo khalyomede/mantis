@@ -42,4 +42,12 @@ fn test_it_can_generate_negative_integer() {
     expect(fake.negative_integer()).to_be_negative()
 }
 
+fn test_it_can_generate_internet_base_url() {
+    expect(fake.internet.base_url()).to_not_be_empty() // TODO: to_be_url()
+}
+
+fn test_it_can_generate_internet_protocol() {
+    expect(fake.internet.protocol()).to_not_be_empty()
+}
+
 // TODO: add untested Fake functions.

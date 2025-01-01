@@ -35,6 +35,7 @@ export default defineConfig({
                             { text: "Erorr handling", link: '/http/error-handling' },
                             { text: "Logging", link: "/http/logging.md" },
                             { text: "Configuration", link: '/http/configuration' },
+                            { text: "Cors", link: "/http/cors" },
                             { text: "Extending", link: '/http/extending' },
                         ],
                     },

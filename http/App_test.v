@@ -1,5 +1,5 @@
 import json
-import http { App, Route, Status, Request, Response, Session, SessionData, ErrorHandler, HttpError }
+import http { App, Route, Status, Request, Response, Session, SessionData, ErrorHandler, HttpError, Cors }
 import http.response
 import http.route
 import logging { Log }
@@ -552,4 +552,169 @@ fn test_head_request_returns_same_headers_as_get_without_body() {
     expect(res.content).to_be_equal_to("")
     expect(res.headers).to_have_key_equal_to("Content-Type", ["text/html"])
     expect(res.headers).to_have_key_equal_to("Content-Length", [content.len.str()])
+}
+
+fn test_options_request_returns_allowed_methods() {
+    app := http.create_app(
+        routes: [
+            route.get(path: "/post/{id}", callback: fn (app App) !Response {
+                return response.html(content: "post detail")
+            }),
+            route.put(path: "/post/{id}", callback: fn (app App) !Response {
+                return response.html(content: "post updated")
+            }),
+            route.delete(path: "/post/{id}", callback: fn (app App) !Response {
+                return response.html(content: "post deleted")
+            })
+        ],
+        request: Request{
+            path: "/post/12"
+            method: .options
+            headers: {
+                'Origin': [fake.internet.base_url()]
+            }
+        }
+    )
+
+    res := app.render()
+
+    expect(res.status).to_be_equal_to(Status.ok)
+    expect(res.headers['Allow']).to_contain('GET, PUT, DELETE')
+    expect(res.headers['Access-Control-Allow-Methods']).to_contain('GET, PUT, DELETE')
+    expect(res.headers['Access-Control-Max-Age']).to_contain('7200')
+    expect(res.headers['Access-Control-Allow-Origin']).to_contain('*')
+}
+
+fn test_options_with_credentials_requires_specific_origin() {
+    allowed_origin := fake.internet.base_url()
+
+    app_cors := Cors{
+        credentials: true
+        allowed_origins: [allowed_origin]
+    }
+
+    app := http.create_app(
+        cors: app_cors
+        routes: [route.get(path: "/", callback: fn (app App) !Response {
+            return response.html(content: "hello world")
+        })],
+        request: Request{
+            path: "/"
+            method: .options
+            headers: {
+                'Origin': [allowed_origin]
+            }
+        }
+    )
+
+    res := app.render()
+
+    expect(res.headers['Access-Control-Allow-Credentials']).to_contain('true')
+    expect(res.headers['Access-Control-Allow-Origin']).to_contain(allowed_origin)
+}
+
+fn test_options_filters_requested_headers() {
+    allowed_origin := fake.internet.base_url()
+
+    app_cors := Cors{
+        allowed_headers: ['Content-Type', 'Authorization']
+    }
+
+    app := http.create_app(
+        cors: app_cors
+        routes: [
+            route.get(path: "/", callback: fn (app App) !Response {
+                return response.html(content: "hello world")
+            })
+        ],
+        request: Request{
+            path: "/"
+            method: .options
+            headers: {
+                'Origin': [allowed_origin]
+                'Access-Control-Request-Headers': ['Content-Type, X-Custom-Header']
+            }
+        }
+    )
+
+    res := app.render()
+
+    expect(res.headers['Access-Control-Allow-Headers']).to_contain('Content-Type')
+    expect(res.headers['Access-Control-Allow-Headers']).to_not_contain('X-Custom-Header')
+}
+
+fn test_options_with_route_specific_cors() {
+    app_origin := 'https://app.example.com'
+    api_origin := 'https://api.example.com'
+
+    app_cors := Cors{
+        allowed_origins: [app_origin]
+    }
+
+    app := http.create_app(
+        cors: app_cors
+        routes: [
+            route.get(
+                path: "/api/users"
+                cors: Cors{
+                    allowed_origins: [api_origin]
+                }
+                callback: fn (app App) !Response {
+                    return response.html(content: fake.sentence())
+                }
+            )
+        ]
+        request: Request{
+            path: "/api/users"
+            method: .options
+            headers: {
+                'Origin': [api_origin]
+            }
+        }
+    )
+
+    res := app.render()
+
+    // Should use route-specific CORS settings
+    expect(res.headers['Access-Control-Allow-Origin']).to_contain(api_origin)
+    expect(res.headers['Access-Control-Allow-Origin']).to_not_contain(app_origin)
+}
+
+fn test_options_with_merged_cors_settings() {
+    origin := fake.internet.base_url()
+    custom_headers := ['X-Custom-Header']
+
+    app_cors := Cors{
+        credentials: true
+        allowed_origins: [origin]
+    }
+
+    app := http.create_app(
+        cors: app_cors
+        routes: [
+            route.get(
+                path: "/api/users"
+                cors: Cors{
+                    allowed_headers: ['X-Custom-Header']
+                }
+                callback: fn (app App) !Response {
+                    return response.html(content: "users list")
+                }
+            )
+        ]
+        request: Request{
+            path: "/api/users"
+            method: .options
+            headers: {
+                'Origin': [origin]
+                'Access-Control-Request-Headers': ['X-Custom-Header']
+            }
+        }
+    )
+
+    res := app.render()
+
+    // Should merge global origin with route-specific headers
+    expect(res.headers['Access-Control-Allow-Origin']).to_contain(origin)
+    expect(res.headers['Access-Control-Allow-Headers']).to_contain('X-Custom-Header')
 }

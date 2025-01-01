@@ -97,6 +97,10 @@ pub fn (expect Expect[[]string]) to_contain(expected string) {
     assert expect.actual.contains(expected), "Expected array ${expect.actual} to contain \"${expected}\"."
 }
 
+pub fn (expect Expect[[]string]) to_not_contain(expected string) {
+    assert !expect.actual.contains(expected), "Expected array ${expect.actual} to not contain \"${expected}\"."
+}
+
 pub fn (expect Expect[string]) to_not_be_empty() {
     assert expect.actual.trim_space().len > 0
 }

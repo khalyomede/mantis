@@ -22,6 +22,7 @@ pub struct App {
         session Session
         error_handler ErrorHandler = default_error_handler()
         translation Translation
+        cors Cors
 
     pub mut:
         env Env
@@ -45,6 +46,7 @@ fn (app App) address() string {
 
 pub fn (app App) serve()! {
     app.ensure_no_head_route_is_registered()!
+    // TODO: app.ensure_routes_with_cors_credentials_enabled_define_specific_allowed_origins()!
     app.validate_options()!
 
     console.info("listening on ${app.address()}")
@@ -230,7 +232,13 @@ pub fn (app App) find_route() ?Route {
 }
 
 pub fn (app App) render() Response {
-    app.ensure_no_head_route_is_registered() or { panic(err) }
+    app.ensure_no_head_route_is_registered() or { panic(err) } // TODO: Do not panic, call error handler
+    // TODO: app.ensure_routes_with_cors_credentials_enabled_define_specific_allowed_origins() or { app.handle_error(err) }
+
+    // Handle OPTIONS automatically
+    if app.request.method == .options {
+        return app.render_option_request()
+    }
 
     route := app.find_route() or {
         return app.handle_error(HttpError{
@@ -408,4 +416,75 @@ fn parse_form_urlencoded(body string) map[string]string {
     }
 
     return form
+}
+
+fn (app App) get_allowed_methods_for_path(path string) []Method {
+    mut methods := []Method{}
+
+    for route in app.routes {
+        if route.matches_path(path) {
+            methods << route.method
+        }
+    }
+
+    return methods
+}
+
+fn (app App) render_option_request() Response {
+    methods := app.get_allowed_methods_for_path(app.request.path)
+    allowed_methods := methods.map(it.to_string()).join(', ')
+
+    // Find matching routes to get their CORS settings
+    mut effective_cors := app.cors
+
+    for route in app.routes {
+        if route.matches_path(app.request.path) {
+            effective_cors = app.cors.merge(route.cors)
+            break
+        }
+    }
+
+    cors_allowed_origins := effective_cors.origins()
+    cors_allowed_headers := effective_cors.headers()
+    cors_max_age := effective_cors.max_age()
+
+    mut headers := {
+        'Allow': [allowed_methods]
+        'Access-Control-Max-Age': [cors_max_age.str()]
+    }
+
+    // Add CORS headers if Origin present
+    if origin := app.request.headers['Origin'] {
+        if effective_cors.credentials {
+            headers['Access-Control-Allow-Credentials'] = ['true']
+
+            if origin[0] in cors_allowed_origins {
+                headers['Access-Control-Allow-Origin'] = origin
+            }
+        } else {
+            if '*' in cors_allowed_origins {
+                headers['Access-Control-Allow-Origin'] = ['*']
+            } else if origin[0] in cors_allowed_origins {
+                headers['Access-Control-Allow-Origin'] = [origin[0]]  // Return single origin
+            }
+        }
+
+        // Only add requested headers that are allowed
+        if requested_headers := app.request.headers['Access-Control-Request-Headers'] {
+            allowed := requested_headers[0].split(',')
+                .map(it.trim_space())
+                .filter(it in cors_allowed_headers)
+
+            if allowed.len > 0 {
+                headers['Access-Control-Allow-Headers'] = [allowed.join(', ')]
+            }
+        }
+
+        headers['Access-Control-Allow-Methods'] = [allowed_methods]
+    }
+
+    return Response{
+        status: .ok
+        headers: headers
+    }
 }
