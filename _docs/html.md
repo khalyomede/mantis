@@ -606,13 +606,22 @@ import khalyomede.mantis.css.property { display, align_items }
 import khalyomede.mantis.html { style }
 
 fn main() {
-  content := style({}, [
+  mut content := style({}, [
     css.style([
       selector(".card-title", [
         display(.flex)
         align_items(.center)
       ])
     ])
+  ])
+
+  // or
+
+  content = style({}, [
+    ".card-title {"
+    "  display: flex;"
+    "  align-items: center;"
+    "}"
   ])
 
   println(content) // <style>.card-title{display:flex;align-items:center;}</style>

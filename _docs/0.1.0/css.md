@@ -12,7 +12,7 @@ Use the `style()` function to generate CSS rules in a type-safe manner.
 module main
 
 import khalyomede.mantis.css { style, selector }
-import khalyomede.mantis.css { display, align_items }
+import khalyomede.mantis.css.property { display, align_items }
 
 fn main() {
   content := style([
@@ -40,7 +40,6 @@ module main
 import khalyomede.mantis.css { selector }
 import khalyomede.mantis.css.property { display, align_items }
 import khalyomede.mantis.html { style }
-
 
 fn main() {
   content := style({}, [
