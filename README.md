@@ -49,7 +49,7 @@ v -stats -N -W test .
 
 ## Roadmap
 
-██░░░░░░░░░░░░░░░░░░ (26/98 - 25%)
+██░░░░░░░░░░░░░░░░░░ (26/99 - 25%)
 
 - Routing
   - ✅ Get routes
@@ -92,6 +92,7 @@ v -stats -N -W test .
   - ⏳ Chunked transfer encoding
 - Environment
   - ✅ Dot env embeded values
+  - ⏳ Nested envs in other envs
 - Database
   - ⏳ Max connections settings (with wait mecanism)
   - ✅ Typed MySQL query result (struct)
