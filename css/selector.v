@@ -1,24 +1,8 @@
 module css
 
-type PropertyValue = string|int
-
-// TODO: use a generic
-pub fn selector(name string, properties map[string]PropertyValue) string {
-    mut content := "${name} {"
-
-    for key, value in properties {
-        data := match value {
-            string {
-                value
-            }
-
-            int {
-                value.str()
-            }
-        }
-
-        content = "${content}\n    ${key}: ${data};"
+pub fn selector(value string, blocks []SelectorBlock) Selector {
+    return Selector {
+        selector: value
+        blocks: blocks
     }
-
-    return "${content}\n}"
 }

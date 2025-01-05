@@ -2,9 +2,35 @@
 
 Mantis provides type-safe CSS generation through its css module.
 
-## Selectors
+## Style
 
-Create CSS selectors with type-checked properties:
+Use the `style()` function to generate CSS rules in a type-safe manner.
+
+::: code-group
+
+```v [main.v]
+module main
+
+import khalyomede.mantis.css { style, selector }
+import khalyomede.mantis.css { display, align_items }
+
+fn main() {
+  content := style([
+    selector(".card-title", [
+      display(.flex)
+      align_items(.center)
+    ])
+  ])
+
+  println(content) // .card-title{display:flex;align-items:center;}
+}
+```
+
+:::
+
+## Paired with HTML
+
+This method pairs well with the [`style()` HTML function](/html#style):
 
 ::: code-group
 
@@ -12,93 +38,30 @@ Create CSS selectors with type-checked properties:
 module main
 
 import khalyomede.mantis.css { selector }
-
-fn main() {
-  content := selector(".container", {
-    "max-width": "1200px"
-    "margin": "0 auto"
-  })
-
-  println(content)
-  // .container {
-  //   max-width: 1200px;
-  //   margin: 0 auto;
-  // }
-}
-```
-
-:::
-
-## Mixed Property Types
-
-The selector function accepts both string and numeric values:
-
-::: code-group
-
-```v [main.v]
-module main
-
-import khalyomede.mantis.css { selector }
-
-fn main() {
-  button_style := selector(".button", {
-    "padding": "8px 16px"
-    "border-radius": 4
-    "font-size": "1.2rem"
-    "z-index": 100
-  })
-
-  println(button_style)
-  // .button {
-  //   padding: 8px 16px;
-  //   border-radius: 4;
-  //   font-size: 1.2rem;
-  //   z-index: 100;
-  // }
-}
-```
-
-:::
-
-## Combining With HTML
-
-Use CSS generation alongside HTML components:
-
-::: code-group
-
-```v [main.v]
-module main
-
+import khalyomede.mantis.css.property { display, align_items }
 import khalyomede.mantis.html { style }
-import khalyomede.mantis.css { selector }
+
 
 fn main() {
-  styles := [
-    selector(".container", {
-      "max-width": "1200px"
-      "margin": "0 auto"
-    }),
-    selector(".button", {
-      "padding": "8px 16px"
-      "border-radius": 4
-    })
-  ]
+  content := style({}, [
+    css.style([
+      selector(".card-title", [
+        display(.flex)
+        align_items(.center)
+      ])
+    ])
+  ])
 
-  // Embed in HTML style tag
-  stylesheet := style({}, [styles.join("\n")])
-
-  println(stylesheet)
-  // <style>
-  // .container {
-  //   max-width: 1200px;
-  //   margin: 0 auto;
-  // }
-  // .button {
-  //   padding: 8px 16px;
-  //   border-radius: 4;
-  // }
-  // </style>
+  println(content) // <style>.card-title{display:flex;align-items:center;}</style>
 }
 ```
 
 :::
+
+## Available properties
+
+As there is too much elements, follow these steps:
+
+1. Try to "guess" the function by importing and using it according to the name you would expect
+2. If it does not compile, check on the [Github repository css/property](https://github.com/khalyomede/mantis/tree/master/css/property) folder to you find it (make sure to select the correct version)
+3. If it does not exists, please make a pull request or create an issue with the link to the [MDN](https://developer.mozilla.org/en-US/) doc

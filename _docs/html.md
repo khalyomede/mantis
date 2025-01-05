@@ -594,21 +594,28 @@ fn main() {
 
 ### style
 
-Adds CSS styles to the page.
+Adds CSS styles to the page. See the [CSS documentation](/css).
 
 ::: code-group
 
 ```v [main.v]
 module main
 
+import khalyomede.mantis.css { selector }
+import khalyomede.mantis.css.property { display, align_items }
 import khalyomede.mantis.html { style }
 
 fn main() {
   content := style({}, [
-    '.container { max-width: 1200px; }'
+    css.style([
+      selector(".card-title", [
+        display(.flex)
+        align_items(.center)
+      ])
+    ])
   ])
 
-  println(content) // <style>.container { max-width: 1200px; }</style>
+  println(content) // <style>.card-title{display:flex;align-items:center;}</style>
 }
 ```
 
