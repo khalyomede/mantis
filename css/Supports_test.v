@@ -1,5 +1,5 @@
 import css { Supports, SelectorBlock, Selector, Rule }
-import css.property { Display, AlignItems }
+import css.property
 import test { expect }
 
 fn test_it_can_render_multiple_supports_statement_with_class_selector_and_display_flex_rule_to_string() {
@@ -8,7 +8,7 @@ fn test_it_can_render_multiple_supports_statement_with_class_selector_and_displa
 
     selector_blocks << Rule {
         property: .display
-        value: Display.flex.to_string()
+        value: property.Display.flex.to_string()
     }
 
     blocks << Selector {
@@ -20,12 +20,12 @@ fn test_it_can_render_multiple_supports_statement_with_class_selector_and_displa
         rules: [
             Rule {
                 property: .display
-                value: Display.flex.to_string()
+                value: property.Display.flex.to_string()
                 lonely: true
             }
             Rule {
                 property: .align_items
-                value: AlignItems.center.to_string()
+                value: property.AlignItems.center.to_string()
                 lonely: true
             }
         ]
