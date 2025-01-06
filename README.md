@@ -49,12 +49,19 @@ v -stats -N -W test .
 
 ## Roadmap
 
-██░░░░░░░░░░░░░░░░░░ (26/99 - 25%)
+██░░░░░░░░░░░░░░░░░░ (26/106 - 24%)
 
 - Routing
   - ✅ Get routes
   - ✅ Post routes
   - ✅ Routes with parameters
+- Middlewares
+  - Global middlewares
+    - ⏳ before route matching
+    - ⏳ after route matching
+  - Route-level middlewares
+    - ⏳ before route renders
+    - ⏳ after route renders
 - Views
   - ⏳ HTML components
   - ⏳ HTML enum attributes
@@ -172,12 +179,15 @@ v -stats -N -W test .
     - ⏳ Mocking utilities
   - Assets bundling
     - ⏳ Vite.js
+    - ⏳ Static file serving
 - Performance
   - ⏳ Improved concurrency performance
   - ⏳ Memory efficient Fake data generator
 - Production running
   - ⏳ On-demand mode
   - ✅ Standalone mode (multi-cores)
+  - ⏳ Zero traffic-loss live-code update (no downtime deployment)
+  - ⏳ Embeded HTTPS/SSL request handling
 - Testing
   - ✅ Expect test-style
   - ⏳ HTTP expectations
