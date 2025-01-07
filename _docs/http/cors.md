@@ -13,7 +13,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response, Cors } // [!code focus]
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 
 fn main() {
   app_cors := Cors{ // [!code focus:5]
@@ -29,7 +28,7 @@ fn main() {
         name: "index"
         path: "/"
         callback: fn (app App) !Response {
-          return response.html(content: "hello world")
+          return app.response.html(content: "hello world")
         }
       )
     ]
@@ -53,7 +52,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response, Cors } // [!code focus]
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
@@ -66,7 +64,7 @@ fn main() {
           credentials: true
         }
         callback: fn (app App) !Response {
-          return response.html(
+          return app.response.html(
             content: "User created"
             status: .created
           )
@@ -92,7 +90,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response, Cors } // [!code focus]
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 
 fn main() {
   app_cors := Cors{
@@ -107,7 +104,7 @@ fn main() {
         name: "api.profile"
         path: "/api/profile"
         callback: fn (app App) !Response {
-          return response.html(content: "Profile data")
+          return app.response.html(content: "Profile data")
         }
       )
     ]

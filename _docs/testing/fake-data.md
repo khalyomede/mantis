@@ -8,7 +8,7 @@ You can generate fake data, like person names, random integers, ... Useful for t
 
 ```v{4,6,9} [main_test.v]
 import khalyomede.mantis.http { create_app, App, Response, Request, Status }
-import khalyomede.mantis.http.response
+
 import khalyomede.mantis.http.route
 import khalyomede.mantis.test { expect, Fake }
 
@@ -20,7 +20,7 @@ fn test_it_returns_200_for_home_page() {
   app := create_app(
     routes: [
       route.get(path: "/", callback: fn [content] (app App) !Response {
-        return response.html(content: content)
+        return app.response.html(content: content)
       })
     ]
     request: Request{

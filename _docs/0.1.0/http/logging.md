@@ -11,7 +11,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 import khalyomede.mantis.logging { Log } // [!code focus:2]
 import khalyomede.mantis.logging.channel { File }
 
@@ -26,7 +25,7 @@ fn main() {
       route.post(name: "contact.store", path: "/contact", callback: fn (app App) !Response {
         app.log.debug("Contact form sent.")! // [!code focus]
 
-        return response.redirect("/", {})
+        return app.response.redirect("/", {})
       })
     ]
   )

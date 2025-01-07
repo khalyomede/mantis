@@ -176,7 +176,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 import khalyomede.mantis.validation { Rule, Value, Min, Max } // [!code focus:22]
 
 // Custom validation rule for passwords
@@ -225,7 +224,7 @@ fn main() {
           validation.validate(input, rules)!
 
           // If we reach here, validation passed
-          return response.html(
+          return app.response.html(
             content: "Registration successful!"
             status: .created
           )

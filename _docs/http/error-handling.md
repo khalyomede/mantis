@@ -12,7 +12,7 @@ All routes callbacks have the `!` before `!Response`, indicating you can bubble 
 module main
 
 import khalyomede.mantis.http { create_app, App, Response }
-import khalyomede.mantis.http.response
+
 import khalyomede.mantis.http.route
 import khalyomede.mantis.validation { validate, Min, Value, Rule }
 
@@ -34,7 +34,7 @@ fn main() {
 
         validate(data, rules)! // any errors will be rendered/reported // [!code focus]
 
-        return response.html(content: "You search is ${search}.")
+        return app.response.html(content: "You search is ${search}.")
       })
     ]
   )
@@ -63,7 +63,7 @@ Use when you need to log an error but want to continue processing:
 module main
 
 import khalyomede.mantis.http { create_app, App, Response, HttpError } // [!code:focus]
-import khalyomede.mantis.http.response
+
 import khalyomede.mantis.http.route
 
 fn main() {
@@ -72,7 +72,7 @@ fn main() {
       route.get(name: "index", path: "/", callback: fn (app App) !Response {
         theme := app.session.get("theme")! // [!code focus]
 
-        return response.html(content: "Current theme: ${theme}")
+        return app.response.html(content: "Current theme: ${theme}")
       })
     ]
   )
@@ -127,7 +127,7 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response, ErrorHandler } // [!code focus]
 import khalyomede.mantis.html { h1, div, p }
-import khalyomede.mantis.http.response
+
 import khalyomede.mantis.http.route
 import khalyomede.mantis.console
 
@@ -140,7 +140,7 @@ fn main() {
       }
       render: fn (app App, err IError) Response {
         // Custom error rendering logic
-        return response.html(
+        return app.response.html(
           content: h1({}, ['Oops! Something went wrong'])
           status: .server_error
         )
@@ -148,7 +148,7 @@ fn main() {
     }
     routes: [
       route.get(name: "index", path: "/", callback: fn (app App) !Response {
-        return response.html(content: div({}, ["Home page"]))
+        return app.response.html(content: div({}, ["Home page"]))
       })
     ]
   )

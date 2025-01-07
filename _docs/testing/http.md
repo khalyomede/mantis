@@ -10,7 +10,7 @@ Test simple route responses:
 ```v [tests/http/basic_test.v]
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
+
 import khalyomede.mantis.test { expect }
 
 fn test_basic_route() {
@@ -20,7 +20,7 @@ fn test_basic_route() {
         name: "index"
         path: "/"
         callback: fn (app App) !Response {
-          return response.html(content: "hello world")
+          return app.response.html(content: "hello world")
         }
       )
     ]
@@ -51,13 +51,13 @@ fn test_route_with_parameters() {
         path: "/post/{id}"
         callback: fn (app App) !Response {
           id := app.route_parameter("id") or {
-            return response.html(
+            return app.response.html(
               content: "Post not found"
               status: .not_found
             )
           }
 
-          return response.html(content: "Post ${id}")
+          return app.response.html(content: "Post ${id}")
         }
       )
     ],
@@ -91,13 +91,13 @@ fn test_form_submission() {
         path: "/login"
         callback: fn (app App) !Response {
           email := app.request.form("email") or {
-            return response.html(
+            return app.response.html(
               content: "Email required"
               status: .bad_request
             )
           }
 
-          return response.html(
+          return app.response.html(
             content: "Welcome ${email}"
             status: .created
           )
@@ -133,7 +133,7 @@ fn test_custom_error_handler() {
   app := create_app(
     error_handler: ErrorHandler{
       render: fn (app App, err IError) Response {
-        return response.html(
+        return app.response.html(
           content: "Oops: ${err.msg()}"
           status: .server_error
         )

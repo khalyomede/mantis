@@ -13,7 +13,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
@@ -22,7 +21,7 @@ fn main() {
         name: "index"
         path: "/"
         callback: fn (app App) !Response {
-          return response.html(content: "hello world")
+          return app.response.html(content: "hello world")
         }
       )
     ]
@@ -49,7 +48,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
@@ -59,10 +57,10 @@ fn main() {
         path: "/post/{id}"
         callback: fn (app App) !Response {
           id := app.route_parameter("id") or {
-            return response.html(content: "Post not found")
+            return app.response.html(content: "Post not found")
           }
 
-          return response.html(content: "Showing post ${id}")
+          return app.response.html(content: "Showing post ${id}")
         }
       )
     ]
@@ -85,7 +83,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
@@ -95,14 +92,14 @@ fn main() {
         path: "/post/{post_id}/comment/{comment_id}"
         callback: fn (app App) !Response {
           post_id := app.route_parameter("post_id") or {
-            return response.html(content: "Post not found")
+            return app.response.html(content: "Post not found")
           }
 
           comment_id := app.route_parameter("comment_id") or {
-            return response.html(content: "Comment not found")
+            return app.response.html(content: "Comment not found")
           }
 
-          return response.html(content: "Showing comment ${comment_id} on post ${post_id}")
+          return app.response.html(content: "Showing comment ${comment_id} on post ${post_id}")
         }
       )
     ]
@@ -128,7 +125,6 @@ fn main() {
 module main
 
 import khalyomede.mantis.http { create_app, App, Response }
-import khalyomede.mantis.http.response
 import khalyomede.mantis.http.route
 
 fn main() {
@@ -136,10 +132,10 @@ fn main() {
     routes: [
       route.delete(path: "/post/{post}", callback: fn (app App) !Response {
         id := app.route_parameter("post") or {
-          return response.html(status: .not_found)
+          return app.response.html(status: .not_found)
         }
 
-        return response.html(content: "post ${id} deleted")
+        return app.response.html(content: "post ${id} deleted")
       })
     ]
   )
@@ -159,7 +155,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
@@ -168,7 +163,7 @@ fn main() {
         name: "post.create"
         path: "/post/create"
         callback: fn (app App) !Response {
-          return response.html(content: "Create post form")
+          return app.response.html(content: "Create post form")
         }
       )
     ]
@@ -188,7 +183,6 @@ fn main() {
 module main
 
 import khalyomede.mantis.http { create_app, App, Response }
-import khalyomede.mantis.http.response
 import khalyomede.mantis.http.route
 
 fn main() {
@@ -196,10 +190,10 @@ fn main() {
     routes: [
       route.patch(path: "/post/{post}/comment/{comment}", callback: fn (app App) !Response {
         comment_id := app.route_parameter("comment") or {
-          return response.html(status: .not_found)
+          return app.response.html(status: .not_found)
         }
 
-        return response.html(content: "comment ${comment_id} modified")
+        return app.response.html(content: "comment ${comment_id} modified")
       })
     ]
   )
@@ -219,7 +213,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
@@ -228,7 +221,7 @@ fn main() {
         name: "post.store"
         path: "/post"
         callback: fn (app App) !Response {
-          return response.html(content: "Post created")
+          return app.response.html(content: "Post created")
         }
       )
     ]
@@ -249,7 +242,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
@@ -259,10 +251,10 @@ fn main() {
         path: "/post/{post}"
         callback: fn (app App) !Response {
           post_id := app.route_parameter("post") or {
-            return response.html(status: .not_found)
+            return app.response.html(status: .not_found)
           }
 
-          return response.html(content: "Post ${post_id} updated")
+          return app.response.html(content: "Post ${post_id} updated")
         }
       )
     ]

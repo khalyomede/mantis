@@ -23,6 +23,7 @@ pub struct App {
         error_handler ErrorHandler = default_error_handler()
         translation Translation
         cors Cors
+        response Response
 
     pub mut:
         env Env

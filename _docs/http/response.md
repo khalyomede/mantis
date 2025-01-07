@@ -13,7 +13,7 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response // [!code focus]
+ // [!code focus]
 
 fn main() {
   app := create_app(
@@ -22,7 +22,7 @@ fn main() {
         name: "index"
         path: "/"
         callback: fn (app App) !Response {
-          return response.html(content: "hello world") // [!code focus]
+          return app.response.html(content: "hello world") // [!code focus]
         }
       )
     ]
@@ -45,7 +45,7 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response, Status }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response // [!code focus]
+ // [!code focus]
 
 fn main() {
   app := create_app(
@@ -54,7 +54,7 @@ fn main() {
         name: "post.store"
         path: "/post"
         callback: fn (app App) !Response {
-          return response.html(
+          return app.response.html(
             content: "Post created successfully"
             status: .created // [!code focus:4]
           )
@@ -80,7 +80,7 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response // [!code focus]
+ // [!code focus]
 
 fn main() {
   app := create_app(
@@ -89,7 +89,7 @@ fn main() {
         name: "cache.example"
         path: "/cached-page"
         callback: fn (app App) !Response {
-          return response.html(
+          return app.response.html(
             content: "This page is cached"
             headers: { // [!code focus:3]
               'Cache-Control': ['max-age=3600']
@@ -117,7 +117,7 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response // [!code focus]
+ // [!code focus]
 
 fn main() {
   app := create_app(
@@ -126,7 +126,7 @@ fn main() {
         name: "profile"
         path: "/profile"
         callback: fn (app App) !Response {
-          return response.redirect("/login", {}) // [!code focus]
+          return app.response.redirect("/login", {}) // [!code focus]
         }
       )
     ]
@@ -145,7 +145,7 @@ You can also add query parameters:
 ```v [main.v]
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response // [!code focus]
+ // [!code focus]
 
 fn main() {
   app := create_app(
@@ -154,7 +154,7 @@ fn main() {
         name: "admin"
         path: "/admin"
         callback: fn (app App) !Response {
-          return response.redirect("/login", { // [!code focus:3]
+          return app.response.redirect("/login", { // [!code focus:3]
             'return_to': '/admin'
           })
         }

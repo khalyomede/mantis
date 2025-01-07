@@ -13,7 +13,7 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response, Session } // [!code focus]
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
+
 
 fn main() {
   app := create_app(
@@ -27,7 +27,7 @@ fn main() {
         name: "index"
         path: "/"
         callback: fn (app App) !Response {
-          return response.html(content: "hello world")
+          return app.response.html(content: "hello world")
         }
       )
     ]
@@ -50,7 +50,7 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response, Session } // [!code focus]
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
+
 
 fn main() {
   app := create_app(
@@ -65,7 +65,7 @@ fn main() {
         callback: fn (app App) !Response {
           theme := app.session.get("theme") or { "light" } // [!code focus]
 
-          return response.html(content: "Current theme: ${theme}")
+          return app.response.html(content: "Current theme: ${theme}")
         }
       )
     ]
@@ -88,7 +88,7 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response, Session } // [!code focus]
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
+
 
 fn main() {
   app := create_app(
@@ -103,7 +103,7 @@ fn main() {
         callback: fn (app App) !Response {
           app.session.set("theme", "dark")! // [!code focus]
 
-          return response.html(content: "Theme updated")
+          return app.response.html(content: "Theme updated")
         }
       )
     ]
@@ -126,7 +126,7 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response, Session } // [!code focus]
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
+
 
 fn main() {
   app := create_app(
@@ -142,7 +142,7 @@ fn main() {
         path: "/dashboard"
         callback: fn (app App) !Response {
           // Each request to dashboard will extend the session // [!code focus]
-          return response.html(content: "Welcome to dashboard")
+          return app.response.html(content: "Welcome to dashboard")
         }
       )
     ]

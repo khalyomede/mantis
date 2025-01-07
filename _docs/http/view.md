@@ -13,7 +13,7 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
+
 import khalyomede.mantis.html { html, head, title, body, div, p } // [!code focus]
 
 fn main() {
@@ -34,7 +34,7 @@ fn main() {
             ])
           ])
 
-          return response.html(content: content)
+          return app.response.html(content: content)
         }
       )
     ]
@@ -57,7 +57,7 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
+
 import khalyomede.mantis.html { div, nav, a } // [!code focus]
 
 fn navbar() string { // [!code focus:7]
@@ -80,7 +80,7 @@ fn main() {
             div({}, ['Page content'])
           ])
 
-          return response.html(content: content)
+          return app.response.html(content: content)
         }
       )
     ]
@@ -103,7 +103,7 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
+
 import khalyomede.mantis.html { div, button } // [!code focus]
 
 fn main() {
@@ -124,7 +124,7 @@ fn main() {
             ])
           ])
 
-          return response.html(content: content)
+          return app.response.html(content: content)
         }
       )
     ]
@@ -147,7 +147,7 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
+
 import khalyomede.mantis.html { ul, li } // [!code focus]
 
 fn main() {
@@ -165,7 +165,7 @@ fn main() {
 
           content := ul({}, list_items)
 
-          return response.html(content: content)
+          return app.response.html(content: content)
         }
       )
     ]

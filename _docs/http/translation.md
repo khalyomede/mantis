@@ -11,7 +11,7 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
+
 import khalyomede.mantis.translation { Translation, Lang } // [!code focus]
 
 fn main() {
@@ -39,7 +39,7 @@ fn main() {
         callback: fn (app App) !Response {
           text := app.translation.translate(key: "Hello World", lang: .fr) // [!code focus:2]
 
-          return response.html(content: text)  // "Bonjour le monde"
+          return app.response.html(content: text)  // "Bonjour le monde"
         }
       )
     ]
@@ -62,7 +62,7 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
+
 import khalyomede.mantis.translation { Translation, Lang } // [!code focus]
 
 fn main() {
@@ -96,7 +96,7 @@ fn main() {
             }
           )
 
-          return response.html(content: text)  // "Bienvenue John"
+          return app.response.html(content: text)  // "Bienvenue John"
         }
       )
     ]
@@ -119,7 +119,7 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
+
 import khalyomede.mantis.translation { Translation, Lang } // [!code focus]
 
 fn main() {
@@ -155,7 +155,7 @@ fn main() {
             count: 3
           )
 
-          return response.html(content: text)  // "Vous avez 3 messages"
+          return app.response.html(content: text)  // "Vous avez 3 messages"
         }
       )
     ]
@@ -178,7 +178,7 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
+
 import khalyomede.mantis.translation { Translation, Lang } // [!code focus]
 
 fn main() {
@@ -219,7 +219,7 @@ fn main() {
             }
           )
 
-          return response.html(content: text)  // "Marie a mise à jour son profil"
+          return app.response.html(content: text)  // "Marie a mise à jour son profil"
         }
       )
     ]

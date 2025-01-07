@@ -17,7 +17,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 import khalyomede.mantis.database { Database, DatabaseConnection } // [!code focus:6]
 
 struct Post {
@@ -40,7 +39,7 @@ fn main() {
         callback: fn (app App) !Response {
           // The ? indicates this might not find an ID
           id := app.route_parameter("id") or {
-            return response.html(
+            return app.response.html(
               content: "Post not found",
               status: .not_found
             )
@@ -51,13 +50,13 @@ fn main() {
           posts := app_ref.database.all[Post]("SELECT id, title FROM posts")! // [!code focus]
 
           post := posts[0] or {
-            return response.html(
+            return app.response.html(
               content: "Post not found",
               status: .not_found
             )
           }
 
-          return response.html(content: "Post (id ${id}): ${post.title}")
+          return app.response.html(content: "Post (id ${id}): ${post.title}")
         }
       )
     ]

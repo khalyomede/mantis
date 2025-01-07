@@ -13,7 +13,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 import khalyomede.mantis.env { Env } // [!code focus]
 
 fn main() {
@@ -26,7 +25,7 @@ fn main() {
         name: "index"
         path: "/"
         callback: fn (app App) !Response {
-          return response.html(content: "hello world")
+          return app.response.html(content: "hello world")
         }
       )
     ]
@@ -49,7 +48,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 import khalyomede.mantis.env { Env } // [!code focus]
 
 fn main() {
@@ -67,7 +65,7 @@ fn main() {
           app_name := instance.env.get('APP_NAME') or { 'My App' } // [!code focus:4]
           app_mode := instance.env.get('APP_MODE') or { 'development' }
 
-          return response.html(content: '${app_name} running in ${app_mode} mode')
+          return app.response.html(content: '${app_name} running in ${app_mode} mode')
         }
       )
     ]
@@ -117,7 +115,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 import khalyomede.mantis.env { Env } // [!code focus]
 
 fn main() {
@@ -140,7 +137,7 @@ fn main() {
             'debug': instance.env.get('APP_DEBUG') or { 'false' }
           }
 
-          return response.html(content: 'Configuration loaded')
+          return app.response.html(content: 'Configuration loaded')
         }
       )
     ]

@@ -64,7 +64,7 @@ fn test_home_page_displays_hello_world() {
   app := create_app(
     routes: [
       route.get(name: "index", path: "/", callback: fn (app App) !Response {
-        return response.html(content: "hello world")
+        return app.response.html(content: "hello world")
       })
     ],
     request: Request{

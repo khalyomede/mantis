@@ -21,13 +21,12 @@ module main
 
 import khalyomede.mantis.http { app_create, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
     routes: [
       route.get(name: "index", path: "/", callback: fn (app App) !Response {
-        return response.html(content: "hello world")
+        return app.response.html(content: "hello world")
       })
     ]
   )
@@ -66,7 +65,6 @@ module main
 import khalyomede.mantis.database { Database, DatabaseConnection }
 import khalyomede.mantis.http { app_create, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 import khalyomede.mantis.validation { validate, Rule, Value }
 
 struct Filled {}
@@ -101,21 +99,21 @@ fn main() {
     routes: [
       route.get(name: "post.update", path: "/post/{post}", callback: fn (app App) !Response {
         id := app.route_parameter("post") or {
-          return response.html(status: .not_found)
+          return app.response.html(status: .not_found)
         }
 
         posts := app.database.all[Post]("SELECT title, excerpt FROM posts WHERE id = ${id}")!
 
         post := posts[0] or {
-          return response.html(status: .not_found)
+          return app.response.html(status: .not_found)
         }
 
         title := app.request.form("title") or {
-          return response.html(status: .unprocessable_entity)
+          return app.response.html(status: .unprocessable_entity)
         }
 
         excerpt := app.request.form("excerpt") or {
-          return response.html(status: .unprocessable_entity)
+          return app.response.html(status: .unprocessable_entity)
         }
 
         data := {
@@ -136,7 +134,7 @@ fn main() {
 
         app.database.run("UPDATE posts SET title = ${title}, excerpt = ${excerpt} WHERE id = ${id}")!
 
-        return response.redirect("/post/{$id}", {})
+        return app.response.redirect("/post/{$id}", {})
       })
     ]
   )

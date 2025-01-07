@@ -11,7 +11,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
@@ -21,10 +20,10 @@ fn main() {
         path: "/search"
         callback: fn (app App) !Response {
           query := app.request.query("q") or { // [!code focus:3]
-            return response.html(content: "No search term provided")
+            return app.response.html(content: "No search term provided")
           }
 
-          return response.html(content: "Search results for: ${query}")
+          return app.response.html(content: "Search results for: ${query}")
         }
       )
     ]
@@ -47,7 +46,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
@@ -57,10 +55,10 @@ fn main() {
         path: "/login"
         callback: fn (app App) !Response {
           email := app.request.form("email") or { // [!code focus:3]
-            return response.html(content: "Email is required")
+            return app.response.html(content: "Email is required")
           }
 
-          return response.html(content: "Logged in as ${email}")
+          return app.response.html(content: "Logged in as ${email}")
         }
       )
     ]
@@ -83,7 +81,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
@@ -94,7 +91,7 @@ fn main() {
         callback: fn (app App) !Response {
           theme := app.request.cookies.get("theme") or { "light" } // [!code focus]
 
-          return response.html(content: "Using ${theme} theme")
+          return app.response.html(content: "Using ${theme} theme")
         }
       )
     ]
@@ -117,7 +114,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-import khalyomede.mantis.http.response
 
 fn main() {
   app := create_app(
@@ -126,7 +122,7 @@ fn main() {
         name: "welcome"
         path: "/welcome"
         callback: fn (app App) !Response {
-          return response.html(content: "Your IP is ${app.request.ip}") // [!code focus]
+          return app.response.html(content: "Your IP is ${app.request.ip}") // [!code focus]
         }
       )
     ]

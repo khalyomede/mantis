@@ -1,6 +1,5 @@
 import json
-import http { App, Route, Status, Request, Response, Session, SessionData, ErrorHandler, HttpError, Cors }
-import http.response
+import http { App, Route, Status, Request, Response, Session, SessionData, ErrorHandler, HttpError, Cors, HeaderType, Mime }
 import http.route
 import logging { Log }
 import logging.channel { File }
@@ -20,7 +19,7 @@ fn test_serves_200_response_for_simple_get_route() {
                 name: "index"
                 path: "/"
                 callback: fn [content] (app App) !Response {
-                    return response.html(content: content)
+                    return app.response.html(content: content)
                 }
             )
         ],
@@ -46,7 +45,7 @@ fn test_serves_200_response_for_route_with_parameters() {
                 name: "post.show",
                 path: "/post/{post}",
                 callback: fn [content] (app App) !Response {
-                    return response.html(content: content)
+                    return app.response.html(content: content)
                 }
             )
         ]
@@ -73,7 +72,8 @@ fn test_can_get_route_parameter() {
                 path: "/post/{post}/comment/{comment}",
                 callback: fn (app App) !Response {
                     comment := app.route_parameter("comment") or { "" }
-                    return response.html(content: "showing comment ${comment}")
+
+                    return app.response.html(content: "showing comment ${comment}")
                 }
             )
         ]
@@ -98,7 +98,7 @@ fn test_can_get_query() {
                     "en"
                 }
 
-                return response.html(content: lang)
+                return app.response.html(content: lang)
             })
         ],
         request: Request{
@@ -142,7 +142,7 @@ fn test_can_redirect_to_url_with_query_parameters() {
     app := http.create_app(
         routes: [
             route.get(name: "index", path: "/", callback: fn (app App) !Response {
-                return response.redirect("/login", {
+                return app.response.redirect(path: "/login", queries: {
                     "error": "invalid_credentials"
                     "email": "user@example.com"
                 })
@@ -156,7 +156,7 @@ fn test_can_redirect_to_url_with_query_parameters() {
 
     res := app.render()
 
-    expect(res.headers["Location"]).to_contain("/login?error=invalid_credentials&email=user%40example.com")
+    expect(res.headers[HeaderType.location.to_string()]).to_contain("/login?error=invalid_credentials&email=user%40example.com")
 }
 
 fn test_can_parse_form_body_in_post_request() {
@@ -168,7 +168,8 @@ fn test_can_parse_form_body_in_post_request() {
             route.post(name: "login.store", path: "/login", callback: fn (app App) !Response {
                 name := app.request.form("name") or { "" }
                 email := app.request.form("email") or { "" }
-                return response.html(content: "${name} - ${email}")
+
+                return app.response.html(content: "${name} - ${email}")
             })
         ],
         request: Request{
@@ -212,8 +213,11 @@ fn test_can_retreive_session_data() {
         },
         routes: [
             route.get(name: "dashboard.index", path: "/dashboard", callback: fn (app App) !Response {
-                user_uuid := app.session.get("user_uuid") or { return response.html(status: .server_error) }
-                return response.html(content: "User uuid is ${user_uuid}.")
+                user_uuid := app.session.get("user_uuid") or {
+                    return app.response.html(status: .server_error)
+                }
+
+                return app.response.html(content: "User uuid is ${user_uuid}.")
             })
         ],
         request: Request{
@@ -300,7 +304,7 @@ fn test_returns_json_error_when_requested() {
             path: '/not-found'
             method: .get
             headers: {
-                'Accept': ['application/json']
+                HeaderType.accept.to_string(): [Mime.application_json.to_string()]
             }
         }
     }
@@ -308,7 +312,7 @@ fn test_returns_json_error_when_requested() {
     res := app.render()
 
     expect(res.status).to_be_equal_to(Status.not_found)
-    expect(res.headers).to_have_key_equal_to('Content-Type', ['application/json'])
+    expect(res.headers).to_have_key_equal_to(HeaderType.content_type.to_string(), [Mime.application_json.to_string()])
     expect(res.content).to_be_equal_to('')
 }
 
@@ -318,10 +322,10 @@ fn test_can_use_custom_error_handler() {
             // Custom reporting logic
         }
         render: fn (app App, err IError) Response {
-            return Response{
+            return app.response.html(
                 content: 'Custom error: ${err.msg()}'
                 status: .server_error
-            }
+            )
         }
     }
 
@@ -335,6 +339,7 @@ fn test_can_use_custom_error_handler() {
 
     res := app.render()
 
+    expect(res.headers).to_have_key_equal_to(HeaderType.content_type.to_string(), [Mime.text_html.to_string()])
     expect(res.content).to_be_equal_to('Custom error: Route not found')
 }
 
@@ -407,9 +412,7 @@ fn test_can_set_different_port_number() {
         port: u16(3000)
         routes: [
             route.get(path: "/", callback: fn (app App) !Response {
-                return Response{
-                    content: "hello world"
-                }
+                return app.response.html(content: "hello world")
             })
         ]
         request: Request{
@@ -459,10 +462,10 @@ fn test_it_respond_to_put_route() {
         routes: [
             route.put(path: "/post/{post}", callback: fn (app App) !Response {
                 id := app.route_parameter("post") or {
-                    return response.html(status: .not_found)
+                    return app.response.html(status: .not_found)
                 }
 
-                return response.html(content: "post ${id} updated")
+                return app.response.html(content: "post ${id} updated")
             })
         ]
         request: Request{
@@ -484,10 +487,10 @@ fn test_it_can_respond_to_patch_route() {
         routes: [
             route.patch(path: "/post/{post}/comment/{comment}", callback: fn (app App) !Response {
                 id := app.route_parameter("comment") or {
-                    return response.html(status: .not_found)
+                    return app.response.html(status: .not_found)
                 }
 
-                return response.html(content: "comment ${id} modified")
+                return app.response.html(content: "comment ${id} modified")
             })
         ]
         request: Request{
@@ -509,10 +512,10 @@ fn test_it_can_respond_to_delete_route() {
         routes: [
             route.delete(path: "/post/{post}", callback: fn (app App) !Response {
                 id := app.route_parameter("post") or {
-                    return response.html(status: .not_found)
+                    return app.response.html(status: .not_found)
                 }
 
-                return response.html(content: "post ${id} deleted")
+                return app.response.html(content: "post ${id} deleted")
             })
         ]
         request: Request{
@@ -536,7 +539,7 @@ fn test_head_request_returns_same_headers_as_get_without_body() {
                 name: "index"
                 path: "/"
                 callback: fn [content] (app App) !Response {
-                    return response.html(content: content)
+                    return app.response.html(content: content)
                 }
             )
         ]
@@ -558,13 +561,13 @@ fn test_options_request_returns_allowed_methods() {
     app := http.create_app(
         routes: [
             route.get(path: "/post/{id}", callback: fn (app App) !Response {
-                return response.html(content: "post detail")
+                return app.response.html(content: "post detail")
             }),
             route.put(path: "/post/{id}", callback: fn (app App) !Response {
-                return response.html(content: "post updated")
+                return app.response.html(content: "post updated")
             }),
             route.delete(path: "/post/{id}", callback: fn (app App) !Response {
-                return response.html(content: "post deleted")
+                return app.response.html(content: "post deleted")
             })
         ],
         request: Request{
@@ -596,7 +599,7 @@ fn test_options_with_credentials_requires_specific_origin() {
     app := http.create_app(
         cors: app_cors
         routes: [route.get(path: "/", callback: fn (app App) !Response {
-            return response.html(content: "hello world")
+            return app.response.html(content: "hello world")
         })],
         request: Request{
             path: "/"
@@ -624,7 +627,7 @@ fn test_options_filters_requested_headers() {
         cors: app_cors
         routes: [
             route.get(path: "/", callback: fn (app App) !Response {
-                return response.html(content: "hello world")
+                return app.response.html(content: "hello world")
             })
         ],
         request: Request{
@@ -660,7 +663,7 @@ fn test_options_with_route_specific_cors() {
                     allowed_origins: [api_origin]
                 }
                 callback: fn (app App) !Response {
-                    return response.html(content: fake.sentence())
+                    return app.response.html(content: fake.sentence())
                 }
             )
         ]
@@ -698,7 +701,7 @@ fn test_options_with_merged_cors_settings() {
                     allowed_headers: ['X-Custom-Header']
                 }
                 callback: fn (app App) !Response {
-                    return response.html(content: "users list")
+                    return app.response.html(content: "users list")
                 }
             )
         ]
