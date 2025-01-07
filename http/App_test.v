@@ -409,7 +409,7 @@ fn test_can_translate_text() {
 
 fn test_can_set_different_port_number() {
     app := http.create_app(
-        port: u16(3000)
+        port: 3000
         routes: [
             route.get(path: "/", callback: fn (app App) !Response {
                 return app.response.html(content: "hello world")
