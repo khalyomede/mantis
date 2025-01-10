@@ -123,7 +123,7 @@ fn main() {
         name: "profile"
         path: "/profile"
         callback: fn (app App) !Response {
-          return app.response.redirect("/login", {}) // [!code focus]
+          return app.response.redirect(path: "/login") // [!code focus]
         }
       )
     ]
@@ -151,7 +151,7 @@ fn main() {
         name: "admin"
         path: "/admin"
         callback: fn (app App) !Response {
-          return app.response.redirect("/login", { // [!code focus:3]
+          return app.response.redirect(path: "/login", queries: { // [!code focus:3]
             'return_to': '/admin'
           })
         }
