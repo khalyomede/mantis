@@ -86,12 +86,9 @@ fn main() {
         name: "cache.example"
         path: "/cached-page"
         callback: fn (app App) !Response {
-          return app.response.html(
-            content: "This page is cached"
-            headers: { // [!code focus:3]
-              'Cache-Control': ['max-age=3600']
-            }
-          )
+          return app.response
+            .html(content: "This page is cached")
+            .set_header("Cache-Control", "max-age=3600") // [!code focus]
         }
       )
     ]

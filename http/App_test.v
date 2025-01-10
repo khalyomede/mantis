@@ -1,5 +1,5 @@
 import json
-import http { App, Route, Status, Request, Response, Session, SessionData, ErrorHandler, HttpError, Cors, HeaderType, Mime }
+import http { App, Route, Status, Request, Response, Session, SessionData, ErrorHandler, HttpError, Cors, HeaderType, Mime, Middlewares }
 import http.route
 import logging { Log }
 import logging.channel { File }
@@ -296,6 +296,10 @@ fn test_returns_404_for_missing_route() {
     expect(res.status).to_be_equal_to(Status.not_found)
     expect(res.headers).to_have_key_equal_to('Content-Type', ['text/html'])
     expect(res.content).to_be_equal_to('')
+}
+
+fn test_it_returns_404_if_registered_route_does_not_match() {
+    // TODO
 }
 
 fn test_returns_json_error_when_requested() {
@@ -720,4 +724,65 @@ fn test_options_with_merged_cors_settings() {
     // Should merge global origin with route-specific headers
     expect(res.headers['Access-Control-Allow-Origin']).to_contain(origin)
     expect(res.headers['Access-Control-Allow-Headers']).to_contain('X-Custom-Header')
+}
+
+fn test_it_can_apply_header_change_through_global_middleware_before_route_match() {
+    x_powered_by := fake.company.name()
+    content := fake.sentence()
+
+    app := http.create_app(
+        middlewares: Middlewares{
+            before_route_match: [
+                fn [x_powered_by] (app App) !Response {
+                    return app.response.set_header("X-Powered-By", x_powered_by)
+                }
+            ]
+        }
+        routes: [
+            route.get(path: "/", callback: fn [content] (app App) !Response {
+                return app.response.html(content: content)
+            })
+        ]
+        request: Request{
+            path: "/"
+            method: .get
+        }
+    )
+
+    res := app.render()
+
+    expect(res.status).to_be_equal_to(Status.ok)
+    expect(res.content).to_be_equal_to(content)
+    expect(res.headers).to_have_key_equal_to("X-Powered-By", [x_powered_by])
+    expect(res.headers).to_have_key_equal_to(HeaderType.content_type.to_string(), [Mime.text_html.to_string()])
+}
+
+fn test_route_can_override_header_set_by_global_before_route_match_middleware() {
+    x_powered_by := fake.company.name()
+    content := fake.sentence()
+
+    app := http.create_app(
+        middlewares: Middlewares{
+            before_route_match: [
+                fn (app App) !Response {
+                    return app.response.set_header("X-Powered-By", fake.company.name())
+                }
+            ]
+        }
+        routes: [
+            route.get(path: "/", callback: fn [x_powered_by, content] (app App) !Response {
+                return app.response.set_header("X-Powered-By", x_powered_by).html(content: content)
+            })
+        ]
+        request: Request{
+            path: "/"
+            method: .get
+        }
+    )
+
+    res := app.render()
+
+    expect(res.status).to_be_equal_to(Status.ok)
+    expect(res.content).to_be_equal_to(content)
+    expect(res.headers).to_have_key_equal_to("X-Powered-By", [x_powered_by])
 }

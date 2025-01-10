@@ -1,0 +1,45 @@
+# Middleware
+
+Middlewares are functions that you want to apply on many routes or globally which alter the response.
+
+## Global middlewares
+
+You can define middlewares to be applied before any route matching occurs. A middleware is much like a route and share the same signature.
+
+### Before route matching
+
+Here is a simple example showing how to change the header of all the routes, before the router tries to find a route.
+
+::: code-group
+
+```v [main.v]
+module main
+
+import khalyomede.mantis.http { create_app, App, Response, Middlewares } // [!code focus]
+import khalyomede.mantis.http.route
+
+fn main() {
+  app := create_app(
+    middlewares: Middlewares{ // [!code focus:7]
+      before_route_match: [
+        fn (app App) !Response {
+          return app.response.set_header("X-Powered-By", "Mantis")
+        }
+      ]
+    }
+    routes: [
+      route.get(path: "/", callback: fn (app App) !Response {
+        return app.response.html(content: "Hello world")
+      })
+    ]
+  )
+
+  app.serve() or { panic(err) }
+}
+```
+
+:::
+
+::: tip NOTICE
+Like routes, middlewares errors are catched and rendered/reported to the [error handler](/0.1.0/http/error-handling).
+:::

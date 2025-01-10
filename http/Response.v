@@ -31,6 +31,16 @@ pub fn (response Response) html(parameters HtmlParameters) Response {
     }
 }
 
+pub fn (response Response) set_header(key string, value string) Response {
+    return Response {
+        ...response
+        headers: {
+            ...response.headers
+            key: [value]
+        }
+    }
+}
+
 pub fn (response Response) redirect(parameters RedirectParameters) Response {
     redirect_path := create_url(path: parameters.path, queries: parameters.queries)
 

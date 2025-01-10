@@ -33,6 +33,7 @@ export default defineConfig({
                     { text: 'Folder structure', link: '/folder-structure' },
                     {
                         text: 'Http', items: [
+                            { text: "Life cycle", link: '/http/life-cycle' },
                             { text: "Routing", link: '/http/routing' },
                             { text: "Response", link: '/http/response' },
                             { text: "Request", link: '/http/request' },
@@ -43,6 +44,7 @@ export default defineConfig({
                             { text: "Database", link: '/http/database' },
                             { text: "Erorr handling", link: '/http/error-handling' },
                             { text: "Logging", link: "/http/logging.md" },
+                            { text: "Middleware", link: "/http/middleware.md" },
                             { text: "Configuration", link: '/http/configuration' },
                             { text: "Cors", link: "/http/cors" },
                             { text: "Extending", link: '/http/extending' },
@@ -115,6 +117,7 @@ export default defineConfig({
                                 { text: 'Folder structure', link: '/0.1.0/folder-structure' },
                                 {
                                     text: 'Http', items: [
+                                        { text: "Life cycle", link: '/0.1.0/http/life-cycle' },
                                         { text: "Routing", link: '/0.1.0/http/routing' },
                                         { text: "Response", link: '/0.1.0/http/response' },
                                         { text: "Request", link: '/0.1.0/http/request' },
@@ -125,6 +128,7 @@ export default defineConfig({
                                         { text: "Database", link: '/0.1.0/http/database' },
                                         { text: "Erorr handling", link: '/0.1.0/http/error-handling' },
                                         { text: "Logging", link: "/0.1.0/http/logging.md" },
+                                        { text: "Middleware", link: "/0.1.0/http/middleware.md" },
                                         { text: "Configuration", link: '/0.1.0/http/configuration' },
                                         { text: "Extending", link: '/0.1.0/http/extending' },
                                     ],

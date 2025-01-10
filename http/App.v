@@ -24,6 +24,7 @@ pub struct App {
         translation Translation
         cors Cors
         response Response
+        middlewares Middlewares
 
     pub mut:
         env Env
@@ -248,8 +249,21 @@ pub fn (app App) render() Response {
         })
     }
 
-    response := route.callback(app) or {
-        return app.handle_error(err)
+    mut altered_app := app
+
+    for middleware in app.middlewares.before_route_match {
+        response := middleware(altered_app) or {
+            return altered_app.handle_error(err)
+        }
+
+        altered_app = App {
+            ...altered_app
+            response: response
+        }
+    }
+
+    response := route.callback(altered_app) or {
+        return altered_app.handle_error(err)
     }
 
     // Strip body for HEAD requests that matched GET routes
