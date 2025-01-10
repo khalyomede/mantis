@@ -109,6 +109,8 @@ fn main() {
 }
 ```
 
+:::
+
 ## HTTP Methods
 
 - [DELETE](#delete)
