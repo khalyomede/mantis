@@ -1,10 +1,12 @@
 # Error Handling
 
-Mantis provides two main methods for handling errors in your application:
+Errors can be handled on a central place if you need to report and render errors in a consistent way.
 
-## Handling error
+## Automatic error reporting
 
-All routes callbacks have the `!` before `!Response`, indicating you can bubble errors without having to explicitly call the error handler: any error bubbled will be handled by your error handler.
+All routes and [middlewares](/0.1.0/http/middleware) callbacks have the `!` before `!Response`, indicating uncatched errors will be passed to your error handler.
+
+For example, when validating data, instead of manual error handling, you can just let it fail. The error handler will take care of any unhandled errors.
 
 ::: code-group
 
@@ -12,6 +14,7 @@ All routes callbacks have the `!` before `!Response`, indicating you can bubble 
 module main
 
 import khalyomede.mantis.http { create_app, App, Response }
+
 import khalyomede.mantis.http.route
 import khalyomede.mantis.validation { validate, Min, Value, Rule }
 
@@ -46,13 +49,13 @@ fn main() {
 
 This will:
 1. Report the error (e.g., log it)
-2. Generate and return a response according to how the error handler is configured to render errors (see the [custom error handler](#custom-error-handler) section)
+2. Render the error (according to how the error handler has been configured, see the [custom error handler](#custom-error-handler) section) and return it
 
 ::: tip NOTICE
 Refer to V documentation about the [built-in error type](https://docs.vlang.io/type-declarations.html#optionresult-types-and-error-handling) for more information.
 :::
 
-## report_error
+## Erorr reporting
 
 Use when you need to log an error but want to continue processing:
 
@@ -62,13 +65,18 @@ Use when you need to log an error but want to continue processing:
 module main
 
 import khalyomede.mantis.http { create_app, App, Response, HttpError } // [!code:focus]
+
 import khalyomede.mantis.http.route
 
 fn main() {
   app := create_app(
     routes: [
       route.get(name: "index", path: "/", callback: fn (app App) !Response {
-        theme := app.session.get("theme")! // [!code focus]
+        theme := app.session.get("theme") or { // [!code focus:2]
+          app.erorr_handler.report(err) // Just log it, no rendering
+
+          "light" // default value
+        }
 
         return app.response.html(content: "Current theme: ${theme}")
       })
@@ -81,42 +89,11 @@ fn main() {
 
 :::
 
-## Error Types
-
-Mantis provides built-in error types for common scenarios:
-
-```v
-import khalyomede.mantis.http { HttpError, ValidationError }
-
-// For HTTP errors
-HttpError{
-  code: .not_found     // Status enum (.ok, .not_found, .server_error...)
-  message: string      // Error message
-}
-
-// For validation errors
-ValidationError{
-  message: string      // Error message
-}
-```
-
-## Content Types
-
-The default error handler automatically detects and responds with the appropriate format:
-
-```v
-// Browser requests get HTML
-Accept: text/html
-=> HTML error page
-
-// API requests get JSON
-Accept: application/json
-=> JSON error response
-```
-
 ## Custom Error Handler
 
-You can customize error handling by providing your own handler:
+By default a simple error handler is configured, which will return blank errors (with no styling) and log in the server console any errors.
+
+You can customize the error handler by providing your own like following:
 
 ::: code-group
 
@@ -125,6 +102,7 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response, ErrorHandler } // [!code focus]
 import khalyomede.mantis.html { h1, div, p }
+
 import khalyomede.mantis.http.route
 import khalyomede.mantis.console
 
