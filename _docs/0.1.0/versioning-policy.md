@@ -8,7 +8,7 @@ Breaking changes may occur in any minor version increment (0.x.0).
 
 This follows the [SemVer](https://semver.org/lang/fr/) specification for initial development, which states that anything may change at any time during this phase.
 
-Read the [upgrade instructions](/upgrade) for details on required changes between versions.
+Read the [upgrade instructions](/0.1.0/upgrade) for details on required changes between versions.
 
 ## After 1.0.0
 

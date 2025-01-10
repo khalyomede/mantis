@@ -40,4 +40,4 @@ fn main() {
 
 :::
 
-Learn all the available method in the [Logging](/logging) documentation.
+Learn all the available method in the [Logging](/0.1.0/logging) documentation.

@@ -594,7 +594,7 @@ fn main() {
 
 ### style
 
-Adds CSS styles to the page. See the [CSS documentation](/css).
+Adds CSS styles to the page. See the [CSS documentation](/0.1.0/css).
 
 ::: code-group
 

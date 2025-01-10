@@ -30,7 +30,7 @@ fn main() {
 
 ## Paired with HTML
 
-This method pairs well with the [`style()` HTML function](/html#style):
+This method pairs well with the [`style()` HTML function](/0.1.0/html#style):
 
 ::: code-group
 
