@@ -130,6 +130,7 @@ export default defineConfig({
                                         { text: "Logging", link: "/0.1.0/http/logging.md" },
                                         { text: "Middleware", link: "/0.1.0/http/middleware.md" },
                                         { text: "Configuration", link: '/0.1.0/http/configuration' },
+                                        { text: "Cors", link: "/0.1.0/http/cors" },
                                         { text: "Extending", link: '/0.1.0/http/extending' },
                                     ],
                                 },
