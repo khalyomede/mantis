@@ -13,7 +13,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
- // [!code focus]
 
 fn main() {
   app := create_app(
@@ -45,7 +44,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response, Status }
 import khalyomede.mantis.http.route
- // [!code focus]
 
 fn main() {
   app := create_app(
@@ -80,7 +78,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
- // [!code focus]
 
 fn main() {
   app := create_app(
@@ -114,7 +111,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
- // [!code focus]
 
 fn main() {
   app := create_app(
@@ -142,7 +138,6 @@ You can also add query parameters:
 ```v [main.v]
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
- // [!code focus]
 
 fn main() {
   app := create_app(
