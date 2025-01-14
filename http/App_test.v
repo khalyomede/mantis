@@ -1,5 +1,5 @@
 import json
-import http { App, Route, Status, Request, Response, Session, SessionData, ErrorHandler, HttpError, Cors, HeaderType, Mime, Middlewares }
+import http { App, Route, Status, Request, Response, Session, SessionData, ErrorHandler, HttpError, Cors, HeaderType, Mime, Middlewares, RouteMiddlewares }
 import http.route
 import logging { Log }
 import logging.channel { File }
@@ -773,6 +773,39 @@ fn test_route_can_override_header_set_by_global_before_route_match_middleware() 
             route.get(path: "/", callback: fn [x_powered_by, content] (app App) !Response {
                 return app.response.set_header("X-Powered-By", x_powered_by).html(content: content)
             })
+        ]
+        request: Request{
+            path: "/"
+            method: .get
+        }
+    )
+
+    res := app.render()
+
+    expect(res.status).to_be_equal_to(Status.ok)
+    expect(res.content).to_be_equal_to(content)
+    expect(res.headers).to_have_key_equal_to("X-Powered-By", [x_powered_by])
+}
+
+fn test_route_can_override_header_before_route_renders_response() {
+    x_powered_by := fake.company.name()
+    content := fake.sentence()
+
+    app := http.create_app(
+        routes: [
+            route.get(
+                path: "/"
+                middlewares: RouteMiddlewares{
+                    before_response_rendered: [
+                        fn [x_powered_by] (app App) !Response {
+                            return app.response.set_header("X-Powered-By", x_powered_by)
+                        }
+                    ]
+                }
+                callback: fn [content] (app App) !Response {
+                    return app.response.html(content: content)
+                }
+            )
         ]
         request: Request{
             path: "/"

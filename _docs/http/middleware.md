@@ -40,6 +40,45 @@ fn main() {
 
 :::
 
+## Route middlewares
+
+Middlewares can be declared on a route level for more fine-grain control.
+
+### Before response rendered
+
+You can modify the response right before it will be rendered.
+
+::: code-group
+
+```v [main.v]
+module main
+
+import khalyomede.mantis.http { create_app, App, Response, RouteMiddlewares } // [!code focus]
+import khalyomede.mantis.http.route
+
+fn main() {
+  app := create_app(
+    routes: [
+      route.get(
+        path: "/"
+        middlewares: RouteMiddlewares{ // [!code focus:7]
+          before_response_rendered: [
+            fn (app App) !Response {
+              return app.response.set_header("X-Powered-By", "Mantis")
+            }
+          ]
+        }
+        callback: fn (app App) !Response {
+          return app.response.html(content: "Hello world")
+        }
+      )
+    ]
+  )
+}
+```
+
+:::
+
 ::: tip NOTICE
 Like routes, middlewares errors are catched and rendered/reported to the [error handler](/http/error-handling).
 :::

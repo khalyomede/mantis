@@ -10,6 +10,7 @@ pub struct Route {
         path string
         method Method = .get
         cors Cors
+        middlewares RouteMiddlewares
         callback fn (App) !Response @[required]
 }
 

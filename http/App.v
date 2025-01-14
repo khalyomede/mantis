@@ -262,6 +262,17 @@ pub fn (app App) render() Response {
         }
     }
 
+    for middleware in route.middlewares.before_response_rendered {
+        response := middleware(altered_app) or {
+            return altered_app.handle_error(err)
+        }
+
+        altered_app = App {
+            ...altered_app
+            response: response
+        }
+    }
+
     response := route.callback(altered_app) or {
         return altered_app.handle_error(err)
     }
