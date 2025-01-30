@@ -48,7 +48,7 @@ v -stats -N -W test .
 
 ## Roadmap
 
-██░░░░░░░░░░░░░░░░░░ (26/106 - 24%)
+██░░░░░░░░░░░░░░░░░░ (28/106 - 26%)
 
 - Routing
   - ✅ Get routes
@@ -56,10 +56,10 @@ v -stats -N -W test .
   - ✅ Routes with parameters
 - Middlewares
   - Global middlewares
-    - ⏳ before route matching
+    - ✅ before route matching
     - ⏳ after route matching
   - Route-level middlewares
-    - ⏳ before route renders
+    - ✅ before route renders
     - ⏳ after route renders
 - Views
   - ⏳ HTML components
