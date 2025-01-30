@@ -82,3 +82,40 @@ fn main() {
 ::: tip NOTICE
 Like routes, middlewares errors are catched and rendered/reported to the [error handler](/0.1.0/http/error-handling).
 :::
+
+### After response rendered
+
+You can also alter the response after it has been rendered from your [route callback](/0.1.0/http/routing).
+
+::: code-group
+
+```v [main.v]
+module main
+
+import khalyomede.mantis.http { create_app, App, Response, RouteMiddlewares } // [!code focus]
+import khalyomede.mantis.http.route
+
+fn main() {
+  app := create_app(
+    routes: [
+      route.get(
+        path: "/"
+        middlewares: RouteMiddlewares{ // [!code focus:7]
+          after_response_rendered: [
+            fn (app App) !Response {
+              return app.response.set_header("X-Powered-By", "Mantis")
+            }
+          ]
+        }
+        callback: fn (app App) !Response {
+          return app.response.html(content: "Hello world")
+        }
+      )
+    ]
+  )
+
+  app.serve() or { panic(err) }
+}
+```
+
+::: code-group

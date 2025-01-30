@@ -273,8 +273,19 @@ pub fn (app App) render() Response {
         }
     }
 
-    response := route.callback(altered_app) or {
+    mut response := route.callback(altered_app) or {
         return altered_app.handle_error(err)
+    }
+
+    altered_app = App{
+        ...altered_app,
+        response: response
+    }
+
+    for middleware in route.middlewares.after_response_rendered {
+        response = middleware(altered_app) or {
+            return altered_app.handle_error(err)
+        }
     }
 
     // Strip body for HEAD requests that matched GET routes

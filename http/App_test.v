@@ -819,3 +819,37 @@ fn test_route_can_override_header_before_route_renders_response() {
     expect(res.content).to_be_equal_to(content)
     expect(res.headers).to_have_key_equal_to("X-Powered-By", [x_powered_by])
 }
+
+fn test_after_response_middleware_can_alter_header_after_route_response() {
+    content := fake.sentence()
+
+    app := http.create_app(
+        routes: [
+            route.get(
+                path: "/"
+                middlewares: RouteMiddlewares{
+                    after_response_rendered: [
+                        fn (app App) !Response {
+                            return app.response.set_header("X-Powered-By", "After")
+                        }
+                    ]
+                }
+                callback: fn [content] (app App) !Response {
+                    return app.response
+                        .set_header("X-Powered-By", "Before")
+                        .html(content: content)
+                }
+            )
+        ]
+        request: Request{
+            path: "/"
+            method: .get
+        }
+    )
+
+    res := app.render()
+
+    expect(res.status).to_be_equal_to(Status.ok)
+    expect(res.content).to_be_equal_to(content)
+    expect(res.headers).to_have_key_equal_to("X-Powered-By", ["After"])
+}
