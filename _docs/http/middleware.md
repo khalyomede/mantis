@@ -40,6 +40,40 @@ fn main() {
 
 :::
 
+### After route matching
+
+When you need to change the response after the route has been found and rendered, use this middleware.
+
+::: code-group
+
+```v [main.v]
+module main
+
+import khalyomede.mantis.http { App, Response, Middlewares, create_app } // [!code focus]
+import khalyomede.mantis.http.route
+
+fn main() {
+  app := create_app(
+    middlewares: Middlewares{ // [!code focus:7]
+      after_route_match: [
+        fn (app App) !Response {
+          return app.response.set_header("X-Powered-By", "Mantis")
+        }
+      ]
+    }
+    routes: [
+      route.get(path: "/", callback: fn (app App) !Response {
+        return app.response.html(content: "Hello world")
+      })
+    ]
+  )
+
+  app.serve() or { panic(err) }
+}
+```
+
+:::
+
 ## Route middlewares
 
 Middlewares can be declared on a route level for more fine-grain control.

@@ -853,3 +853,33 @@ fn test_after_response_middleware_can_alter_header_after_route_response() {
     expect(res.content).to_be_equal_to(content)
     expect(res.headers).to_have_key_equal_to("X-Powered-By", ["After"])
 }
+
+fn test_after_route_match_middleware_can_add_header() {
+    x_powered_by := fake.company.name()
+    content := fake.sentence()
+
+    app := http.create_app(
+        middlewares: Middlewares{
+            after_route_match: [
+                fn [x_powered_by] (app App) !Response {
+                    return app.response.set_header("X-Powered-By", x_powered_by)
+                }
+            ]
+        }
+        routes: [
+            route.get(path: "/", callback: fn [content] (app App) !Response {
+                return app.response.html(content: content)
+            })
+        ]
+        request: Request{
+            path: "/"
+            method: .get
+        }
+    )
+
+    res := app.render()
+
+    expect(res.status).to_be_equal_to(Status.ok)
+    expect(res.content).to_be_equal_to(content)
+    expect(res.headers).to_have_key_equal_to("X-Powered-By", [x_powered_by])
+}

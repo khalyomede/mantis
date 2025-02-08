@@ -251,7 +251,7 @@ pub fn (app App) render() Response {
 
     mut altered_app := app
 
-    for middleware in app.middlewares.before_route_match {
+    for middleware in altered_app.middlewares.before_route_match {
         response := middleware(altered_app) or {
             return altered_app.handle_error(err)
         }
@@ -283,6 +283,12 @@ pub fn (app App) render() Response {
     }
 
     for middleware in route.middlewares.after_response_rendered {
+        response = middleware(altered_app) or {
+            return altered_app.handle_error(err)
+        }
+    }
+
+    for middleware in altered_app.middlewares.after_route_match {
         response = middleware(altered_app) or {
             return altered_app.handle_error(err)
         }
