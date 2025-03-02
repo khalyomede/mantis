@@ -62,6 +62,32 @@ fn test_serves_200_response_for_route_with_parameters() {
     expect(res.headers["Content-Type"]).to_contain("text/html")
 }
 
+fn test_serves_404_when_route_doesnt_matches_path() {
+    content := fake.sentence()
+
+    app := http.create_app(
+        routes: [
+            route.get(
+                name: "index"
+                path: "/"
+                callback: fn [content] (app App) !Response {
+                    return app.response.html(content: content)
+                }
+            )
+        ],
+        request: Request{
+            path: "/todo/create"
+            method: .get
+        }
+    )
+
+    res := app.render()
+
+    expect(res.status).to_be_equal_to(Status.not_found)
+    expect(res.content).to_be_equal_to("")
+    expect(res.headers["Content-Type"]).to_contain("text/html")
+}
+
 fn test_can_get_route_parameter() {
     comment_id := fake.uuid.v4()
 

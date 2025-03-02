@@ -29,7 +29,7 @@ fn (route Route) matches(request Request) bool {
 
 fn (route Route) matches_path(path string) bool {
     // Build regex pattern by replacing {param} with ([^/]+)
-    mut pattern := path
+    mut pattern := route.path
 
     // Extract parameter names from route
     mut re := regex.regex_opt(r"\{([^}]+)\}") or {
