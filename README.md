@@ -48,7 +48,7 @@ v -stats -N -W test .
 
 ## Roadmap
 
-██░░░░░░░░░░░░░░░░░░ (30/106 - 28%)
+██░░░░░░░░░░░░░░░░░░ (30/107 - 28%)
 
 - Routing
   - ✅ Get routes
@@ -61,6 +61,14 @@ v -stats -N -W test .
   - Route-level middlewares
     - ✅ before route renders
     - ✅ after route renders
+  - ⏳ Middleware interruption
+    - Before route matching/rendering
+      - Continue
+      - Skip to route
+      - Terminate
+    - After route matching/rendering
+      - Continue
+      - Terminate
 - Views
   - ⏳ HTML components
   - ⏳ HTML enum attributes
