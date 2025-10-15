@@ -861,9 +861,9 @@ fn test_after_response_middleware_can_alter_header_after_route_response() {
                     ]
                 }
                 callback: fn [content] (app App) !Response {
-                    return app.response
-                        .set_header("X-Powered-By", "Before")
-                        .html(content: content)
+                    response := app.response.set_header("X-Powered-By", "Before")
+
+                    return response.html(content: content)
                 }
             )
         ]

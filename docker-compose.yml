@@ -3,9 +3,9 @@ services:
     build: ./docker/v/latest
     tty: true
     entrypoint: v
-    working_dir: /home/v
+    working_dir: /root/v
     volumes:
-      - .:/home/v
+      - .:/root/v
     ports:
       - 80:80
 
