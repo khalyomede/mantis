@@ -3,25 +3,39 @@ services:
     build: ./docker/v/latest
     tty: true
     entrypoint: v
-    working_dir: /root/v
+    working_dir: /root/app
     volumes:
-      - .:/root/v
+      - .:/root/app
     ports:
       - 80:80
+
+  v0411:
+    build: ./docker/v/0.4.11
+    entrypoint: v
+    working_dir: /root/app
+    volumes:
+      - .:/root/app
+
+  v0410:
+    build: ./docker/v/0.4.10
+    entrypoint: v
+    working_dir: /root/app
+    volumes:
+      - .:/root/app
 
   v049:
     build: ./docker/v/0.4.9
     entrypoint: v
-    working_dir: /home/alpine/app
+    working_dir: /root/app
     volumes:
-      - .:/home/alpine/app
+      - .:/root/app
 
   v048:
     build: ./docker/v/0.4.8
     entrypoint: v
-    working_dir: /home/alpine/app
+    working_dir: /root/app
     volumes:
-      - .:/home/alpine/app
+      - .:/root/app
 
   npm:
     image: node:23-alpine
