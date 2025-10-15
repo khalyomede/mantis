@@ -14,7 +14,6 @@ module main
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 
-
 fn main() {
   app := create_app(
     routes: [
@@ -50,7 +49,6 @@ module main
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 
-
 fn main() {
   app := create_app(
     routes: [
@@ -85,7 +83,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-
 
 fn main() {
   app := create_app(
@@ -130,7 +127,6 @@ fn main() {
 module main
 
 import khalyomede.mantis.http { create_app, App, Response }
-
 import khalyomede.mantis.http.route
 
 fn main() {
@@ -162,7 +158,6 @@ module main
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 
-
 fn main() {
   app := create_app(
     routes: [
@@ -190,7 +185,6 @@ fn main() {
 module main
 
 import khalyomede.mantis.http { create_app, App, Response }
-
 import khalyomede.mantis.http.route
 
 fn main() {
@@ -222,7 +216,6 @@ module main
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
 
-
 fn main() {
   app := create_app(
     routes: [
@@ -251,7 +244,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-
 
 fn main() {
   app := create_app(

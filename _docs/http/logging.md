@@ -11,7 +11,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-
 import khalyomede.mantis.logging { Log } // [!code focus:2]
 import khalyomede.mantis.logging.channel { File }
 

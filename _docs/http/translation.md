@@ -11,7 +11,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-
 import khalyomede.mantis.translation { Translation, Lang } // [!code focus]
 
 fn main() {
@@ -62,7 +61,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-
 import khalyomede.mantis.translation { Translation, Lang } // [!code focus]
 
 fn main() {
@@ -119,7 +117,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-
 import khalyomede.mantis.translation { Translation, Lang } // [!code focus]
 
 fn main() {
@@ -178,7 +175,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-
 import khalyomede.mantis.translation { Translation, Lang } // [!code focus]
 
 fn main() {

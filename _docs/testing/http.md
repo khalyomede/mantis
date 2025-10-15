@@ -10,7 +10,6 @@ Test simple route responses:
 ```v [tests/http/basic_test.v]
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-
 import khalyomede.mantis.test { expect }
 
 fn test_basic_route() {

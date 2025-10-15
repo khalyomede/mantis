@@ -13,7 +13,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-
 import khalyomede.mantis.html { html, head, title, body, div, p } // [!code focus]
 
 fn main() {
@@ -57,7 +56,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-
 import khalyomede.mantis.html { div, nav, a } // [!code focus]
 
 fn navbar() string { // [!code focus:7]
@@ -103,7 +101,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-
 import khalyomede.mantis.html { div, button } // [!code focus]
 
 fn main() {
@@ -147,7 +144,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response }
 import khalyomede.mantis.http.route
-
 import khalyomede.mantis.html { ul, li } // [!code focus]
 
 fn main() {

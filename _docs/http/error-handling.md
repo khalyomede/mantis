@@ -14,7 +14,6 @@ For example, when validating data, instead of manual error handling, you can jus
 module main
 
 import khalyomede.mantis.http { create_app, App, Response }
-
 import khalyomede.mantis.http.route
 import khalyomede.mantis.validation { validate, Min, Value, Rule }
 
@@ -102,7 +101,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response, ErrorHandler } // [!code focus]
 import khalyomede.mantis.html { h1, div, p }
-
 import khalyomede.mantis.http.route
 import khalyomede.mantis.console
 

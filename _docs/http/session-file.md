@@ -14,7 +14,6 @@ module main
 import khalyomede.mantis.http { create_app, App, Response, Session } // [!code focus]
 import khalyomede.mantis.http.route
 
-
 fn main() {
   app := create_app(
     session: Session{ // [!code focus:5]
@@ -50,7 +49,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response, Session } // [!code focus]
 import khalyomede.mantis.http.route
-
 
 fn main() {
   app := create_app(
@@ -89,7 +87,6 @@ module main
 import khalyomede.mantis.http { create_app, App, Response, Session } // [!code focus]
 import khalyomede.mantis.http.route
 
-
 fn main() {
   app := create_app(
     session: Session{ // [!code focus:4]
@@ -126,7 +123,6 @@ module main
 
 import khalyomede.mantis.http { create_app, App, Response, Session } // [!code focus]
 import khalyomede.mantis.http.route
-
 
 fn main() {
   app := create_app(
