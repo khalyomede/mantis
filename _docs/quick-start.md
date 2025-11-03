@@ -47,7 +47,9 @@ Run `docker compose run --rm v init` and follow the instructions.
 
 ### Package manager
 
-_coming soon with 0.1.0._
+```bash
+v install khalyomede.mantis
+```
 
 ### Manual installation
 

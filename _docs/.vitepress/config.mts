@@ -103,74 +103,74 @@ export default defineConfig({
         root: {
             label: 'master'
         },
-        "0.1.0": {
-            label: '0.1.0',
+        "0.0.1": {
+            label: '0.0.1',
             ...defineConfig({
                 themeConfig: {
                     sidebar: [
                         {
                             items: [
-                                { text: 'Introduction', link: '/0.1.0/introduction' },
-                                { text: 'Upgrade', link: '/0.1.0/upgrade' },
-                                { text: 'Quick start', link: '/0.1.0/quick-start' },
-                                { text: 'Productivity', link: '/0.1.0/productivity' },
-                                { text: 'Folder structure', link: '/0.1.0/folder-structure' },
+                                { text: 'Introduction', link: '/0.0.1/introduction' },
+                                { text: 'Upgrade', link: '/0.0.1/upgrade' },
+                                { text: 'Quick start', link: '/0.0.1/quick-start' },
+                                { text: 'Productivity', link: '/0.0.1/productivity' },
+                                { text: 'Folder structure', link: '/0.0.1/folder-structure' },
                                 {
                                     text: 'Http', items: [
-                                        { text: "Life cycle", link: '/0.1.0/http/life-cycle' },
-                                        { text: "Routing", link: '/0.1.0/http/routing' },
-                                        { text: "Response", link: '/0.1.0/http/response' },
-                                        { text: "Request", link: '/0.1.0/http/request' },
-                                        { text: "View", link: '/0.1.0/http/view' },
-                                        { text: "Translation", link: '/0.1.0/http/translation' },
-                                        { text: "Session (file)", link: '/0.1.0/http/session-file' },
-                                        { text: "Environment", link: '/0.1.0/http/environment' },
-                                        { text: "Database", link: '/0.1.0/http/database' },
-                                        { text: "Erorr handling", link: '/0.1.0/http/error-handling' },
-                                        { text: "Logging", link: "/0.1.0/http/logging.md" },
-                                        { text: "Middleware", link: "/0.1.0/http/middleware.md" },
-                                        { text: "Configuration", link: '/0.1.0/http/configuration' },
-                                        { text: "Cors", link: "/0.1.0/http/cors" },
-                                        { text: "Extending", link: '/0.1.0/http/extending' },
+                                        { text: "Life cycle", link: '/0.0.1/http/life-cycle' },
+                                        { text: "Routing", link: '/0.0.1/http/routing' },
+                                        { text: "Response", link: '/0.0.1/http/response' },
+                                        { text: "Request", link: '/0.0.1/http/request' },
+                                        { text: "View", link: '/0.0.1/http/view' },
+                                        { text: "Translation", link: '/0.0.1/http/translation' },
+                                        { text: "Session (file)", link: '/0.0.1/http/session-file' },
+                                        { text: "Environment", link: '/0.0.1/http/environment' },
+                                        { text: "Database", link: '/0.0.1/http/database' },
+                                        { text: "Erorr handling", link: '/0.0.1/http/error-handling' },
+                                        { text: "Logging", link: "/0.0.1/http/logging.md" },
+                                        { text: "Middleware", link: "/0.0.1/http/middleware.md" },
+                                        { text: "Configuration", link: '/0.0.1/http/configuration' },
+                                        { text: "Cors", link: "/0.0.1/http/cors" },
+                                        { text: "Extending", link: '/0.0.1/http/extending' },
                                     ],
                                 },
                                 {
                                     text: 'Console', items: [
-                                        { text: "Routing", link: '/0.1.0/console/routing' },
-                                        { text: "Command", link: '/0.1.0/console/command' },
-                                        { text: "Argument", link: '/0.1.0/console/argument' },
-                                        { text: "Flag", link: '/0.1.0/console/flag' },
-                                        { text: "Option", link: '/0.1.0/console/option' },
-                                        { text: "Logging", link: '/0.1.0/console/logging' },
+                                        { text: "Routing", link: '/0.0.1/console/routing' },
+                                        { text: "Command", link: '/0.0.1/console/command' },
+                                        { text: "Argument", link: '/0.0.1/console/argument' },
+                                        { text: "Flag", link: '/0.0.1/console/flag' },
+                                        { text: "Option", link: '/0.0.1/console/option' },
+                                        { text: "Logging", link: '/0.0.1/console/logging' },
                                     ],
                                 },
-                                { text: 'Validation', link: '/0.1.0/validation' },
-                                { text: 'HTML', link: '/0.1.0/html' },
-                                { text: 'CSS', link: '/0.1.0/css' },
-                                { text: 'URL', link: '/0.1.0/url' },
-                                { text: 'Environment', link: '/0.1.0/environment' },
+                                { text: 'Validation', link: '/0.0.1/validation' },
+                                { text: 'HTML', link: '/0.0.1/html' },
+                                { text: 'CSS', link: '/0.0.1/css' },
+                                { text: 'URL', link: '/0.0.1/url' },
+                                { text: 'Environment', link: '/0.0.1/environment' },
                                 {
                                     text: 'Database', items: [
-                                        { text: 'Query', link: '/0.1.0/database/query' }
+                                        { text: 'Query', link: '/0.0.1/database/query' }
                                     ]
                                 },
-                                { text: 'Logging', link: '/0.1.0/logging' },
+                                { text: 'Logging', link: '/0.0.1/logging' },
                                 {
                                     text: 'Testing', items: [
-                                        { text: 'Assertion', link: '/0.1.0/testing/assertion' },
-                                        { text: 'HTTP', link: '/0.1.0/testing/http' },
-                                        { text: 'Console', link: '/0.1.0/testing/console' },
-                                        { text: 'Fake data', link: '/0.1.0/testing/fake-data' },
+                                        { text: 'Assertion', link: '/0.0.1/testing/assertion' },
+                                        { text: 'HTTP', link: '/0.0.1/testing/http' },
+                                        { text: 'Console', link: '/0.0.1/testing/console' },
+                                        { text: 'Fake data', link: '/0.0.1/testing/fake-data' },
                                     ]
                                 },
-                                { text: "Deploy", link: "/0.1.0/deploy" },
+                                { text: "Deploy", link: "/0.0.1/deploy" },
                                 {
                                     text: "Comparison", items: [
-                                        { text: "Laravel", link: "/0.1.0/comparison/laravel" }
+                                        { text: "Laravel", link: "/0.0.1/comparison/laravel" }
                                     ]
                                 },
-                                { text: 'Versioning policy', link: '/0.1.0/versioning-policy' },
-                                { text: 'Reference', link: '/0.1.0/reference' },
+                                { text: 'Versioning policy', link: '/0.0.1/versioning-policy' },
+                                { text: 'Reference', link: '/0.0.1/reference' },
                             ]
                         }
                     ],
