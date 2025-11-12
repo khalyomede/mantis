@@ -26,6 +26,14 @@ fn main() {
 
 Browse [khalyomede.github.io/mantis](https://khalyomede.github.io/mantis).
 
+## Updates
+
+Follow me for updates and feel free to DM/tweet for questions:
+
+https://x.com/anwar_nairi
+
+_Currently reworking internals to split key parts (query builder, router, ...) into separate V packages._
+
 ## License
 
 Mantis is open-sourced software licensed under the [MIT license](LICENSE.md).
@@ -47,6 +55,8 @@ v -stats -N -W test .
 ```
 
 ## Roadmap
+
+_This is just informative and plan may change a little bit according to priorities given the fact I work on it on my free time. Bare with me and thanks for your patience!_
 
 ██░░░░░░░░░░░░░░░░░░ (30/107 - 28%)
 
