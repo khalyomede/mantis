@@ -54,7 +54,7 @@ This will:
 Refer to V documentation about the [built-in error type](https://docs.vlang.io/type-declarations.html#optionresult-types-and-error-handling) for more information.
 :::
 
-## Erorr reporting
+## Error reporting
 
 Use when you need to log an error but want to continue processing:
 
@@ -72,7 +72,7 @@ fn main() {
     routes: [
       route.get(name: "index", path: "/", callback: fn (app App) !Response {
         theme := app.session.get("theme") or { // [!code focus:2]
-          app.erorr_handler.report(err) // Just log it, no rendering
+          app.error_handler.report(err) // Just log it, no rendering
 
           "light" // default value
         }
