@@ -58,165 +58,28 @@ v -stats -N -W test .
 
 _This is just informative and plan may change a little bit according to priorities given the fact I work on it on my free time. Bare with me and thanks for your patience!_
 
-██░░░░░░░░░░░░░░░░░░ (30/107 - 28%)
+0.0.1 has all features in this repository. The next version will explode the core in several packages for wide spread use and ease of maintenance.
 
-- Routing
-  - ✅ Get routes
-  - ✅ Post routes
-  - ✅ Routes with parameters
-- Middlewares
-  - Global middlewares
-    - ✅ before route matching
-    - ✅ after route matching
-  - Route-level middlewares
-    - ✅ before route renders
-    - ✅ after route renders
-  - ⏳ Middleware interruption
-    - Before route matching/rendering
-      - Continue
-      - Skip to route
-      - Terminate
-    - After route matching/rendering
-      - Continue
-      - Terminate
-- Views
-  - ⏳ HTML components
-  - ⏳ HTML enum attributes
-  - ⏳ Static pages
-- Translations / internationalization (i18n)
-  - ✅ Simple texts
-  - ✅ Translation parameters
-  - ✅ Singular/plural translation
-  - ✅ Gender translation (feminine/masculine)
-- Session management
-  - Drivers
-    - ✅ Local file
-    - ✅ Cookie (client read-only)
-    - ⏳ Database
-    - ⏳ Redis
-- Validation
-  - ✅ Basic validation
-  - ⏳ Rules
-  - ⏳ And, Or, Not
-  - ⏳ Validation helper
-  - ✅ Custom rules
-- Request
-  - ✅ Parsing query
-  - ✅ Parsing body
-  - ⏳ Form integrity checker
-  - ⏳ Multipart/form-data form file parsing
-- Url
-  - ✅ Url builder
-- Response
-  - ✅ Basic HTML response
-  - ✅ Response headers
-  - ✅ Redirect responses
-  - ⏳ Streamed response
-  - ⏳ Keep-alive response
-  - ⏳ Chunked transfer encoding
-- Environment
-  - ✅ Dot env embeded values
-  - ⏳ Nested envs in other envs
-- Database
-  - ⏳ Max connections settings (with wait mecanism)
-  - ✅ Typed MySQL query result (struct)
-  - ⏳ Support for relationships
-  - Drivers
-    - ⏳ MySQL/MariaDB
-    - ⏳ Postgres
-    - ✅ Sqlite
-    - ⏳ Local file
-    - ⏳ Migrations
-    - ⏳ Seeders
-- Real time
-  - Web socket drivers
-    - ⏳ Server-Side Events (SSE)
-  - Push notification drivers
-    - ⏳ Local file
-    - ⏳ Firebase
-    - ⏳ Pusher
-- Security
-  - Authentication drivers
-    - ⏳ Database
-  - Single Sign-On
-    - ⏳ Google
-    - ⏳ Facebook
-    - ⏳ Apple
-    - ⏳ Twitter
-    - ⏳ Linkedin
-    - ⏳ Github
-  - Views
-    - ⏳ XSS protection
-  - Session
-    - ⏳ Encrypted session ids (read-only Cookie / File-based session)
-    - ⏳ CSRF protection
-    - ⏳ Rate limit helper
-  - Encryption
-    - ⏳ Crypt/decrypt helper
-  - Password hasher
-    - ⏳ Password Hash helper
-  - Validation
-    - ⏳ Escaping HTML inside string values
-  - Url
-    - ⏳ Escaping URL parts
-  - Request
-    - ⏳ Form body size limit
-- Communication
-  - ⏳ HTTP client
-  - Email driver
-    - ⏳ Local file
-    - ⏳ Mailtrap
-    - ⏳ SMTP mailer
-  - SMS drivers
-    - ⏳ Local file
-    - ⏳ Vonage
-    - ⏳ Twilio
-- File storage drivers
-  - ⏳ Local file
-  - ⏳ AWS S3
-- Task scheduling
-  - ⏳ Command builder
-  - ⏳ Cron scheduler
-- Background task drivers
-  - ⏳ Local file
-  - ⏳ Database
-- Monitoring
-  - Logging drivers
-    - ✅ Local file
-    - ⏳ Syslog
-    - ⏳ Papertrail
-  - Error tracking drivers
-    - ⏳ Local file
-    - ⏳ Sentry
-- Local development
-  - Local running
-    - ⏳ Docker image
-  - Testing
-    - ⏳ Unit test helpers
-    - ⏳ Mocking utilities
-  - Assets bundling
-    - ⏳ Vite.js
-    - ⏳ Static file serving
-- Performance
-  - ⏳ Improved concurrency performance
-  - ⏳ Memory efficient Fake data generator
-- Production running
-  - ⏳ On-demand mode
-  - ✅ Standalone mode (multi-cores)
-  - ⏳ Zero traffic-loss live-code update (no downtime deployment)
-  - ⏳ Embeded HTTPS/SSL request handling
-- Testing
-  - ✅ Expect test-style
-  - ⏳ HTTP expectations
-  - ⏳ Error stack trace (like built-in assert)
-  - ✅ Fake data generator
-- Comparisons
-  - ✅ Laravel
-  - ⏳ Rails
-  - ⏳ AdonisJS
-  - ⏳ Express
-  - ⏳ Gin
-- Examples
-  - ⏳ With HTMX
-  - ⏳ Inertia adapter
-- ✅ Online documentation
+
+- [x] [khalyomede/commander](https://github.com/khalyomede/commander): A package to create command line applications.
+- [x] [khalyomede/expect](https://github.com/khalyomede/expect): An expect-style testing utility.
+- [x] [khalyomede/faker](https://github.com/khalyomede/faker): Generate fake data for your tests.
+- [x] [khalyomede/url](https://github.com/khalyomede/url): A simple URL builder utility.
+- [x] [khalyomede/el](https://github.com/khalyomede/el): Type safe HTML views as function.
+- [x] [khalyomede/lang](https://github.com/khalyomede/lang): A enum of all existing lang.
+- [x] [khalyomede/ip](https://github.com/khalyomede/ip): An IP v4 / v6 compatible struct to parse and render IPs.
+- [ ] [khalyomede/mime](https://github.com/khalyomede/mime): An enum with common MIME types.
+- [ ] khalyomede/mantis: A battery included web framework.
+- [ ] khalyomede/server: A simple HTTP web server.
+- [ ] khalyomede/router: A simple string/handler based HTTP router.
+- [ ] khalyomeder/http: Request/response utilities.
+- [ ] khalyomede/crypt: Encryption/decryption utilities.
+- [ ] khalyomede/hash: A simple hash function supporting multiple algorithm.
+- [ ] khalyomede/database: Unified database connector.
+khalyomede/query: A unified query builder for SQL relational databases.
+- [ ] khalyomede/logger: A multi-channel logger.
+khalyomede/validation: Validate primritives types and struct.
+- [ ] khalyomede/cache: A unified cache mecanism supporting various drivers.
+- [ ] khalyomede/file: A unified file read/write package supporting various drivers.
+- [ ] khalyomede/mail: A unifid email sending package supporting various drivers.
+- [ ] khalyomede/limiter: A cache-based rate limiter.
