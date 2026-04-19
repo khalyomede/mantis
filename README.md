@@ -69,10 +69,10 @@ _This is just informative and plan may change a little bit according to prioriti
 - [x] [khalyomede/lang](https://github.com/khalyomede/lang): A enum of all existing lang.
 - [x] [khalyomede/ip](https://github.com/khalyomede/ip): An IP v4 / v6 compatible struct to parse and render IPs.
 - [ ] [khalyomede/mime](https://github.com/khalyomede/mime): An enum with common MIME types.
+- [ ] [khalyomeder/web](https://github.com/khalyomede/web): Request/response utilities.
 - [ ] khalyomede/mantis: A battery included web framework.
 - [ ] khalyomede/server: A simple HTTP web server.
 - [ ] khalyomede/router: A simple string/handler based HTTP router.
-- [ ] khalyomeder/http: Request/response utilities.
 - [ ] khalyomede/crypt: Encryption/decryption utilities.
 - [ ] khalyomede/hash: A simple hash function supporting multiple algorithm.
 - [ ] khalyomede/database: Unified database connector.
