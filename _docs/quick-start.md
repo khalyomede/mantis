@@ -14,6 +14,14 @@ docker compose version
 
 ## V executable
 
+Create a Dockerfile at "docker/v/Dockerfile" and paste this content:
+
+```dockerfile
+FROM khalyomede/vlang:latest-alpine
+
+RUN apk add --no-cache sqlite-dev
+```
+
 Create a file "docker-compose.yml" and paste this content:
 
 ::: code-group
@@ -21,7 +29,7 @@ Create a file "docker-compose.yml" and paste this content:
 ```yml [docker-compose.yml]
 services:
   v:
-    image: khalyomede/vlang:latest-alpine
+    build: ./build/v
     tty: true
     entrypoint: v
     working_dir: /home/v
