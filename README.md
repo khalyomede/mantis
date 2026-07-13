@@ -68,7 +68,7 @@ _This is just informative and plan may change a little bit according to prioriti
 - [x] [khalyomede/el](https://github.com/khalyomede/el): Type safe HTML views as function.
 - [x] [khalyomede/lang](https://github.com/khalyomede/lang): A enum of all existing lang.
 - [x] [khalyomede/ip](https://github.com/khalyomede/ip): An IP v4 / v6 compatible struct to parse and render IPs.
-- [ ] [khalyomede/mime](https://github.com/khalyomede/mime): An enum with common MIME types.
+- [x] [khalyomede/mime](https://github.com/khalyomede/mime): An enum with common MIME types.
 - [ ] [khalyomeder/web](https://github.com/khalyomede/web): Request/response utilities.
 - [ ] khalyomede/mantis: A battery included web framework.
 - [ ] khalyomede/server: A simple HTTP web server.
