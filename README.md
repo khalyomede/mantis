@@ -76,9 +76,9 @@ _This is just informative and plan may change a little bit according to prioriti
 - [ ] khalyomede/crypt: Encryption/decryption utilities.
 - [ ] khalyomede/hash: A simple hash function supporting multiple algorithm.
 - [ ] khalyomede/database: Unified database connector.
-khalyomede/query: A unified query builder for SQL relational databases.
+- [ ] khalyomede/query: A unified query builder for SQL relational databases.
 - [ ] khalyomede/logger: A multi-channel logger.
-khalyomede/validation: Validate primritives types and struct.
+- [ ] khalyomede/validation: Validate primritives types and struct.
 - [ ] khalyomede/cache: A unified cache mecanism supporting various drivers.
 - [ ] khalyomede/file: A unified file read/write package supporting various drivers.
 - [ ] khalyomede/mail: A unifid email sending package supporting various drivers.
